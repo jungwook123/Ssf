@@ -623,7 +623,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_maxHp: 1000
   hpScaler: {fileID: 72204082679599907}
-  timeLimit: 5
+  timeLimit: 30
   timeLimitText: {fileID: 5527238291371342464}
 --- !u!1 &5735460603822552279
 GameObject:

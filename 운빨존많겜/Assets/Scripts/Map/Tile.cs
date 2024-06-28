@@ -1,18 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
+[RequireComponent(typeof(Animator))]
 public class Tile : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public Tower tower;
+    Animator anim;
+    void Awake()
     {
-        
+        anim = GetComponent<Animator>(); 
     }
-
-    // Update is called once per frame
-    void Update()
+    public void Highlight()
     {
-        
+        anim.SetBool("Highlighted", true);
+    }
+    public void Unhighlight()
+    {
+        anim.SetBool("Highlighted", false);
     }
 }

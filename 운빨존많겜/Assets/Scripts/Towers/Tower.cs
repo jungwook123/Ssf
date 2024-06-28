@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 [RequireComponent(typeof(CircleCollider2D), typeof(Animator))]
 public abstract class Tower : MonoBehaviour
@@ -12,8 +13,8 @@ public abstract class Tower : MonoBehaviour
     public TowerData data { get { return m_data; } }
     
     CircleCollider2D scanCollider;
-    protected Animator anim;
-    protected List<Enemy> enemies = new();
+    protected Animator anim { get; private set; }
+    protected List<Enemy> enemies { get; } = new();
 
     [SerializeField] protected float m_range;
     public int towerCount { get; private set; } = 1;
@@ -36,7 +37,6 @@ public abstract class Tower : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(collision.transform.name);
         if (collision.CompareTag("Enemy"))
         {
             enemies.Add(collision.GetComponent<Enemy>());
@@ -56,17 +56,11 @@ public abstract class Tower : MonoBehaviour
         models[++towerCount - 1].SetActive(true);
         return true;
     }
-    public void Select()
-    {
-        anim.SetBool("Selected", true);
-    }
-    public void Unselect()
-    {
-        anim.SetBool("Selected", false);
-    }
     float counter = 0.0f;
+    bool canAttack = true;
     protected virtual void Update()
     {
+        if (!canAttack) return;
         if (counter < fireRate) counter += Time.deltaTime;
         else
         {
@@ -80,5 +74,37 @@ public abstract class Tower : MonoBehaviour
     public virtual void Attack()
     {
         
+    }
+    IEnumerator moving = null;
+    public void Move(Transform moveTo)
+    {
+        if (moving != null) StopCoroutine(moving);
+        moving = Moving(moveTo);
+        StartCoroutine(moving);
+    }
+    const float towerLerpSpeed = 5.0f;
+    IEnumerator Moving(Transform moveTo)
+    {
+        while(Vector2.Distance(transform.position, moveTo.position) > 0.1f)
+        {
+            transform.position = Vector2.Lerp(transform.position, moveTo.position, towerLerpSpeed * Time.deltaTime);
+            yield return null;
+        }
+    }
+    public void Select()
+    {
+        anim.SetBool("Selected", true);
+    }
+    public void Unselect()
+    {
+        anim.SetBool("Selected", false);
+    }
+    public void Disable()
+    {
+        canAttack = false;
+    }
+    public void Enable()
+    {
+        canAttack = true;
     }
 }
