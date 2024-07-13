@@ -5,12 +5,12 @@ public class Bullet : MonoBehaviour
 {
     float damage, speed;
     const float range = 50.0f;
-    Pooler originPool;
+    Pooler<Bullet> originPool;
     private void Awake()
     {
         GameManager.Instance.onGameOver += () => { Release(); };
     }
-    public void Set(float damage, float speed, Pooler origin)
+    public void Set(float damage, float speed, Pooler<Bullet> origin)
     {
         this.damage = damage;
         this.speed = speed;
@@ -38,6 +38,6 @@ public class Bullet : MonoBehaviour
     {
         if (released) return;
         released = true;
-        originPool.ReleaseObject(gameObject);
+        originPool.ReleaseObject(this);
     }
 }

@@ -17,7 +17,7 @@ public class GameManager_Selected : State<GameManager>
         if (!added)
         {
             origin.UIs.deleteButton.onClick.AddListener(DeleteTower);
-            origin.UIs.fuseButton.onClick.AddListener(() => { parentLayer.ChangeState("Idle"); });
+            origin.UIs.fuseButton.onClick.AddListener(FuseTower);
             added = true;
         }
         if (origin.selected == null)
@@ -34,7 +34,7 @@ public class GameManager_Selected : State<GameManager>
         {
             parentLayer.ChangeState("Idle"); return;
         }
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && origin.UIs._IsMouseOnUI()==false)
         {
             parentLayer.ChangeState("Idle"); return;
         }
@@ -66,6 +66,10 @@ public class GameManager_Selected : State<GameManager>
     void DeleteTower()
     {
         MonoBehaviour.Destroy(origin.selected.gameObject);
+        parentLayer.ChangeState("Idle");
+    }
+    void FuseTower()
+    {
         parentLayer.ChangeState("Idle");
     }
     public override void OnStateExit()

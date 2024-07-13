@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
     public float maxHp { get { return m_maxHp; } }
     float hp;
     [SerializeField] Transform hpScaler;
+    [SerializeField] Animator anim;
     int pointIndex = 1;
 
     const float moveSpeed = 1.0f;
@@ -42,6 +43,7 @@ public class Enemy : MonoBehaviour
     public void GetDamage(float damage)
     {
         hp -= damage;
+        if (anim != null) anim.SetTrigger("Damaged");
         if (hp <= 0) Destroy(gameObject);
         else hpScaler.localScale = new Vector2(hp / maxHp, 1.0f);
     }

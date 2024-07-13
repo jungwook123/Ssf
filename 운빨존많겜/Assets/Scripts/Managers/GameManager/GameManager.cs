@@ -32,7 +32,6 @@ public class GameManager : MonoBehaviour
     #endregion
     #region FSMVals
     TopLayer<GameManager> topLayer;
-    public Tile selectQueued = null;
     public Tower selected = null;
     public Tile selectedTile = null;
     [SerializeField] Transform m_moveArrow;
