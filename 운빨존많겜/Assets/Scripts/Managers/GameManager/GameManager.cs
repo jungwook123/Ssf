@@ -34,25 +34,21 @@ public class GameManager : MonoBehaviour
     TopLayer<GameManager> topLayer;
     public Tower selected = null;
     public Tile selectedTile = null;
-    [SerializeField] Transform m_moveArrow;
-    public Transform moveArrow { get { return m_moveArrow; } }
+    [SerializeField] Transform m_rangeViewer;
+    public Transform rangeViewer { get { return m_rangeViewer; } }
     #endregion
     #region Money
     [SerializeField] int m_money;
     public int money { get { return m_money; } }
-    public Action<int> onMoneyEarn;
+    public Action<int> onMoneyChange;
     public void MoneyChange(int amount)
     {
-        if(money + amount < 0)
+        m_money += amount;
+        if(money  < 0)
         {
-            onMoneyEarn?.Invoke(-money);
             m_money = 0;
         }
-        else
-        {
-            onMoneyEarn?.Invoke(amount);
-            m_money += amount;
-        }
+        onMoneyChange(money);
     }
     #region Costs
     public int spawnCost { get; private set; } = 20;

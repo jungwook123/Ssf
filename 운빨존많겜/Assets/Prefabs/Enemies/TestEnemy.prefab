@@ -416,6 +416,7 @@ MonoBehaviour:
   m_maxHp: 100
   hpScaler: {fileID: 72204082679599907}
   anim: {fileID: 6388665644847998048}
+  moneyReward: 1
 --- !u!50 &4682466585260629692
 Rigidbody2D:
   serializedVersion: 4

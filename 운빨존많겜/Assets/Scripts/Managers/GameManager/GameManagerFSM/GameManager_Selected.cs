@@ -26,6 +26,9 @@ public class GameManager_Selected : State<GameManager>
         }
         origin.UIs.SelectUI(origin.selected);
         origin.selected.Select();
+        origin.rangeViewer.localScale = new Vector2(origin.selected.range*2, origin.selected.range*2);
+        origin.rangeViewer.position = origin.selected.transform.position;
+        origin.rangeViewer.gameObject.SetActive(true);
     }
     public override void OnStateUpdate()
     {
@@ -78,5 +81,6 @@ public class GameManager_Selected : State<GameManager>
         origin.UIs.CloseSelectUI();
         origin.selected.Unselect();
         origin.selected = null;
+        origin.rangeViewer.gameObject.SetActive(false);
     }
 }

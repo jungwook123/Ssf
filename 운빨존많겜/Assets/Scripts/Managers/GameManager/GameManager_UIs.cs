@@ -9,11 +9,13 @@ public class GameManager_UIs : MonoBehaviour
 {
     [SerializeField] Transform selectedUI;
     [SerializeField] Button m_deleteButton, m_fuseButton;
+    [SerializeField] Text moneyText;
     public Button deleteButton { get { return m_deleteButton; } }
     public Button fuseButton { get { return m_fuseButton; } }
     private void Awake()
     {
         selectedUI.gameObject.SetActive(false);
+        GameManager.Instance.onMoneyChange += (int money) => { moneyText.text = string.Concat(money, "$"); };
     }
     public void SelectUI(Tower tower)
     {

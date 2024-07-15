@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour
     float hp;
     [SerializeField] Transform hpScaler;
     [SerializeField] Animator anim;
+    [SerializeField] protected int moneyReward = 1;
     int pointIndex = 1;
 
     const float moveSpeed = 1.0f;
@@ -44,7 +45,13 @@ public class Enemy : MonoBehaviour
     {
         hp -= damage;
         if (anim != null) anim.SetTrigger("Damaged");
-        if (hp <= 0) Destroy(gameObject);
+        if (hp <= 0) Die();
         else hpScaler.localScale = new Vector2(hp / maxHp, 1.0f);
+    }
+    protected virtual void Die()
+    {
+        GameManager.Instance.MoneyChange(moneyReward);
+        GameManager.Instance.enemies.Remove(this);
+        Destroy(gameObject);
     }
 }

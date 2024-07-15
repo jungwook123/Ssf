@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class TestTower : MeleeTower
+public class TestRanged : RangedTower
 {
 
 }

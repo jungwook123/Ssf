@@ -73,7 +73,7 @@ public abstract class Tower : MonoBehaviour
     }
     public virtual void Attack()
     {
-        
+        anim.SetTrigger("Attack");
     }
     IEnumerator moving = null;
     public void Move(Transform moveTo)
@@ -93,11 +93,11 @@ public abstract class Tower : MonoBehaviour
     }
     public void Select()
     {
-        anim.SetBool("Selected", true);
+        
     }
     public void Unselect()
     {
-        anim.SetBool("Selected", false);
+        
     }
     public void Disable()
     {
