@@ -119,21 +119,6 @@ public class GameManager : MonoBehaviour
         {
             towerToSpawn = commonTowers.GetRandom();
         }
-        for (int i = 0; i < gridSizeY; i++)
-        {
-            for (int k = 0; k < gridSizeX; k++)
-            {
-                if (grid[i, k].tower == null) continue;
-                if (grid[i, k].tower.data == towerToSpawn)
-                {
-                    if (grid[i, k].tower.AddTower())
-                    {
-                        onTowerSpawn?.Invoke(towerToSpawn);
-                        return;
-                    }
-                }
-            }
-        }
         for (int i = 0; i < gridSizeX; i++)
         {
             for (int k = 0; k < gridSizeY; k++)
