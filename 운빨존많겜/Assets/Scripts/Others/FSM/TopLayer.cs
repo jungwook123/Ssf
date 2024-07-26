@@ -10,6 +10,13 @@ public abstract class TopLayer<T> : Layer<T>
     {
 
     }
+    public override void ChangeState(string stateName)
+    {
+        currentState.OnStateExit();
+        currentState = states[stateName];
+        currentState.OnStateEnter();
+        AlertStateChange();
+    }
     public override void AlertStateChange()
     {
         onFSMChange?.Invoke();

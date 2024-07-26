@@ -36,8 +36,7 @@ public class Enemy : MonoBehaviour
         {
             if (++pointIndex >= GameManager.Instance.enemyWaypoints.Length)
             {
-                pointIndex = 0;
-                GameManager.Instance.EnemyIndexReset(this);
+                ReachEnd();
             }
         }
     }
@@ -47,6 +46,11 @@ public class Enemy : MonoBehaviour
         if (anim != null) anim.SetTrigger("Damaged");
         if (hp <= 0) Die();
         else hpScaler.localScale = new Vector2(hp / maxHp, 1.0f);
+    }
+    protected virtual void ReachEnd()
+    {
+        GameManager.Instance.enemies.Remove(this);
+        Destroy(gameObject);
     }
     protected virtual void Die()
     {

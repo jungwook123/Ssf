@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3eb69d416d7d2284f90df19c5707d70f, type: 3}
-  m_Name: TestSkill
+  m_Name: TestRanged
   m_EditorClassIdentifier: 
-  m_tower: {fileID: 2140780892500147218, guid: 683690fdae06b714eba8a33fde1644d1, type: 3}
+  m_tower: {fileID: -3595936622295713114, guid: 45d33c65259195f4cbad9d834f925272, type: 3}
