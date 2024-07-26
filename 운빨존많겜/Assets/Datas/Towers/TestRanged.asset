@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: TestRanged
   m_EditorClassIdentifier: 
   m_tower: {fileID: -3595936622295713114, guid: 45d33c65259195f4cbad9d834f925272, type: 3}
+  m_cardImage: {fileID: 21300000, guid: 2641f50915c6e98498db781effa081f9, type: 3}
+  m_upgrade: {fileID: 0}
