@@ -17,6 +17,7 @@ public class Bullet : MonoBehaviour
         originPool = origin;
         counter = 0.0f;
         released = false;
+        GameManager.Instance.onGameOver += Release;
     }
     float counter = 0.0f;
     bool released = false;
@@ -39,5 +40,6 @@ public class Bullet : MonoBehaviour
         if (released) return;
         released = true;
         originPool.ReleaseObject(this);
+        GameManager.Instance.onGameOver -= Release;
     }
 }

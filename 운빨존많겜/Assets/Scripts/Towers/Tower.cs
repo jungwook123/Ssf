@@ -17,9 +17,6 @@ public abstract class Tower : MonoBehaviour
     protected List<Enemy> enemies { get; } = new();
 
     [SerializeField] protected float m_range;
-    public int towerCount { get; private set; } = 1;
-    public readonly int maxTowerCount = 3;
-    [SerializeField] GameObject[] models = new GameObject[3];
     public float range { get { return m_range; } set { m_range = value; scanCollider.radius = value; } }
 
     [Header("Statistics")]
@@ -31,9 +28,6 @@ public abstract class Tower : MonoBehaviour
         scanCollider.isTrigger = true;
 
         anim = GetComponent<Animator>();
-
-        foreach (var i in models) i.SetActive(false);
-        models[0].SetActive(true);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -49,12 +43,6 @@ public abstract class Tower : MonoBehaviour
         {
             enemies.Remove(collision.GetComponent<Enemy>());
         }
-    }
-    public bool AddTower()
-    {
-        if (towerCount == maxTowerCount) return false;
-        models[++towerCount - 1].SetActive(true);
-        return true;
     }
     float counter = 0.0f;
     bool canAttack = true;
@@ -75,22 +63,6 @@ public abstract class Tower : MonoBehaviour
     {
         anim.SetTrigger("Attack");
     }
-    IEnumerator moving = null;
-    public void Move(Transform moveTo)
-    {
-        if (moving != null) StopCoroutine(moving);
-        moving = Moving(moveTo);
-        StartCoroutine(moving);
-    }
-    const float towerLerpSpeed = 5.0f;
-    IEnumerator Moving(Transform moveTo)
-    {
-        while(Vector2.Distance(transform.position, moveTo.position) > 0.1f)
-        {
-            transform.position = Vector2.Lerp(transform.position, moveTo.position, towerLerpSpeed * Time.deltaTime);
-            yield return null;
-        }
-    }
     public void Select()
     {
         
@@ -99,11 +71,11 @@ public abstract class Tower : MonoBehaviour
     {
         
     }
-    public void Disable()
+    public virtual void Disable()
     {
         canAttack = false;
     }
-    public void Enable()
+    public virtual void Enable()
     {
         canAttack = true;
     }

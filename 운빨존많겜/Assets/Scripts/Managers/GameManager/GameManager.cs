@@ -16,19 +16,17 @@ public class GameManager : MonoBehaviour
     public Transform[] enemyWaypoints { get { return m_enemyWaypoints; } }
     public List<Enemy> enemies { get; } = new();
     #endregion
-    #region Towers
-    [SerializeField] List<TowerData> commonTowers, uncommonTowers, rareTowers, legedaryTowers;
+    #region Towers&Cards
+    [SerializeField] List<TowerData> towers = new();
+    public const int cardCount = 3;
+    public TowerData[] cards { get; private set; } = new TowerData[cardCount];
+    public bool cardSelected { get; private set; } = false;
     #endregion
     #region Grid
     const int gridSizeX = 6, gridSizeY = 3;
     Tile[,] grid = new Tile[gridSizeY, gridSizeX];
     [SerializeField]
     Transform[] gridParents = new Transform[gridSizeY];
-    #endregion
-    #region Chances
-    [SerializeField]
-    Chances[] chances;
-    int chanceLevel = 0;
     #endregion
     #region FSMVals
     TopLayer<GameManager> topLayer;
@@ -39,16 +37,19 @@ public class GameManager : MonoBehaviour
     #endregion
     #region Money
     [SerializeField] int m_money;
-    public int money { get { return m_money; } }
+    [SerializeField] int m_shuffleCost;
+    [SerializeField] int shuffleCostIncrease;
+    public int money { get { return m_money; } private set { m_money = value; } }
+    public int shuffleCost { get { return m_shuffleCost; } private set { m_shuffleCost = value; } }
     public Action<int> onMoneyChange;
     public void MoneyChange(int amount)
     {
-        m_money += amount;
+        money += amount;
         if(money  < 0)
         {
-            m_money = 0;
+            money = 0;
         }
-        onMoneyChange(money);
+        onMoneyChange.Invoke(money);
     }
     #region Costs
     public int spawnCost { get; private set; } = 20;
@@ -71,12 +72,16 @@ public class GameManager : MonoBehaviour
             }
         }
     }
-    public int GetIndex(Enemy enemy) => enemies.IndexOf(enemy);
-    public void EnemyIndexReset(Enemy enemy)
+    private void Start()
     {
-        enemies.Remove(enemy);
-        enemies.Add(enemy);
+        for (int i = 0; i < cardCount; i++)
+        {
+            cards[i] = towers.GetRandom();
+        }
+        cardSelected = false;
+        onCardShuffle?.Invoke();
     }
+    public int GetIndex(Enemy enemy) => enemies.IndexOf(enemy);
     private void Update()
     {
         topLayer.OnStateUpdate();
@@ -90,62 +95,57 @@ public class GameManager : MonoBehaviour
         }
     }
     public Action<TowerData> onTowerSpawn;
-    public void SpawnTower()
+    public bool SpawnTower(TowerData towerToSpawn)
     {
-        if (money > spawnCost)
-        {
-            MoneyChange(-spawnCost);
-            spawnCost += spawnCostIncrease;
-        }
-        else
-        {
-            return;
-        }
-        int odd = UnityEngine.Random.Range(1, 1001);
-        TowerData towerToSpawn;
-        if (odd <= chances[chanceLevel].legendaryChance)
-        {
-            towerToSpawn = legedaryTowers.GetRandom();
-        }
-        else if (odd <= chances[chanceLevel].legendaryChance + chances[chanceLevel].rareChance)
-        {
-            towerToSpawn = rareTowers.GetRandom();
-        }
-        else if (odd <= chances[chanceLevel].legendaryChance + chances[chanceLevel].rareChance + chances[chanceLevel].uncommonChance)
-        {
-            towerToSpawn = uncommonTowers.GetRandom();
-        }
-        else
-        {
-            towerToSpawn = commonTowers.GetRandom();
-        }
-        for (int i = 0; i < gridSizeY; i++)
-        {
-            for (int k = 0; k < gridSizeX; k++)
-            {
-                if (grid[i, k].tower == null) continue;
-                if (grid[i, k].tower.data == towerToSpawn)
-                {
-                    if (grid[i, k].tower.AddTower())
-                    {
-                        onTowerSpawn?.Invoke(towerToSpawn);
-                        return;
-                    }
-                }
-            }
-        }
         for (int i = 0; i < gridSizeX; i++)
         {
             for (int k = 0; k < gridSizeY; k++)
             {
                 if (grid[k, i].tower == null)
                 {
-                    grid[k, i].tower = Instantiate(towerToSpawn.tower, grid[k, i].transform.position, Quaternion.identity).GetComponent<Tower>();
+                    grid[k, i].tower = Instantiate(towerToSpawn.tower, grid[k, i].transform.position, Quaternion.identity);
                     grid[k, i].tower.Set(towerToSpawn);
                     onTowerSpawn?.Invoke(towerToSpawn);
-                    return;
+                    return true;
                 }
             }
+        }
+        return false;
+    }
+    public int SearchTower(TowerData tower)
+    {
+        int tot = 0;
+        for (int i = 0; i < gridSizeX; i++)
+        {
+            for (int k = 0; k < gridSizeY; k++)
+            {
+                if (grid[k, i].tower != null && grid[k, i].tower.data == tower)
+                {
+                    tot++;
+                }
+            }
+        }
+        return tot;
+    }
+    public Action onCardShuffle, onCardSelect;
+    public void ShuffleCards()
+    {
+        if (money < shuffleCost) return;
+        MoneyChange(-shuffleCost);
+        shuffleCost += shuffleCostIncrease;
+        for(int i = 0; i < cardCount; i++)
+        {
+            cards[i] = towers.GetRandom();
+        }
+        cardSelected = false;
+        onCardShuffle?.Invoke();
+    }
+    public void SelectCard(TowerData tower)
+    {
+        if (SpawnTower(tower))
+        {
+            cardSelected = true;
+            onCardSelect?.Invoke();
         }
     }
     public Action onGameOver;
@@ -161,10 +161,4 @@ public class GameManager : MonoBehaviour
             Destroy(i.gameObject);
         }
     }
-}
-[System.Serializable]
-public struct Chances
-{
-    //N in 1000;
-    public int uncommonChance, rareChance, legendaryChance;
 }
