@@ -1,16 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class Bullet : MonoBehaviour
+
+public class AhriBullet : MonoBehaviour
 {
     float damage, speed;
     const float range = 50.0f;
-    Pooler<Bullet> originPool;
+    Pooler<AhriBullet> originPool;
     private void Awake()
     {
         GameManager.Instance.onGameOver += () => { Release(); };
     }
-    public void Set(float damage, float speed, Pooler<Bullet> origin)
+    public void Set(float damage, float speed, Pooler<AhriBullet> origin)
     {
         this.damage = damage;
         this.speed = speed;
@@ -32,7 +33,7 @@ public class Bullet : MonoBehaviour
         if (collision.CompareTag("Enemy"))
         {
             collision.GetComponent<Enemy>().GetDamage(damage);
-            
+            collision.GetComponent<Enemy>().moveSpeed = 0.8f;
             Release();
         }
     }

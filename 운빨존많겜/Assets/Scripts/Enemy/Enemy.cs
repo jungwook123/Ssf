@@ -14,7 +14,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected int moneyReward = 1;
     int pointIndex = 1;
 
-    const float moveSpeed = 1.0f;
+    public float moveSpeed = 1.0f;
     Transform targetPoint { get { return GameManager.Instance.enemyWaypoints[pointIndex]; } }
     private void Awake()
     {

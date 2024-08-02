@@ -1,16 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class Bullet : MonoBehaviour
+
+public class TwistedFateBullet : MonoBehaviour
 {
     float damage, speed;
+    int AttCnt = 0;
     const float range = 50.0f;
-    Pooler<Bullet> originPool;
+    Pooler<TwistedFateBullet> originPool;
     private void Awake()
     {
         GameManager.Instance.onGameOver += () => { Release(); };
     }
-    public void Set(float damage, float speed, Pooler<Bullet> origin)
+    public void Set(float damage, float speed, Pooler<TwistedFateBullet> origin)
     {
         this.damage = damage;
         this.speed = speed;
@@ -31,7 +33,17 @@ public class Bullet : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
-            collision.GetComponent<Enemy>().GetDamage(damage);
+            
+            if (AttCnt == 4)
+            {
+                collision.GetComponent<Enemy>().GetDamage(damage+10f);
+                AttCnt = 0;
+            }
+            else
+            {
+                collision.GetComponent<Enemy>().GetDamage(damage);
+                AttCnt++;
+            }
             
             Release();
         }

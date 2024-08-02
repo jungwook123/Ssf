@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.5471698, g: 0.2617832, b: 0, a: 1}
+  m_Color: {r: 1, g: 0, b: 0.3085451, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -192,9 +192,9 @@ GameObject:
   - component: {fileID: 6980302562204276629}
   - component: {fileID: 4993602986699188578}
   - component: {fileID: 1545954627871489323}
-  - component: {fileID: -3595936622295713114}
+  - component: {fileID: -4341646752981229963}
   m_Layer: 0
-  m_Name: TestRanged
+  m_Name: Ahri
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -272,7 +272,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &-3595936622295713114
+--- !u!114 &-4341646752981229963
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -281,14 +281,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 2140780892500147218}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea833a0ac2670f14a86f88c5f1cd2528, type: 3}
+  m_Script: {fileID: 11500000, guid: a335404ae48bf1b449f30b740e46745b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_range: 10
   fireRate: 1
   damage: 10
   firePoint: {fileID: 4275702736095991957}
-  bullet: {fileID: -4706505005590832681, guid: a9c3bf8c5617bd448a7c03f6651c9fa6, type: 3}
+  bullet: {fileID: 8133320004101797283, guid: f354a36f8d83ccc488dc0750af8491dd, type: 3}
   bulletSpeed: 10
 --- !u!1 &8426627535407230153
 GameObject:
