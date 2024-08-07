@@ -107,6 +107,26 @@ public class GameManager : MonoBehaviour
         }
     }
     public Action<TowerData> onTowerSpawn;
+    public void UpgradeTower(TowerData towerToUpgrade)
+    {
+        if (towerToUpgrade.upgrade == null || SearchTower(towerToUpgrade) < 3) return;
+        int removed = 0;
+        for (int i = 0; i < gridSizeX; i++)
+        {
+            for (int k = 0; k < gridSizeY; k++)
+            {
+                if (grid[k, i].tower != null && grid[k, i].tower.data == towerToUpgrade)
+                {
+                    removed++;
+                    Destroy(grid[k, i].tower.gameObject);
+                    grid[k, i].tower = null;
+                    if (removed >= 3) break;
+                }
+            }
+            if (removed >= 3) break;
+        }
+        SpawnTower(towerToUpgrade.upgrade);
+    }
     public bool SpawnTower(TowerData towerToSpawn)
     {
         for (int i = 0; i < gridSizeX; i++)

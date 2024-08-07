@@ -24,6 +24,16 @@ public class GameManager_Selected : State<GameManager>
         {
             parentLayer.ChangeState("Idle"); return;
         }
+        if(origin.selected.data.upgrade != null)
+        {
+            origin.UIs.fuseButton.gameObject.SetActive(true);
+            CheckFuseAvailability(origin.selected.data);
+            GameManager.Instance.onTowerSpawn += CheckFuseAvailability;
+        }
+        else
+        {
+            origin.UIs.fuseButton.gameObject.SetActive(false);
+        }
         origin.UIs.SelectUI(origin.selected);
         origin.selected.Select();
         origin.rangeViewer.localScale = new Vector2(origin.selected.range*2, origin.selected.range*2);
@@ -73,13 +83,33 @@ public class GameManager_Selected : State<GameManager>
     }
     void FuseTower()
     {
+        GameManager.Instance.UpgradeTower(origin.selected.data);
         parentLayer.ChangeState("Idle");
+    }
+    void CheckFuseAvailability(TowerData data)
+    {
+        if(data == origin.selected.data)
+        {
+            if(GameManager.Instance.SearchTower(data) >= 3)
+            {
+                origin.UIs.fuseButton.interactable = true;
+                Debug.Log("EAWEAWE");
+            }
+            else
+            {
+                origin.UIs.fuseButton.interactable = false;
+            }
+        }
     }
     public override void OnStateExit()
     {
         base.OnStateExit();
         origin.UIs.CloseSelectUI();
         origin.selected.Unselect();
+        if (origin.selected.data.upgrade != null)
+        {
+            GameManager.Instance.onTowerSpawn -= CheckFuseAvailability;
+        }
         origin.selected = null;
         origin.rangeViewer.gameObject.SetActive(false);
     }

@@ -23,14 +23,6 @@ public class GameManager_UIs : MonoBehaviour
     public void SelectUI(Tower tower)
     {
         selectedUI.position = tower.transform.position;
-        if(tower.data.upgrade != null)
-        {
-            fuseButton.interactable = true;
-        }
-        else
-        {
-            fuseButton.interactable = false;
-        }
         selectedUI.gameObject.SetActive(true);
     }
     public void CloseSelectUI()

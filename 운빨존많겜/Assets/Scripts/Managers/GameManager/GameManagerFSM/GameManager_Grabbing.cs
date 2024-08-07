@@ -23,7 +23,7 @@ public class GameManager_Grabbing : State<GameManager>
         origin.selected.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         origin.selected.transform.position = new Vector3(origin.selected.transform.position.x, origin.selected.transform.position.y, 0.0f);
         RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.up, 0.0f, LayerMask.GetMask("Tile"));
-        if(hit && hit.transform != tile?.transform)
+        if(hit && hit.transform != tile.transform)
         {
             tile.Unhighlight();
             tile = hit.transform.GetComponent<Tile>();
