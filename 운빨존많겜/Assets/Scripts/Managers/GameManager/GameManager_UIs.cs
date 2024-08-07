@@ -51,6 +51,7 @@ public class GameManager_UIs : MonoBehaviour
         {
             cards[i].image.sprite = GameManager.Instance.cards[i].cardImage;
             TowerData tmp = GameManager.Instance.cards[i];
+            cards[i].onClick.RemoveAllListeners();
             cards[i].onClick.AddListener(delegate { GameManager.Instance.SelectCard(tmp); });
             cards[i].interactable = true;
         }

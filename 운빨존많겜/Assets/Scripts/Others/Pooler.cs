@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class Pooler<T> where T : MonoBehaviour
+public class Pooler<T> where T : Component
 {
     ObjectPool<T> pool;
     T prefab;

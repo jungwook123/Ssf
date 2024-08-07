@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EzTower : Tower
+/*public class EzTower : Tower
 {
     [SerializeField] Transform firePoint;
     [SerializeField] EzBullet bullet;
@@ -18,4 +18,4 @@ public class EzTower : Tower
         base.Attack();
         bulletPool.GetObject(firePoint.position, Quaternion.Euler(0, 0, Mathf.Atan2(enemies[0].transform.position.y - firePoint.position.y, enemies[0].transform.position.x - firePoint.position.x) * Mathf.Rad2Deg)).Set(damage, bulletSpeed, bulletPool);
     }
-}
+}*/

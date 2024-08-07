@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AhriBullet : MonoBehaviour
+/*public class AhriBullet : MonoBehaviour
 {
     float damage, speed;
     const float range = 50.0f;
@@ -43,5 +43,13 @@ public class AhriBullet : MonoBehaviour
         released = true;
         originPool.ReleaseObject(this);
         GameManager.Instance.onGameOver -= Release;
+    }
+}*/
+public class AhriBullet : Bullet
+{
+    protected override void OnHit(Enemy hitEnemy)
+    {
+        base.OnHit(hitEnemy);
+        hitEnemy.AddDebuff<Ahri_Slow>(Ahri.slowTime);
     }
 }

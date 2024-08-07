@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     #region Enemies
     [SerializeField] Transform[] m_enemyWaypoints;
     public Transform[] enemyWaypoints { get { return m_enemyWaypoints; } }
-    public List<Enemy> enemies { get; } = new();
+    public List<Enemy> enemies = new();
     #endregion
     #region Towers&Cards
     [SerializeField] List<TowerData> towers = new();
@@ -85,6 +85,18 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         topLayer.OnStateUpdate();
+    }
+    private void LateUpdate()
+    {
+        enemies.Sort((Enemy a, Enemy b) =>
+        {
+            int tmp = b.pointIndex.CompareTo(a.pointIndex);
+            if (tmp == 0)
+            {
+                return Vector2.Distance(a.transform.position, enemyWaypoints[a.pointIndex].position).CompareTo(Vector2.Distance(b.transform.position, enemyWaypoints[b.pointIndex].position));
+            }
+            else return tmp;
+        });
     }
     public void AddEnemy(Enemy enemy)
     {

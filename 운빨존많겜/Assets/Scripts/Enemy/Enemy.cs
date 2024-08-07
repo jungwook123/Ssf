@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,10 +13,12 @@ public class Enemy : MonoBehaviour
     [SerializeField] Transform hpScaler;
     [SerializeField] Animator anim;
     [SerializeField] protected int moneyReward = 1;
-    int pointIndex = 1;
+    public int pointIndex { get; private set; } = 1;
 
     public float moveSpeed = 1.0f;
     Transform targetPoint { get { return GameManager.Instance.enemyWaypoints[pointIndex]; } }
+
+    List<Debuff> debuffs = new();
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -24,6 +27,34 @@ public class Enemy : MonoBehaviour
 
         hp = maxHp;
         pointIndex = 1;
+    }
+    public void AddDebuff<T>(float duration) where T : Debuff, new()
+    {
+        foreach (var i in debuffs)
+        {
+            if (i is T)
+            {
+                i.ResetDuration(duration);
+                Debug.Log("Duration reset");
+                return;
+            }
+        }
+        T tmp = new T();
+        tmp.Set(duration, this);
+        debuffs.Add(tmp);
+    }
+    List<Debuff> removeQueue = new();
+    public void RemoveDebuff(Debuff debuff)
+    {
+        removeQueue.Add(debuff);
+    }
+    public bool FindDebuff<T>() where T : Debuff
+    {
+        foreach(var i in debuffs)
+        {
+            if (i is T) return true;
+        }
+        return false;
     }
     protected virtual void Update()
     {
@@ -37,8 +68,14 @@ public class Enemy : MonoBehaviour
             if (++pointIndex >= GameManager.Instance.enemyWaypoints.Length)
             {
                 ReachEnd();
+                return;
             }
         }
+        foreach (var i in debuffs) i.OnUpdate();
+    }
+    private void LateUpdate()
+    {
+        foreach (var i in removeQueue) debuffs.Remove(i);
     }
     public void GetDamage(float damage)
     {
@@ -52,10 +89,12 @@ public class Enemy : MonoBehaviour
         GameManager.Instance.enemies.Remove(this);
         Destroy(gameObject);
     }
+    public Action onDeath;
     protected virtual void Die()
     {
         GameManager.Instance.MoneyChange(moneyReward);
         GameManager.Instance.enemies.Remove(this);
+        onDeath?.Invoke();
         Destroy(gameObject);
     }
 }

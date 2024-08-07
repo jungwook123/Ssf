@@ -31,10 +31,13 @@ public class Bullet : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
-            collision.GetComponent<Enemy>().GetDamage(damage);
-            
+            OnHit(collision.GetComponent<Enemy>());
             Release();
         }
+    }
+    protected virtual void OnHit(Enemy hitEnemy)
+    {
+        hitEnemy.GetDamage(damage);
     }
     void Release()
     {

@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ez : RangedTower
+public class Ignis : MeleeTower
 {
-    public const float slowAmount = 0.2f, slowTime = 3.0f;
+    public const float burnDamage = 3f, burnTick = 0.5f, burnDuration = 5.0f;
     protected override int TargettingCompare(Enemy a, Enemy b)
     {
-        if (a.FindDebuff<Ez_Slow>())
+        if (a.FindDebuff<Ignis_Burn>())
         {
-            if (b.FindDebuff<Ez_Slow>())
+            if (b.FindDebuff<Ignis_Burn>())
             {
                 return base.TargettingCompare(a, b);
             }
@@ -18,7 +18,7 @@ public class Ez : RangedTower
                 return 1;
             }
         }
-        else if (b.FindDebuff<Ez_Slow>())
+        else if (b.FindDebuff<Ignis_Burn>())
         {
             return -1;
         }
@@ -26,5 +26,10 @@ public class Ez : RangedTower
         {
             return base.TargettingCompare(a, b);
         }
+    }
+    public override void Attack()
+    {
+        base.Attack();
+        enemies[0].AddDebuff<Ignis_Burn>(burnDuration);
     }
 }

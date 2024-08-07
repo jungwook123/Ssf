@@ -34,7 +34,6 @@ public abstract class Tower : MonoBehaviour
         if (collision.CompareTag("Enemy"))
         {
             enemies.Add(collision.GetComponent<Enemy>());
-            enemies.Sort((Enemy a, Enemy b) => GameManager.Instance.GetIndex(a).CompareTo(GameManager.Instance.GetIndex(b)));
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -61,7 +60,12 @@ public abstract class Tower : MonoBehaviour
     }
     public virtual void Attack()
     {
+        enemies.Sort((Enemy a, Enemy b) => TargettingCompare(a, b));
         anim.SetTrigger("Attack");
+    }
+    protected virtual int TargettingCompare(Enemy a, Enemy b)
+    {
+        return GameManager.Instance.GetIndex(a).CompareTo(GameManager.Instance.GetIndex(b));
     }
     public void Select()
     {

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EzBullet : MonoBehaviour
+/*public class EzBullet : MonoBehaviour
 {
     float damage, speed;
     const float range = 50.0f;
@@ -43,5 +43,13 @@ public class EzBullet : MonoBehaviour
         released = true;
         originPool.ReleaseObject(this);
         GameManager.Instance.onGameOver -= Release;
+    }
+}*/
+public class EzBullet : Bullet
+{
+    protected override void OnHit(Enemy hitEnemy)
+    {
+        base.OnHit(hitEnemy);
+        hitEnemy.AddDebuff<Ez_Slow>(Ez.slowTime);
     }
 }
