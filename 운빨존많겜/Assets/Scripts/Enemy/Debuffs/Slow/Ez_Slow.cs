@@ -9,8 +9,8 @@ public class Ez_Slow : Slow
     {
         
     }
-    static Pooler<ParticleSystem> effectPool = new Pooler<ParticleSystem>(Resources.Load<ParticleSystem>("Particles/Ez_Slow"));
-    ParticleSystem particles;
+    static Pooler<Transform> effectPool = new Pooler<Transform>(Resources.Load<Transform>("Particles/Ez_Slow"));
+    Transform particles;
     public override void Set(float duration, Enemy debuffed)
     {
         base.Set(duration, debuffed);
@@ -19,7 +19,7 @@ public class Ez_Slow : Slow
     protected override void OnDebuffEnd()
     {
         base.OnDebuffEnd();
-        particles.transform.SetParent(null);
+        particles.SetParent(null);
         effectPool.ReleaseObject(particles);
     }
 }

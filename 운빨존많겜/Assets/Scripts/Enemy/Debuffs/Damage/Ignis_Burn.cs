@@ -9,8 +9,8 @@ public class Ignis_Burn : Damage
     {
 
     }
-    static Pooler<ParticleSystem> effectPool = new Pooler<ParticleSystem>(Resources.Load<ParticleSystem>("Particles/Ignis_Burn"));
-    ParticleSystem particles;
+    static Pooler<Transform> effectPool = new Pooler<Transform>(Resources.Load<Transform>("Particles/Ignis_Burn"));
+    Transform particles;
     public override void Set(float duration, Enemy debuffed)
     {
         base.Set(duration, debuffed);
@@ -19,7 +19,7 @@ public class Ignis_Burn : Damage
     protected override void OnDebuffEnd()
     {
         base.OnDebuffEnd();
-        particles.transform.SetParent(null);
+        particles.SetParent(null);
         effectPool.ReleaseObject(particles);
     }
 }

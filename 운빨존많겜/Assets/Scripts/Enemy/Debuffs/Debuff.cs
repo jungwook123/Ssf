@@ -13,7 +13,7 @@ public class Debuff
         counter = duration;
         debuffed.onDeath += OnDebuffEnd;
     }
-    public void ResetDuration(float duration)
+    public virtual void ResetDuration(float duration)
     {
         counter = Mathf.Max(counter, duration);
     }

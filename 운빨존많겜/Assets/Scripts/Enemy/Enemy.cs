@@ -56,6 +56,14 @@ public class Enemy : MonoBehaviour
         }
         return false;
     }
+    public T GetDebuff<T>() where T : Debuff
+    {
+        foreach (var i in debuffs)
+        {
+            if (i is T) return i as T;
+        }
+        return null;
+    }
     protected virtual void Update()
     {
         float dist = Vector2.Distance(transform.position, targetPoint.position);

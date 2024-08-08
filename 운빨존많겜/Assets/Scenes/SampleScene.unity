@@ -2882,7 +2882,7 @@ MonoBehaviour:
   - {fileID: 2109868884}
   enemies: []
   towers:
-  - {fileID: 11400000, guid: 975d2e6d6cb872641ad64a2ebc6a7cb8, type: 2}
+  - {fileID: 11400000, guid: 466a69fd104a34346a24b38d08795435, type: 2}
   gridParents:
   - {fileID: 1525825517}
   - {fileID: 1897474317}
