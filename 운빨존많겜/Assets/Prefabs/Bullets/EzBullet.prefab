@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 232575371222373468}
   - component: {fileID: -8917995475188060898}
-  - component: {fileID: 5243545885943709585}
+  - component: {fileID: 3046894174164996560}
   m_Layer: 0
   m_Name: EzBullet
   m_TagString: Untagged
@@ -163,7 +163,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &5243545885943709585
+--- !u!114 &3046894174164996560
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -172,6 +172,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 5541069192425987786}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97ae3319d666ec047af24a37dca51911, type: 3}
+  m_Script: {fileID: 11500000, guid: d1d0972e1d2860044b10be42d337bb21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

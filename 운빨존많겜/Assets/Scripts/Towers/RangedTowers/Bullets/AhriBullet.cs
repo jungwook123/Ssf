@@ -49,7 +49,8 @@ public class AhriBullet : Bullet
 {
     protected override void OnHit(Enemy hitEnemy)
     {
-        base.OnHit(hitEnemy);
+        GameManager.Instance.UIs.DamageUI(hitEnemy, damage, new Color(1, 0, 1));
+        hitEnemy.GetDamage(damage);
         hitEnemy.AddDebuff<Ahri_Slow>(Ahri.slowTime);
     }
 }

@@ -35,9 +35,9 @@ public class GameManager_Selected : State<GameManager>
             origin.UIs.fuseButton.gameObject.SetActive(false);
         }
         origin.UIs.SelectUI(origin.selected);
-        origin.selected.Select();
-        origin.rangeViewer.localScale = new Vector2(origin.selected.range*2, origin.selected.range*2);
         origin.rangeViewer.position = origin.selected.transform.position;
+        origin.rangeViewer.localScale = new Vector2(origin.selected.range * 2.0f, origin.selected.range * 2.0f);
+        origin.selected.Select();
         origin.rangeViewer.gameObject.SetActive(true);
     }
     public override void OnStateUpdate()
@@ -47,7 +47,7 @@ public class GameManager_Selected : State<GameManager>
         {
             parentLayer.ChangeState("Idle"); return;
         }
-        if (Input.GetMouseButtonDown(0) && origin.UIs._IsMouseOnUI()==false)
+        if (Input.GetMouseButtonDown(0) && origin.UIs._IsMouseOnUI()==false || Input.GetKeyDown(KeyCode.Escape))
         {
             parentLayer.ChangeState("Idle"); return;
         }
@@ -105,11 +105,11 @@ public class GameManager_Selected : State<GameManager>
     {
         base.OnStateExit();
         origin.UIs.CloseSelectUI();
-        origin.selected.Unselect();
         if (origin.selected.data.upgrade != null)
         {
             GameManager.Instance.onTowerSpawn -= CheckFuseAvailability;
         }
+        origin.selected.Unselect();
         origin.selected = null;
         origin.rangeViewer.gameObject.SetActive(false);
     }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -11,6 +12,7 @@ public class GameManager_UIs : MonoBehaviour
     [SerializeField] Button m_deleteButton, m_fuseButton;
     [SerializeField] Text moneyText, shuffleButtonText;
     [SerializeField] Button[] cards = new Button[GameManager.cardCount];
+    [SerializeField] DamageText damageEffectPrefab;
     public Button deleteButton { get { return m_deleteButton; } }
     public Button fuseButton { get { return m_fuseButton; } }
     private void Awake()
@@ -19,6 +21,7 @@ public class GameManager_UIs : MonoBehaviour
         GameManager.Instance.onMoneyChange += (int money) => { moneyText.text = string.Concat(money, "$"); };
         GameManager.Instance.onCardShuffle += CardShuffle;
         GameManager.Instance.onCardSelect += CardSelect;
+        dmgEffectPool = new Pooler<DamageText>(damageEffectPrefab, 100, 10);
     }
     public void SelectUI(Tower tower)
     {
@@ -57,4 +60,40 @@ public class GameManager_UIs : MonoBehaviour
             cards[i].interactable = false;
         }
     }
+    public Pooler<DamageText> dmgEffectPool { get; private set; }
+    public void DamageUI(Enemy hit, float damage)
+    {
+        if(damage/hit.maxHp >= 0.5f)
+        {
+            ShowDamageUI(hit.transform.position, $"{damage}!!", Color.red);
+        }
+        else if(damage/hit.maxHp >= 0.25f)
+        {
+            ShowDamageUI(hit.transform.position, $"{damage}!", new Color(1f, 0.5f, 0));
+        }
+        else
+        {
+            ShowDamageUI(hit.transform.position, damage.ToString(), new Color(1f, 1f, 0));
+        }
+    }
+    public void DamageUI(Enemy hit, float damage, Color color)
+    {
+        if (damage / hit.maxHp >= 0.5f)
+        {
+            ShowDamageUI(hit.transform.position, $"{damage}!!", color);
+        }
+        else if (damage / hit.maxHp >= 0.25f)
+        {
+            ShowDamageUI(hit.transform.position, $"{damage}!", color);
+        }
+        else
+        {
+            ShowDamageUI(hit.transform.position, damage.ToString(), color);
+        }
+    }
+    void ShowDamageUI(Vector2 pos, string content, Color color)
+    {
+        dmgEffectPool.GetObject(pos, Quaternion.identity).Set(content, color, new Vector2(UnityEngine.Random.Range(-1.0f, 1.0f), UnityEngine.Random.Range(-1.0f, 1.0f)).normalized);
+    }
+    public void Release(DamageText obj) => dmgEffectPool.ReleaseObject(obj);
 }

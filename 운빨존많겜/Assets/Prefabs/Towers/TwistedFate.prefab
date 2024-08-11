@@ -285,8 +285,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_range: 10
-  fireRate: 1
-  damage: 10
+  fireRate: 1.5
+  damage: 5
   firePoint: {fileID: 4275702736095991957}
   bullet: {fileID: -6794912527114311549, guid: 6b56a68653facf749a1ec6d4d60235ff, type: 3}
   bulletSpeed: 10

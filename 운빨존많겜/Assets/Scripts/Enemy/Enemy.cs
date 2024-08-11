@@ -9,7 +9,7 @@ public class Enemy : MonoBehaviour
     Rigidbody2D rb;
     [SerializeField] float m_maxHp;
     public float maxHp { get { return m_maxHp; } }
-    float hp;
+    public float hp { get; private set; }
     [SerializeField] Transform hpScaler;
     [SerializeField] Animator anim;
     [SerializeField] protected int moneyReward = 1;

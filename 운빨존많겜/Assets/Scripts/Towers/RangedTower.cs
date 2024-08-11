@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 public class RangedTower : Tower
 {
+    [Header("Ranged")]
     [SerializeField] Transform firePoint;
     [SerializeField] Bullet bullet;
     [SerializeField] protected float bulletSpeed;

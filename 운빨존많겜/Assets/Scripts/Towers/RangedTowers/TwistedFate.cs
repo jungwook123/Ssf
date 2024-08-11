@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TwistedFate : RangedTower
 {
-    public const float fateDamage = 50.0f, fateDuration = 5.0f;
+    public const float fateDamage = 30.0f, fateDuration = 5.0f;
     protected override int TargettingCompare(Enemy a, Enemy b)
     {
         if (a.FindDebuff<TwistedFate_Fate>())

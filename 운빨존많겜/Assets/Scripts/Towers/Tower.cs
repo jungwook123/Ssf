@@ -17,10 +17,9 @@ public abstract class Tower : MonoBehaviour
     protected Animator anim { get; private set; }
     protected List<Enemy> enemies { get; } = new();
 
+    [Header("Tower")]
     [SerializeField] protected float m_range;
     public float range { get { return m_range; } set { m_range = value; scanCollider.radius = value; } }
-
-    [Header("Statistics")]
     [SerializeField] protected float fireRate, damage;
     protected virtual void Awake()
     {
@@ -62,19 +61,27 @@ public abstract class Tower : MonoBehaviour
     public virtual void Attack()
     {
         enemies.Sort((Enemy a, Enemy b) => TargettingCompare(a, b));
+        if (enemies[0].transform.position.x > transform.position.x)
+        {
+            transform.localScale = new Vector2(-1.0f, 1.0f);
+        }
+        else
+        {
+            transform.localScale = new Vector2(1.0f, 1.0f);
+        }
         anim.SetTrigger("Attack");
     }
     protected virtual int TargettingCompare(Enemy a, Enemy b)
     {
         return GameManager.Instance.GetIndex(a).CompareTo(GameManager.Instance.GetIndex(b));
     }
-    public void Select()
+    public virtual void Select()
     {
         
     }
-    public void Unselect()
+    public virtual void Unselect()
     {
-        
+
     }
     public virtual void Disable()
     {

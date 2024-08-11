@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Ahri : RangedTower
 {
-    public const float slowAmount = 0.2f, slowTime = 3.0f;
+    public const float slowAmount = 0.5f, slowTime = 5.0f;
     protected override int TargettingCompare(Enemy a, Enemy b)
     {
         if (a.FindDebuff<Ahri_Slow>())
