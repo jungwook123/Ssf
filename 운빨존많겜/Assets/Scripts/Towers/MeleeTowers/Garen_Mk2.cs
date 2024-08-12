@@ -29,11 +29,18 @@ public class Garen_Mk2 : Tower
     }
     protected override int TargettingCompare(Enemy a, Enemy b)
     {
-        if(count < stunCount) return base.TargettingCompare(a, b);
-        else
+        if (a.hp / a.maxHp <= threshold)
         {
-            if (b is Boss) return 1;
-            else return base.TargettingCompare(a, b);
+            if (b.hp / b.maxHp <= threshold)
+            {
+                return base.TargettingCompare(a, b);
+            }
+            else return -1;
         }
+        else if (b.hp / b.maxHp <= threshold)
+        {
+            return 1;
+        }
+        else return base.TargettingCompare(a, b);
     }
 }

@@ -29,11 +29,14 @@ public class Modekizer_Mk2_HeavyBleed : Debuff
             debuffed.GetDamage(Modekizer_Mk2.bleedDamage);
         }
     }
+    bool ended = false;
     public override void DebuffEnd()
     {
+        if (ended) return;
         base.DebuffEnd();
         debuffed.moveSpeed /= Modekizer_Mk2.bleedSlowScale;
         particles.SetParent(null);
         effectPool.ReleaseObject(particles);
+        ended = true;
     }
 }

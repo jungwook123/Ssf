@@ -30,11 +30,14 @@ public class Modekizer_Bleed : Debuff
             debuffed.GetDamage(Modekizer.bleedDamage);
         }
     }
+    bool ended = false;
     public override void DebuffEnd()
     {
+        if (ended) return;
         base.DebuffEnd();
         debuffed.moveSpeed /= Modekizer.bleedSlowScale;
         particles.SetParent(null);
         effectPool.ReleaseObject(particles);
+        ended = true;
     }
 }

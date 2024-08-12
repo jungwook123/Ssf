@@ -18,4 +18,20 @@ public class Garen : Tower
             enemies[0].GetDamage(damage);
         }
     }
+    protected override int TargettingCompare(Enemy a, Enemy b)
+    {
+        if (a.hp / a.maxHp <= threshold)
+        {
+            if (b.hp / b.maxHp <= threshold)
+            {
+                return base.TargettingCompare(a, b);
+            }
+            else return -1;
+        }
+        else if (b.hp / b.maxHp <= threshold)
+        {
+            return 1;
+        }
+        else return base.TargettingCompare(a, b);
+    }
 }

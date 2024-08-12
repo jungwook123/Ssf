@@ -72,11 +72,11 @@ public class GameManager_UIs : MonoBehaviour
     public Pooler<DamageText> dmgEffectPool { get; private set; }
     public void DamageUI(Enemy hit, float damage)
     {
-        if(damage/hit.maxHp >= 0.5f)
+        if(damage >= 50.0f)
         {
             ShowDamageUI(hit.transform.position, $"{damage}!!", Color.red);
         }
-        else if(damage/hit.maxHp >= 0.25f)
+        else if(damage >= 30.0f)
         {
             ShowDamageUI(hit.transform.position, $"{damage}!", new Color(1f, 0.5f, 0));
         }
@@ -87,11 +87,11 @@ public class GameManager_UIs : MonoBehaviour
     }
     public void DamageUI(Enemy hit, float damage, Color color)
     {
-        if (damage / hit.maxHp >= 0.5f)
+        if (damage >= 50.0f)
         {
             ShowDamageUI(hit.transform.position, $"{damage}!!", color);
         }
-        else if (damage / hit.maxHp >= 0.25f)
+        else if (damage >= 30.0f)
         {
             ShowDamageUI(hit.transform.position, $"{damage}!", color);
         }

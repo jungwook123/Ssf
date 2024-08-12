@@ -14,6 +14,7 @@ public class EnemySpawner : MonoBehaviour
     {
         skipButton.onClick.AddListener(Skip);
         StartCoroutine(Intermission());
+        GameManager.Instance.onGameOver += () => { StopAllCoroutines(); };
     }
     IEnumerator Intermission()
     {

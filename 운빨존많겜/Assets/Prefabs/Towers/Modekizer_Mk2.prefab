@@ -252,7 +252,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e6fba73aaaa76b4ea87c16ac0db4705, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_range: 3
+  m_range: 6
   fireRate: 0.5
   damage: 8
   model: {fileID: 1376162541108081703}

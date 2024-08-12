@@ -25,9 +25,13 @@ public class GameManager_Grabbing : State<GameManager>
         RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.up, 0.0f, LayerMask.GetMask("Tile"));
         if(hit && hit.transform != tile.transform)
         {
-            tile.Unhighlight();
-            tile = hit.transform.GetComponent<Tile>();
-            tile.Highlight();
+            Tile tmp = hit.transform.GetComponent<Tile>();
+            if(tmp.tower == null)
+            {
+                tile.Unhighlight();
+                tile = hit.transform.GetComponent<Tile>();
+                tile.Highlight();
+            }
         }
         if (Input.GetMouseButton(0) == false)
         {
