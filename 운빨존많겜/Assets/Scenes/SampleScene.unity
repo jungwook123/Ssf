@@ -4017,7 +4017,7 @@ MonoBehaviour:
     - m_enemy: {fileID: 5036868773120832061, guid: 1b6f692a1f532fc4a99c16fb51061e1a, type: 3}
       m_count: 5
       m_spawnCooldown: 1.5
-    m_endTime: 10
+    m_endTime: 20
   - elements:
     - m_enemy: {fileID: 5036868773120832061, guid: 1b6f692a1f532fc4a99c16fb51061e1a, type: 3}
       m_count: 10
@@ -4025,12 +4025,22 @@ MonoBehaviour:
     - m_enemy: {fileID: 5036868773120832061, guid: de9cf0322f107084582e856f866b3674, type: 3}
       m_count: 1
       m_spawnCooldown: 0
-    m_endTime: 25
+    m_endTime: 50
   - elements:
     - m_enemy: {fileID: 5036868773120832061, guid: de9cf0322f107084582e856f866b3674, type: 3}
       m_count: 2
       m_spawnCooldown: 5
-    m_endTime: 25
+    m_endTime: 60
+  - elements:
+    - m_enemy: {fileID: 5036868773120832061, guid: d3570812c4682874db9d5bbba1f0c5ad, type: 3}
+      m_count: 5
+      m_spawnCooldown: 2
+    m_endTime: 40
+  - elements:
+    - m_enemy: {fileID: 5036868773120832061, guid: de9cf0322f107084582e856f866b3674, type: 3}
+      m_count: 3
+      m_spawnCooldown: 5
+    m_endTime: 0
   waveText: {fileID: 348803925}
   waveTimeText: {fileID: 2035598544}
 --- !u!4 &1227103355
