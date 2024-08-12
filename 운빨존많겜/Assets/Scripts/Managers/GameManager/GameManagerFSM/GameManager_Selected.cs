@@ -93,7 +93,6 @@ public class GameManager_Selected : State<GameManager>
             if(GameManager.Instance.SearchTower(data) >= 3)
             {
                 origin.UIs.fuseButton.interactable = true;
-                Debug.Log("EAWEAWE");
             }
             else
             {

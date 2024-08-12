@@ -10,6 +10,11 @@ public class Modekizer_Bleed : Debuff
     public override void Set(float duration, Enemy debuffed)
     {
         base.Set(duration, debuffed);
+        if (debuffed.FindDebuff<Modekizer_Mk2_HeavyBleed>())
+        {
+            base.DebuffEnd();
+            return;
+        }
         debuffed.moveSpeed -= Modekizer.bleedSlow;
         particles = effectPool.GetObject(debuffed.transform.position, Quaternion.identity, debuffed.transform);
     }
@@ -25,9 +30,9 @@ public class Modekizer_Bleed : Debuff
             debuffed.GetDamage(Modekizer.bleedDamage);
         }
     }
-    protected override void OnDebuffEnd()
+    public override void DebuffEnd()
     {
-        base.OnDebuffEnd();
+        base.DebuffEnd();
         debuffed.moveSpeed += Modekizer.bleedSlow;
         particles.SetParent(null);
         effectPool.ReleaseObject(particles);

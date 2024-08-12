@@ -10,7 +10,7 @@ public class Bullet : MonoBehaviour
     {
         GameManager.Instance.onGameOver += () => { Release(); };
     }
-    public void Set(float damage, float speed, Pooler<Bullet> origin)
+    public virtual void Set(float damage, float speed, Pooler<Bullet> origin)
     {
         this.damage = damage;
         this.speed = speed;

@@ -9,7 +9,7 @@ public class Garen : Tower
         base.Attack();
         if(enemies[0].hp / enemies[0].maxHp <= threshold)
         {
-            GameManager.Instance.UIs.DamageUI(enemies[0], damage * multiplier, new Color32(255, 225, 112, 255));
+            GameManager.Instance.UIs.DamageUI(enemies[0], damage * multiplier);
             enemies[0].GetDamage(damage * multiplier);
         }
         else

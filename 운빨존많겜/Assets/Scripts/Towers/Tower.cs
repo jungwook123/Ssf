@@ -21,6 +21,7 @@ public abstract class Tower : MonoBehaviour
     [SerializeField] protected float m_range;
     public float range { get { return m_range; } set { m_range = value; scanCollider.radius = value; } }
     [SerializeField] protected float fireRate, damage;
+    [SerializeField] Transform model;
     protected virtual void Awake()
     {
         scanCollider = GetComponent<CircleCollider2D>();
@@ -63,11 +64,11 @@ public abstract class Tower : MonoBehaviour
         enemies.Sort((Enemy a, Enemy b) => TargettingCompare(a, b));
         if (enemies[0].transform.position.x > transform.position.x)
         {
-            transform.localScale = new Vector2(-1.0f, 1.0f);
+            model.localScale = new Vector2(-1.0f, 1.0f);
         }
         else
         {
-            transform.localScale = new Vector2(1.0f, 1.0f);
+            model.localScale = new Vector2(1.0f, 1.0f);
         }
         anim.SetTrigger("Attack");
     }

@@ -255,6 +255,7 @@ MonoBehaviour:
   m_range: 4
   fireRate: 1
   damage: 15
+  model: {fileID: 1376162541108081703}
 --- !u!1 &8426627535407230153
 GameObject:
   m_ObjectHideFlags: 0

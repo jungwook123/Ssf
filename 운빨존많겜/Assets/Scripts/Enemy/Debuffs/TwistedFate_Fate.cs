@@ -28,7 +28,7 @@ public class TwistedFate_Fate : Debuff
         count++;
         if(count >= 4)
         {
-            OnDebuffEnd();
+            DebuffEnd();
             GameManager.Instance.UIs.DamageUI(debuffed, TwistedFate.fateDamage);
             debuffed.GetDamage(TwistedFate.fateDamage);
             done = true;
@@ -38,9 +38,9 @@ public class TwistedFate_Fate : Debuff
             particles.transform.GetChild(count-1).gameObject.SetActive(true);
         }
     }
-    protected override void OnDebuffEnd()
+    public override void DebuffEnd()
     {
-        base.OnDebuffEnd();
+        base.DebuffEnd();
         particles.SetParent(null);
         effectPool.ReleaseObject(particles);
     }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Modekizer : MeleeTower
+public class Modekizer : Tower
 {
     public const float bleedDamage = 7f, bleedTick = 0.5f, bleedDuration = 2f, bleedSlow = 0.1f;
     protected override int TargettingCompare(Enemy a, Enemy b)
@@ -30,6 +30,8 @@ public class Modekizer : MeleeTower
     public override void Attack()
     {
         base.Attack();
+        GameManager.Instance.UIs.DamageUI(enemies[0], damage);
         enemies[0].AddDebuff<Modekizer_Bleed>(bleedDuration);
+        enemies[0].GetDamage(damage);
     }
 }

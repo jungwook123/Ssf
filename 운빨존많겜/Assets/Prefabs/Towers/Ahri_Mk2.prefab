@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0, g: 0.3827629, b: 1, a: 1}
+  m_Color: {r: 0.6886792, g: 0, b: 0.5347392, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -192,9 +192,9 @@ GameObject:
   - component: {fileID: 6980302562204276629}
   - component: {fileID: 4993602986699188578}
   - component: {fileID: 1545954627871489323}
-  - component: {fileID: -938683092888180745}
+  - component: {fileID: 7201214722221524296}
   m_Layer: 0
-  m_Name: Ezreal
+  m_Name: Ahri_Mk2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -272,7 +272,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &-938683092888180745
+--- !u!114 &7201214722221524296
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -281,14 +281,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 2140780892500147218}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1e7c7a36b1891e4f839131c322ce870, type: 3}
+  m_Script: {fileID: 11500000, guid: fd73c15787e90ee4aa56a976249ad444, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_range: 10
-  fireRate: 1
+  m_range: 12
+  fireRate: 0.5
   damage: 10
+  model: {fileID: 1376162541108081703}
   firePoint: {fileID: 4275702736095991957}
-  bullet: {fileID: 3046894174164996560, guid: 226266ef89b4d9041a7f40b6d33ede6c, type: 3}
+  bullet: {fileID: 8353488293556555461, guid: 81b0666dee2303d4fa5a5e73cb8a2be0, type: 3}
   bulletSpeed: 15
 --- !u!1 &8426627535407230153
 GameObject:
@@ -364,7 +365,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.36320752, g: 0.782871, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3eb69d416d7d2284f90df19c5707d70f, type: 3}
-  m_Name: Ezreal
+  m_Name: Garen_Mk2
   m_EditorClassIdentifier: 
-  m_tower: {fileID: -938683092888180745, guid: fb30d2e57937fed498c5036adc24da47, type: 3}
-  m_cardImage: {fileID: 21300000, guid: 2641f50915c6e98498db781effa081f9, type: 3}
+  m_tower: {fileID: 4248291208371332938, guid: 0c55aa0817bf0ef48a1c921e7d4f2290, type: 3}
+  m_cardImage: {fileID: 21300000, guid: 8e6fec06ed5bf7945b292e623cbb1cc9, type: 3}
   m_upgrade: {fileID: 0}

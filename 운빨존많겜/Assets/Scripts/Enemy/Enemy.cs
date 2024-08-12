@@ -35,13 +35,12 @@ public class Enemy : MonoBehaviour
             if (i is T)
             {
                 i.ResetDuration(duration);
-                Debug.Log("Duration reset");
                 return;
             }
         }
         T tmp = new T();
-        tmp.Set(duration, this);
         debuffs.Add(tmp);
+        tmp.Set(duration, this);
     }
     List<Debuff> removeQueue = new();
     public void RemoveDebuff(Debuff debuff)
@@ -64,19 +63,31 @@ public class Enemy : MonoBehaviour
         }
         return null;
     }
+    bool canMove = true;
+    public void DisableMovement()
+    {
+        canMove = false;
+    }
+    public void EnableMovement()
+    {
+        canMove = true;
+    }
     protected virtual void Update()
     {
-        float dist = Vector2.Distance(transform.position, targetPoint.position);
-        if (dist > 0.01f)
+        if (canMove)
         {
-            transform.Translate(Vector2.ClampMagnitude((targetPoint.position - transform.position).normalized * moveSpeed * Time.deltaTime, dist));
-        }
-        else
-        {
-            if (++pointIndex >= GameManager.Instance.enemyWaypoints.Length)
+            float dist = Vector2.Distance(transform.position, targetPoint.position);
+            if (dist > 0.01f)
             {
-                ReachEnd();
-                return;
+                transform.Translate(Vector2.ClampMagnitude((targetPoint.position - transform.position).normalized * Mathf.Max(moveSpeed, 0.05f) * Time.deltaTime, dist));
+            }
+            else
+            {
+                if (++pointIndex >= GameManager.Instance.enemyWaypoints.Length)
+                {
+                    ReachEnd();
+                    return;
+                }
             }
         }
         foreach (var i in debuffs) i.OnUpdate();

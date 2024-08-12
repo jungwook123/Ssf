@@ -11,7 +11,7 @@ public class Debuff
     {
         this.debuffed = debuffed;
         counter = duration;
-        debuffed.onDeath += OnDebuffEnd;
+        debuffed.onDeath += DebuffEnd;
     }
     public virtual void ResetDuration(float duration)
     {
@@ -22,12 +22,12 @@ public class Debuff
         counter -= Time.deltaTime;
         if(counter <= 0.0f)
         {
-            OnDebuffEnd();
+            DebuffEnd();
         }
     }
-    protected virtual void OnDebuffEnd()
+    public virtual void DebuffEnd()
     {
         debuffed.RemoveDebuff(this);
-        debuffed.onDeath -= OnDebuffEnd;
+        debuffed.onDeath -= DebuffEnd;
     }
 }

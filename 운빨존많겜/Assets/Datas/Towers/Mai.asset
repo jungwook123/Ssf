@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_tower: {fileID: -3146145752102450980, guid: da3947bba4b7ddd47ac00ab5285ed083, type: 3}
   m_cardImage: {fileID: 21300000, guid: d9c904b3e1c00ca4d911d672fcb6d39b, type: 3}
-  m_upgrade: {fileID: 11400000, guid: 9b1af96cbe125be45bdebea39d15afc6, type: 2}
+  m_upgrade: {fileID: 11400000, guid: f1a94ec51cd0cc7479366174cb83e1d1, type: 2}

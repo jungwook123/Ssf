@@ -287,6 +287,7 @@ MonoBehaviour:
   m_range: 5
   fireRate: 1.5
   damage: 7
+  model: {fileID: 1376162541108081703}
   firePoint: {fileID: 4275702736095991957}
   bullet: {fileID: 8133320004101797283, guid: f354a36f8d83ccc488dc0750af8491dd, type: 3}
   bulletSpeed: 10
