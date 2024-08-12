@@ -56,6 +56,12 @@ public class GameManager : MonoBehaviour
     const int spawnCostIncrease = 2;
     #endregion
     #endregion
+    #region baseHP
+    [SerializeField] float m_maxBaseHP;
+    public float maxBaseHP { get { return m_maxBaseHP; } }
+    public float baseHP { get; private set; }
+    #endregion
+    bool spawnEnded = false;
     private void Awake()
     {
         UIs = GetComponent<GameManager_UIs>();
@@ -71,6 +77,7 @@ public class GameManager : MonoBehaviour
                 grid[i, k] = gridParents[i].GetChild(k).GetComponent<Tile>();
             }
         }
+        baseHP = maxBaseHP;
     }
     private void Start()
     {
@@ -84,10 +91,12 @@ public class GameManager : MonoBehaviour
     public int GetIndex(Enemy enemy) => enemies.IndexOf(enemy);
     private void Update()
     {
+        if (gameOver) return;
         topLayer.OnStateUpdate();
     }
     private void LateUpdate()
     {
+        if (gameOver) return;
         enemies.Sort((Enemy a, Enemy b) =>
         {
             int tmp = b.pointIndex.CompareTo(a.pointIndex);
@@ -98,12 +107,17 @@ public class GameManager : MonoBehaviour
             else return tmp;
         });
     }
+    public void AllWaveEnd() => spawnEnded = true;
     public void AddEnemy(Enemy enemy)
     {
         enemies.Add(enemy);
-        if(enemies.Count >= 100)
+    }
+    public void RemoveEnemy(Enemy enemy)
+    {
+        enemies.Remove(enemy);
+        if(enemies.Count == 0 && spawnEnded)
         {
-            GameOver(false);
+            GameOver(true);
         }
     }
     public Action<TowerData> onTowerSpawn;
@@ -180,14 +194,22 @@ public class GameManager : MonoBehaviour
             onCardSelect?.Invoke();
         }
     }
+    public Action onBaseDamage;
+    public void GetBaseDamage(float damage)
+    {
+        baseHP = Mathf.Max(0.0f, baseHP - damage);
+        onBaseDamage.Invoke();
+        if(baseHP <= 0)
+        {
+            GameOver(false);
+        }
+    }
     public Action onGameOver;
+    bool gameOver = false;
     public void GameOver(bool victory)
     {
+        gameOver = true;
         onGameOver?.Invoke();
-        foreach(var i in grid)
-        {
-            if(i.tower!=null) Destroy(i.tower.gameObject);
-        }
         foreach(var i in enemies)
         {
             Destroy(i.gameObject);

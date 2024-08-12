@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Ez
   m_EditorClassIdentifier: 
   m_tower: {fileID: -938683092888180745, guid: fb30d2e57937fed498c5036adc24da47, type: 3}
-  m_cardImage: {fileID: 21300000, guid: 2641f50915c6e98498db781effa081f9, type: 3}
+  m_cardImage: {fileID: 21300000, guid: 32dc4f372193c0741a99a04141ebf8e2, type: 3}
   m_upgrade: {fileID: 11400000, guid: 6cb0f527b9c6c37448f62533dff2d84e, type: 2}

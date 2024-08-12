@@ -2,37 +2,53 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] Wave[] waves;
-    int waveIndex = 0;
+    [SerializeField] Text waveText, waveTimeText;
     private void Awake()
     {
-        if (waves.Length > 0) StartCoroutine(SpawnWave());
+        StartCoroutine(Wave());
     }
-    IEnumerator SpawnWave()
+    IEnumerator SpawnWave(int waveIndex)
     {
-        while (waves[waveIndex].elements.Count > 0)
+        for(int i = 0; i < waves[waveIndex].elements.Count; i++)
         {
-            for (int i = 0; i < waves[waveIndex].elements[0].count; i++)
+            for (int k = 0; k < waves[waveIndex].elements[i].count; k++)
             {
-                Enemy tmp = Instantiate(waves[waveIndex].elements[0].enemy, GameManager.Instance.enemyWaypoints[0].position, Quaternion.identity).GetComponent<Enemy>();
+                Enemy tmp = Instantiate(waves[waveIndex].elements[i].enemy, GameManager.Instance.enemyWaypoints[0].position, Quaternion.identity).GetComponent<Enemy>();
                 GameManager.Instance.AddEnemy(tmp);
-                yield return new WaitForSeconds(waves[waveIndex].elements[0].spawnCooldown);
+                yield return new WaitForSeconds(waves[waveIndex].elements[i].spawnCooldown);
             }
-            waves[waveIndex].elements.RemoveAt(0);
         }
-        yield return new WaitForSeconds(waves[waveIndex].endTime);
-        if (++waveIndex < waves.Length) StartCoroutine(SpawnWave());
+        if (waveIndex == waves.Length - 1) GameManager.Instance.AllWaveEnd();
+    }
+    IEnumerator Wave()
+    {
+        for(int i = 0; i < waves.Length; i++)
+        {
+            if (i < waves.Length - 1) waveText.text = $"Wave {i + 1}";
+            else
+            {
+                waveText.text = "Final Wave";
+                waveTimeText.text = "";
+            }
+            StartCoroutine(SpawnWave(i));
+            for(int k = 0; k < waves[i].endTime; k++)
+            {
+                if(i < waves.Length - 1) waveTimeText.text = $"Next Wave In: {waves[i].endTime - k}";
+                yield return new WaitForSeconds(1);
+            }
+        }
     }
 }
 [System.Serializable]
 public class Wave
 {
     public List<WaveElement> elements;
-    [SerializeField] float m_endTime;
-    public float endTime { get { return m_endTime; } }
+    [SerializeField] int m_endTime;
+    public int endTime { get { return m_endTime; } }
 }
 [System.Serializable]
 public class WaveElement

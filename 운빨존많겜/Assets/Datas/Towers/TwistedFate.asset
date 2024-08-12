@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: TwistedFate
   m_EditorClassIdentifier: 
   m_tower: {fileID: -705547582887560516, guid: fd563ccb1ec4d974087155d77b46002a, type: 3}
-  m_cardImage: {fileID: 21300000, guid: 8e6fec06ed5bf7945b292e623cbb1cc9, type: 3}
+  m_cardImage: {fileID: 21300000, guid: 09764bf8da1d4f940aebb95adfe47e7b, type: 3}
   m_upgrade: {fileID: 11400000, guid: 013f9726e2f21a04abbf1d9b537477e5, type: 2}

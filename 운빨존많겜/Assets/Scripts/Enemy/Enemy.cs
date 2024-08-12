@@ -103,16 +103,18 @@ public class Enemy : MonoBehaviour
         if (hp <= 0) Die();
         else hpScaler.localScale = new Vector2(hp / maxHp, 1.0f);
     }
+    public Action onDeath;
     protected virtual void ReachEnd()
     {
-        GameManager.Instance.enemies.Remove(this);
+        GameManager.Instance.RemoveEnemy(this);
+        GameManager.Instance.GetBaseDamage(hp);
+        onDeath?.Invoke();
         Destroy(gameObject);
     }
-    public Action onDeath;
     protected virtual void Die()
     {
         GameManager.Instance.MoneyChange(moneyReward);
-        GameManager.Instance.enemies.Remove(this);
+        GameManager.Instance.RemoveEnemy(this);
         onDeath?.Invoke();
         Destroy(gameObject);
     }

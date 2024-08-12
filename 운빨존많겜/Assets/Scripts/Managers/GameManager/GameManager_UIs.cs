@@ -13,6 +13,8 @@ public class GameManager_UIs : MonoBehaviour
     [SerializeField] Text moneyText, shuffleButtonText;
     [SerializeField] Button[] cards = new Button[GameManager.cardCount];
     [SerializeField] DamageText damageEffectPrefab;
+    [SerializeField] RectTransform baseHPImage;
+    [SerializeField] Text baseHPText;
     public Button deleteButton { get { return m_deleteButton; } }
     public Button fuseButton { get { return m_fuseButton; } }
     private void Awake()
@@ -21,6 +23,8 @@ public class GameManager_UIs : MonoBehaviour
         GameManager.Instance.onMoneyChange += (int money) => { moneyText.text = string.Concat(money, "$"); };
         GameManager.Instance.onCardShuffle += CardShuffle;
         GameManager.Instance.onCardSelect += CardSelect;
+        GameManager.Instance.onBaseDamage += BaseHPUI;
+        BaseHPUI();
         dmgEffectPool = new Pooler<DamageText>(damageEffectPrefab, 100, 10);
     }
     public void SelectUI(Tower tower)
@@ -59,6 +63,11 @@ public class GameManager_UIs : MonoBehaviour
             cards[i].onClick.RemoveAllListeners();
             cards[i].interactable = false;
         }
+    }
+    void BaseHPUI()
+    {
+        baseHPImage.localPosition = new Vector2(-150.0f + (-300.0f * (1.0f - GameManager.Instance.baseHP / GameManager.Instance.maxBaseHP)), baseHPImage.localPosition.y);
+        baseHPText.text = $"Base HP: {Mathf.CeilToInt(GameManager.Instance.baseHP)}/{GameManager.Instance.maxBaseHP}";
     }
     public Pooler<DamageText> dmgEffectPool { get; private set; }
     public void DamageUI(Enemy hit, float damage)
