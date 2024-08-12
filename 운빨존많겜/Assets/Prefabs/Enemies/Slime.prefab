@@ -412,7 +412,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f61eabd0f700ca48b5f454f8a4fabcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_maxHp: 150
+  m_maxHp: 200
   hpScaler: {fileID: 72204082679599907}
   anim: {fileID: 6388665644847998048}
   moneyReward: 5

@@ -5,7 +5,7 @@ public class Garen_Mk2 : Tower
 {
     const float threshold = 0.5f, multiplier = 3f;
     const int stunCount = 4;
-    const float stunDuration = 2.0f;
+    const float stunDuration = 1.0f;
     int count = 0;
     public override void Attack()
     {

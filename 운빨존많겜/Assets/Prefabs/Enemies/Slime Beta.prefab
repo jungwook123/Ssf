@@ -412,11 +412,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f61eabd0f700ca48b5f454f8a4fabcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_maxHp: 400
+  m_maxHp: 750
   hpScaler: {fileID: 72204082679599907}
   anim: {fileID: 6388665644847998048}
   moneyReward: 5
-  moveSpeed: 1
+  moveSpeed: 1.5
 --- !u!50 &4682466585260629692
 Rigidbody2D:
   serializedVersion: 4

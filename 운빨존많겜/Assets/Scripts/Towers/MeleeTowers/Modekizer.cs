@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Modekizer : Tower
 {
-    public const float bleedDamage = 7f, bleedTick = 0.5f, bleedDuration = 2f, bleedSlow = 0.1f;
+    public const float bleedDamage = 7f, bleedTick = 0.5f, bleedDuration = 2f, bleedSlowScale = 0.9f;
     protected override int TargettingCompare(Enemy a, Enemy b)
     {
         if (a.FindDebuff<Modekizer_Bleed>())

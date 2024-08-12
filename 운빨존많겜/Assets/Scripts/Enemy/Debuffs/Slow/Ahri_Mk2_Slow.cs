@@ -14,13 +14,13 @@ public class Ahri_Mk2_Slow : Debuff
         Ahri_Slow tmp = debuffed.GetDebuff<Ahri_Slow>();
         if (tmp != null) tmp.DebuffEnd();
 
-        debuffed.moveSpeed -= Ahri_Mk2.slowAmount;
+        debuffed.moveSpeed *= Ahri_Mk2.slowScale;
         particles = effectPool.GetObject(debuffed.transform.position, Quaternion.identity, debuffed.transform);
     }
     public override void DebuffEnd()
     {
         base.DebuffEnd();
-        debuffed.moveSpeed += Ahri_Mk2.slowAmount;
+        debuffed.moveSpeed /= Ahri_Mk2.slowScale;
         particles.SetParent(null);
         effectPool.ReleaseObject(particles);
     }

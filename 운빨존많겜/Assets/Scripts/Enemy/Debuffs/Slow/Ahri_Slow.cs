@@ -15,13 +15,13 @@ public class Ahri_Slow : Debuff
             base.DebuffEnd();
             return;
         }
-        debuffed.moveSpeed -= Ahri.slowAmount;
+        debuffed.moveSpeed *= Ahri.slowScale;
         particles = effectPool.GetObject(debuffed.transform.position, Quaternion.identity, debuffed.transform);
     }
     public override void DebuffEnd()
     {
         base.DebuffEnd();
-        debuffed.moveSpeed += Ahri.slowAmount;
+        debuffed.moveSpeed /= Ahri.slowScale;
         particles.SetParent(null);
         effectPool.ReleaseObject(particles);
     }

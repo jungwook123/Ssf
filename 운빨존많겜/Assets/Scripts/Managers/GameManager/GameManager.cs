@@ -107,7 +107,7 @@ public class GameManager : MonoBehaviour
             else return tmp;
         });
     }
-    public void AllWaveEnd() => spawnEnded = true;
+    public void AllSpawnEnd() => spawnEnded = true;
     public void AddEnemy(Enemy enemy)
     {
         enemies.Add(enemy);

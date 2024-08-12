@@ -18,12 +18,10 @@ public class TwistedFate_Fate : Debuff
         particles = effectPool.GetObject(debuffed.transform.position, Quaternion.identity, debuffed.transform);
         particles.GetChild(1).gameObject.SetActive(false);
         particles.GetChild(2).gameObject.SetActive(false);
-        done = false;
     }
-    bool done = false;
     public override void ResetDuration(float duration)
     {
-        if (done) return;
+        if (ended) return;
         base.ResetDuration(duration);
         count++;
         if(count >= 4)
@@ -31,17 +29,19 @@ public class TwistedFate_Fate : Debuff
             DebuffEnd();
             GameManager.Instance.UIs.DamageUI(debuffed, TwistedFate.fateDamage);
             debuffed.GetDamage(TwistedFate.fateDamage);
-            done = true;
         }
         else
         {
             particles.transform.GetChild(count-1).gameObject.SetActive(true);
         }
     }
+    bool ended = false;
     public override void DebuffEnd()
     {
+        if (ended) return;
         base.DebuffEnd();
         particles.SetParent(null);
         effectPool.ReleaseObject(particles);
+        ended = true;
     }
 }

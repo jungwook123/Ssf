@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Modekizer_Mk2 : Tower
 {
-    public const float bleedDamage = 10f, bleedTick = 0.5f, bleedDuration = 3f, bleedSlow = 0.1f;
+    public const float bleedDamage = 10f, bleedTick = 0.5f, bleedDuration = 3f, bleedSlowScale = 0.8f;
     protected override int TargettingCompare(Enemy a, Enemy b)
     {
         if(count < strikeCount)

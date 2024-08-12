@@ -15,7 +15,7 @@ public class Modekizer_Bleed : Debuff
             base.DebuffEnd();
             return;
         }
-        debuffed.moveSpeed -= Modekizer.bleedSlow;
+        debuffed.moveSpeed *= Modekizer.bleedSlowScale;
         particles = effectPool.GetObject(debuffed.transform.position, Quaternion.identity, debuffed.transform);
     }
     float counter = 0;
@@ -33,7 +33,7 @@ public class Modekizer_Bleed : Debuff
     public override void DebuffEnd()
     {
         base.DebuffEnd();
-        debuffed.moveSpeed += Modekizer.bleedSlow;
+        debuffed.moveSpeed /= Modekizer.bleedSlowScale;
         particles.SetParent(null);
         effectPool.ReleaseObject(particles);
     }

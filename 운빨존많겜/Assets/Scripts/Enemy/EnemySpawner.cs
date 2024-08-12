@@ -1,15 +1,48 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 public class EnemySpawner : MonoBehaviour
 {
+    [SerializeField] int startTime;
     [SerializeField] Wave[] waves;
     [SerializeField] Text waveText, waveTimeText;
+    [SerializeField] Button skipButton;
     private void Awake()
     {
-        StartCoroutine(Wave());
+        skipButton.onClick.AddListener(Skip);
+        StartCoroutine(Intermission());
+    }
+    IEnumerator Intermission()
+    {
+        waveText.text = "Intermission";
+        for (int i = 0; i < startTime; i++)
+        {
+            waveTimeText.text = $"Starting in: {startTime - i}";
+            yield return new WaitForSeconds(1);
+        }
+        skipButton.gameObject.SetActive(true);
+        Wave();
+    }
+    IEnumerator waveWaiting = null;
+    int currentWave = 0;
+    void Wave()
+    {
+        if(currentWave < waves.Length - 1)
+        {
+            waveText.text = $"Wave {currentWave + 1}";
+            waveWaiting = WaveWait();
+            StartCoroutine(waveWaiting);
+        }
+        else
+        {
+            waveText.text = "Final Wave";
+            waveTimeText.text = "";
+            skipButton.gameObject.SetActive(false);
+        }
+        StartCoroutine(SpawnWave(currentWave));
     }
     IEnumerator SpawnWave(int waveIndex)
     {
@@ -22,25 +55,23 @@ public class EnemySpawner : MonoBehaviour
                 yield return new WaitForSeconds(waves[waveIndex].elements[i].spawnCooldown);
             }
         }
-        if (waveIndex == waves.Length - 1) GameManager.Instance.AllWaveEnd();
+        if (waveIndex == waves.Length - 1) GameManager.Instance.AllSpawnEnd();
     }
-    IEnumerator Wave()
+    IEnumerator WaveWait()
     {
-        for(int i = 0; i < waves.Length; i++)
+        for(int i = 0; i < waves[currentWave].endTime; i++)
         {
-            if (i < waves.Length - 1) waveText.text = $"Wave {i + 1}";
-            else
-            {
-                waveText.text = "Final Wave";
-                waveTimeText.text = "";
-            }
-            StartCoroutine(SpawnWave(i));
-            for(int k = 0; k < waves[i].endTime; k++)
-            {
-                if(i < waves.Length - 1) waveTimeText.text = $"Next Wave In: {waves[i].endTime - k}";
-                yield return new WaitForSeconds(1);
-            }
+            waveTimeText.text = $"Next Wave In: {waves[currentWave].endTime - i}";
+            yield return new WaitForSeconds(1);
         }
+        currentWave++;
+        Wave();
+    }
+    void Skip()
+    {
+        StopCoroutine(waveWaiting);
+        currentWave++;
+        Wave();
     }
 }
 [System.Serializable]
