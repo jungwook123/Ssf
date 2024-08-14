@@ -26,7 +26,7 @@ public class GameManager_Grabbing : State<GameManager>
         if(hit && hit.transform != tile.transform)
         {
             Tile tmp = hit.transform.GetComponent<Tile>();
-            if(tmp.tower == null)
+            if(tmp.tower == null || tmp.tower == origin.selected)
             {
                 tile.Unhighlight();
                 tile = hit.transform.GetComponent<Tile>();
