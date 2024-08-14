@@ -3170,7 +3170,7 @@ MonoBehaviour:
   selected: {fileID: 0}
   selectedTile: {fileID: 0}
   m_rangeViewer: {fileID: 1987344491}
-  m_money: 100
+  m_money: 300
   m_shuffleCost: 15
   shuffleCostIncrease: 1
   m_maxBaseHP: 3000
@@ -4186,7 +4186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28cd08e774a18b846a710a8dbfb5d50d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startTime: 15
+  startTime: 3
   waves:
   - elements:
     - m_enemy: {fileID: 5036868773120832061, guid: 1b6f692a1f532fc4a99c16fb51061e1a, type: 3}

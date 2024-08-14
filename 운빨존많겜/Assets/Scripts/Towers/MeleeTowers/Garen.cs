@@ -7,6 +7,7 @@ public class Garen : Tower
     public override void Attack()
     {
         base.Attack();
+        AudioManager.Instance.PlayAudio(Resources.Load<AudioClip>("Audio/Garen_Attack"), 0.5f);
         if(enemies[0].hp / enemies[0].maxHp <= threshold)
         {
             GameManager.Instance.UIs.DamageUI(enemies[0], damage * multiplier);

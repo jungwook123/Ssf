@@ -27,6 +27,7 @@ public class TwistedFate_Fate : Debuff
         if(count >= 4)
         {
             DebuffEnd();
+            AudioManager.Instance.PlayAudio(Resources.Load<AudioClip>("Audio/TwistedFate_Fate"), 0.8f);
             GameManager.Instance.UIs.DamageUI(debuffed, TwistedFate.fateDamage);
             debuffed.GetDamage(TwistedFate.fateDamage);
         }

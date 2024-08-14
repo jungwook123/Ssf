@@ -16,11 +16,13 @@ public class Mai_Mk2 : Tower
         base.Attack();
         if (buffed)
         {
+            AudioManager.Instance.PlayAudio(Resources.Load<AudioClip>("Audio/Mai_EnhancedAttack"), 0.8f);
             GameManager.Instance.UIs.DamageUI(enemies[0], damage * buffScale);
             enemies[0].GetDamage(damage * buffScale);
         }
         else
         {
+            AudioManager.Instance.PlayAudio(Resources.Load<AudioClip>("Audio/Mai_Attack"), 0.5f);
             GameManager.Instance.UIs.DamageUI(enemies[0], damage);
             enemies[0].GetDamage(damage);
             count++;

@@ -10,9 +10,14 @@ public class Garen_Mk2 : Tower
     public override void Attack()
     {
         base.Attack();
-        if (count < stunCount) count++;
+        if (count < stunCount)
+        {
+            AudioManager.Instance.PlayAudio(Resources.Load<AudioClip>("Audio/Garen_Attack"), 0.5f);
+            count++;
+        }
         else
         {
+            AudioManager.Instance.PlayAudio(Resources.Load<AudioClip>("Audio/Garen_StunHit"), 0.8f);
             count = 0;
             enemies[0].AddDebuff<Stun>(stunDuration);
         }

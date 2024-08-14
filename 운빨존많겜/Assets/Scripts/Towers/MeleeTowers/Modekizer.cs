@@ -30,6 +30,7 @@ public class Modekizer : Tower
     public override void Attack()
     {
         base.Attack();
+        AudioManager.Instance.PlayAudio(Resources.Load<AudioClip>("Audio/Modekizer_Attack"), 0.5f);
         GameManager.Instance.UIs.DamageUI(enemies[0], damage);
         enemies[0].AddDebuff<Modekizer_Bleed>(bleedDuration);
         enemies[0].GetDamage(damage);
