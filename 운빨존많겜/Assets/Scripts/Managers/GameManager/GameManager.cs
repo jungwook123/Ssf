@@ -210,6 +210,7 @@ public class GameManager : MonoBehaviour
     bool gameOver = false;
     public void GameOver(bool victory)
     {
+        if (gameOver) return;
         gameOver = true;
         onGameOver?.Invoke();
         foreach(var i in enemies)
@@ -218,11 +219,11 @@ public class GameManager : MonoBehaviour
         }
         if (victory)
         {
-            SceneManager.LoadScene("Win");
+            SceneSwitcher.Instance.SwitchScene("Victory");
         }
         else 
         {
-            SceneManager.LoadScene("Defeat");
+            SceneSwitcher.Instance.SwitchScene("Defeat");
         }
     }
 }
