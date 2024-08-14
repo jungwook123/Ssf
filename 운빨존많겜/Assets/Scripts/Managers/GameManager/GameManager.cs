@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 [RequireComponent(typeof(GameManager_UIs))]
 public class GameManager : MonoBehaviour
 {
@@ -213,6 +215,14 @@ public class GameManager : MonoBehaviour
         foreach(var i in enemies)
         {
             Destroy(i.gameObject);
+        }
+        if (victory)
+        {
+            SceneManager.LoadScene("Win");
+        }
+        else 
+        {
+            SceneManager.LoadScene("Defeat");
         }
     }
 }
