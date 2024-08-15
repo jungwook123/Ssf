@@ -332,7 +332,7 @@ GameObject:
   - component: {fileID: 4682466585260629692}
   - component: {fileID: 6388665644847998048}
   m_Layer: 0
-  m_Name: Slime Beta
+  m_Name: Troop
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -412,11 +412,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f61eabd0f700ca48b5f454f8a4fabcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_maxHp: 750
+  m_maxHp: 300
+  model: {fileID: 8701685493984647844}
   hpScaler: {fileID: 72204082679599907}
   anim: {fileID: 6388665644847998048}
-  moneyReward: 5
-  moveSpeed: 1.5
+  moneyReward: 10
+  moveSpeed: 1
 --- !u!50 &4682466585260629692
 Rigidbody2D:
   serializedVersion: 4
@@ -454,7 +455,7 @@ Animator:
   m_GameObject: {fileID: 5036868773120832061}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 14f85ee214be2a547bd578b8679a9f88, type: 2}
+  m_Controller: {fileID: 9100000, guid: 9a6989d489e7e5d45b13c4cc08e2c2e2, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -570,7 +571,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 1cadd07d8fb6d374195b421ae513d61b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: eb90ec237692b23439a04ae88a675987, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

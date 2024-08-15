@@ -78,6 +78,7 @@ public class GameManager_Selected : State<GameManager>
     }
     void DeleteTower()
     {
+        AudioManager.Instance.PlayAudio(Resources.Load<AudioClip>("Audio/Discard"), 1.0f);
         MonoBehaviour.Destroy(origin.selected.gameObject);
         parentLayer.ChangeState("Idle");
     }

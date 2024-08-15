@@ -31,7 +31,8 @@ public class EnemySpawner : MonoBehaviour
     int currentWave = 0;
     void Wave()
     {
-        if(currentWave < waves.Length - 1)
+        skipButton.gameObject.SetActive(false);
+        if (currentWave < waves.Length - 1)
         {
             waveText.text = $"Wave {currentWave + 1}";
             waveWaiting = WaveWait();
@@ -41,7 +42,6 @@ public class EnemySpawner : MonoBehaviour
         {
             waveText.text = "Final Wave";
             waveTimeText.text = "";
-            skipButton.gameObject.SetActive(false);
         }
         StartCoroutine(SpawnWave(currentWave));
     }
@@ -53,10 +53,15 @@ public class EnemySpawner : MonoBehaviour
             {
                 Enemy tmp = Instantiate(waves[waveIndex].elements[i].enemy, GameManager.Instance.enemyWaypoints[0].position, Quaternion.identity).GetComponent<Enemy>();
                 GameManager.Instance.AddEnemy(tmp);
+                if (i == waves[waveIndex].elements.Count - 1 && k == waves[waveIndex].elements[i].count - 1) break;
                 yield return new WaitForSeconds(waves[waveIndex].elements[i].spawnCooldown);
             }
         }
         if (waveIndex == waves.Length - 1) GameManager.Instance.AllSpawnEnd();
+        else
+        {
+            skipButton.gameObject.SetActive(true);
+        }
     }
     IEnumerator WaveWait()
     {

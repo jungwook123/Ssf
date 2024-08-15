@@ -10,7 +10,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] float m_maxHp;
     public float maxHp { get { return m_maxHp; } }
     public float hp { get; private set; }
-    [SerializeField] Transform hpScaler;
+    [SerializeField] Transform model, hpScaler;
     [SerializeField] Animator anim;
     [SerializeField] protected int moneyReward = 1;
     public int pointIndex { get; private set; } = 1;
@@ -27,6 +27,9 @@ public class Enemy : MonoBehaviour
 
         hp = maxHp;
         pointIndex = 1;
+
+        if (targetPoint.position.x > transform.position.x) model.localScale = new Vector2(-1.0f, 1.0f);
+        else model.localScale = new Vector2(1.0f, 1.0f);
     }
     public void AddDebuff<T>(float duration) where T : Debuff, new()
     {
@@ -87,6 +90,11 @@ public class Enemy : MonoBehaviour
                 {
                     ReachEnd();
                     return;
+                }
+                else
+                {
+                    if (targetPoint.position.x > transform.position.x) model.localScale = new Vector2(-1.0f, 1.0f);
+                    else model.localScale = new Vector2(1.0f, 1.0f);
                 }
             }
         }

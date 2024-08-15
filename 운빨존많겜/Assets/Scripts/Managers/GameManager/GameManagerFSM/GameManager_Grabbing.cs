@@ -16,6 +16,7 @@ public class GameManager_Grabbing : State<GameManager>
         origin.selected.Disable();
         tile = origin.selectedTile;
         tile.Highlight();
+        origin.selected.sprite.sortingOrder = 10;
     }
     Tile tile = null; 
     public override void OnStateUpdate()
@@ -36,12 +37,9 @@ public class GameManager_Grabbing : State<GameManager>
         if (Input.GetMouseButton(0) == false)
         {
             origin.selected.transform.position = tile.transform.position;
-            if(tile != origin.selectedTile)
-            {
-                origin.selectedTile.tower = null;
-                tile.tower = origin.selected;
-                origin.selectedTile = tile;
-            }
+            origin.selectedTile.tower = null;
+            tile.tower = origin.selected;
+            origin.selectedTile = tile;
             parentLayer.ChangeState("Selected");
         }
     }

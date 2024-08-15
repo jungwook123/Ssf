@@ -77,6 +77,7 @@ public class GameManager : MonoBehaviour
             for(int k = 0; k < gridSizeX; k++)
             {
                 grid[i, k] = gridParents[i].GetChild(k).GetComponent<Tile>();
+                grid[i, k].order = i;
             }
         }
         baseHP = maxBaseHP;
@@ -141,6 +142,7 @@ public class GameManager : MonoBehaviour
             }
             if (removed >= 3) break;
         }
+        AudioManager.Instance.PlayAudio(Resources.Load<AudioClip>("Audio/Upgrade"), 1.0f);
         SpawnTower(towerToUpgrade.upgrade);
     }
     public bool SpawnTower(TowerData towerToSpawn)
@@ -186,6 +188,7 @@ public class GameManager : MonoBehaviour
             cards[i] = towers.GetRandom();
         }
         cardSelected = false;
+        AudioManager.Instance.PlayAudio(Resources.Load<AudioClip>("Audio/Shuffle"), 1.0f);
         onCardShuffle?.Invoke();
     }
     public void SelectCard(TowerData tower)

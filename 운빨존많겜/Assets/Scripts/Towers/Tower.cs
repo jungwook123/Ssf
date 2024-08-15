@@ -22,6 +22,8 @@ public abstract class Tower : MonoBehaviour
     public float range { get { return m_range; } set { m_range = value; scanCollider.radius = value; } }
     [SerializeField] protected float fireRate, damage;
     [SerializeField] Transform model;
+    [SerializeField] SpriteRenderer m_sprite;
+    public SpriteRenderer sprite { get { return m_sprite; } }
     protected virtual void Awake()
     {
         scanCollider = GetComponent<CircleCollider2D>();

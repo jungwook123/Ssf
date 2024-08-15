@@ -6,7 +6,9 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Animator))]
 public class Tile : MonoBehaviour
 {
-    public Tower tower;
+    public int order = 0;
+    Tower m_tower;
+    public Tower tower { get { return m_tower; } set { m_tower = value; if(m_tower != null) m_tower.sprite.sortingOrder = order; } }
     Animator anim;
     void Awake()
     {
