@@ -7,17 +7,20 @@ public class Garen_Mk2 : Tower
     const int stunCount = 4;
     const float stunDuration = 1.0f;
     int count = 0;
+    static AudioClip m_attackClip, m_stunHitClip;
+    static AudioClip attackClip { get { if (m_attackClip == null) m_attackClip = Resources.Load<AudioClip>("Audio/Garen_Attack"); return m_attackClip; } }
+    static AudioClip stunHitClip { get { if (m_stunHitClip == null) m_stunHitClip = Resources.Load<AudioClip>("Audio/Garen_StunHit"); return m_stunHitClip; } }
     public override void Attack()
     {
         base.Attack();
         if (count < stunCount)
         {
-            AudioManager.Instance.PlayAudio(Resources.Load<AudioClip>("Audio/Garen_Attack"), 0.5f);
+            AudioManager.Instance.PlayAudio(attackClip, 0.5f);
             count++;
         }
         else
         {
-            AudioManager.Instance.PlayAudio(Resources.Load<AudioClip>("Audio/Garen_StunHit"), 0.8f);
+            AudioManager.Instance.PlayAudio(stunHitClip, 0.8f);
             count = 0;
             enemies[0].AddDebuff<Stun>(stunDuration);
         }

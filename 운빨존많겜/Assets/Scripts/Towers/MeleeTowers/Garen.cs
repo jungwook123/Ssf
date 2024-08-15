@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 public class Garen : Tower
 {
     const float threshold = 0.33f, multiplier = 3f;
+    static AudioClip m_attackClip;
+    static AudioClip attackClip { get { if (m_attackClip == null) m_attackClip = Resources.Load<AudioClip>("Audio/Garen_Attack"); return m_attackClip; } }
     public override void Attack()
     {
         base.Attack();
-        AudioManager.Instance.PlayAudio(Resources.Load<AudioClip>("Audio/Garen_Attack"), 0.5f);
+        AudioManager.Instance.PlayAudio(attackClip, 0.5f);
         if(enemies[0].hp / enemies[0].maxHp <= threshold)
         {
             GameManager.Instance.UIs.DamageUI(enemies[0], damage * multiplier);

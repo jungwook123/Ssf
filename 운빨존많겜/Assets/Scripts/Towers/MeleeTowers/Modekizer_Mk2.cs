@@ -37,12 +37,15 @@ public class Modekizer_Mk2 : Tower
     int count = 0;
     const int strikeCount = 4;
     const float strikeDamage = 50.0f;
+    static AudioClip m_attackClip, m_strikeClip;
+    static AudioClip attackClip { get { if (m_attackClip == null) m_attackClip = Resources.Load<AudioClip>("Audio/Mai_Attack"); return m_attackClip; } }
+    static AudioClip strikeClip { get { if (m_strikeClip == null) m_strikeClip = Resources.Load<AudioClip>("Audio/Mai_EnhancedAttack"); return m_strikeClip; } }
     public override void Attack()
     {
         base.Attack();
         if(count < strikeCount)
         {
-            AudioManager.Instance.PlayAudio(Resources.Load<AudioClip>("Audio/Modekizer_Attack"), 0.5f);
+            AudioManager.Instance.PlayAudio(attackClip, 0.5f);
             GameManager.Instance.UIs.DamageUI(enemies[0], damage);
             enemies[0].AddDebuff<Modekizer_Mk2_HeavyBleed>(bleedDuration);
             enemies[0].GetDamage(damage);
@@ -50,7 +53,7 @@ public class Modekizer_Mk2 : Tower
         }
         else
         {
-            AudioManager.Instance.PlayAudio(Resources.Load<AudioClip>("Audio/Modekizer_Strike"), 0.8f);
+            AudioManager.Instance.PlayAudio(strikeClip, 0.8f);
             GameManager.Instance.UIs.DamageUI(enemies[0], strikeDamage);
             enemies[0].GetDamage(strikeDamage);
             count = 0;

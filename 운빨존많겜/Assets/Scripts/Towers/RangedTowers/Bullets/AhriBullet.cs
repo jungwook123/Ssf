@@ -47,9 +47,11 @@ using UnityEngine;
 }*/
 public class AhriBullet : Bullet
 {
+    static AudioClip m_hitClip;
+    static AudioClip hitClip { get { if (m_hitClip == null) m_hitClip = Resources.Load<AudioClip>("Audio/Ahri_Hit"); return m_hitClip; } }
     protected override void OnHit(Enemy hitEnemy)
     {
-        AudioManager.Instance.PlayAudio(Resources.Load<AudioClip>("Audio/Ahri_Hit"), 0.5f);
+        AudioManager.Instance.PlayAudio(hitClip, 0.5f);
         GameManager.Instance.UIs.DamageUI(hitEnemy, damage, new Color(1, 0, 1));
         hitEnemy.GetDamage(damage);
         hitEnemy.AddDebuff<Ahri_Slow>(Ahri.slowTime);

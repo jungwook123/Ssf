@@ -27,10 +27,12 @@ public class Modekizer : Tower
             return base.TargettingCompare(a, b);
         }
     }
+    static AudioClip m_attackClip;
+    static AudioClip attackClip { get { if (m_attackClip == null) m_attackClip = Resources.Load<AudioClip>("Audio/Modekizer_Attack"); return m_attackClip; } }
     public override void Attack()
     {
         base.Attack();
-        AudioManager.Instance.PlayAudio(Resources.Load<AudioClip>("Audio/Modekizer_Attack"), 0.5f);
+        AudioManager.Instance.PlayAudio(attackClip, 0.5f);
         GameManager.Instance.UIs.DamageUI(enemies[0], damage);
         enemies[0].AddDebuff<Modekizer_Bleed>(bleedDuration);
         enemies[0].GetDamage(damage);

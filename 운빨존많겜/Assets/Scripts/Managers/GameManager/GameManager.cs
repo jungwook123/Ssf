@@ -66,6 +66,7 @@ public class GameManager : MonoBehaviour
     bool spawnEnded = false;
     private void Awake()
     {
+        Application.targetFrameRate = 60;
         UIs = GetComponent<GameManager_UIs>();
 
         topLayer = new GameManager_TopLayer(this);

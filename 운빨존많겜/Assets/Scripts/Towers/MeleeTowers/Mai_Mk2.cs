@@ -11,18 +11,21 @@ public class Mai_Mk2 : Tower
     int count = 0;
     bool buffed = false;
     float counter = 0.0f;
+    static AudioClip m_attackClip, m_enhancedAttackClip;
+    static AudioClip attackClip { get { if (m_attackClip == null) m_attackClip = Resources.Load<AudioClip>("Audio/Mai_Attack"); return m_attackClip; } }
+    static AudioClip enhancedAttackClip { get { if (m_enhancedAttackClip == null) m_enhancedAttackClip = Resources.Load<AudioClip>("Audio/Mai_EnhancedAttack"); return m_enhancedAttackClip; } }
     public override void Attack()
     {
         base.Attack();
         if (buffed)
         {
-            AudioManager.Instance.PlayAudio(Resources.Load<AudioClip>("Audio/Mai_EnhancedAttack"), 0.8f);
+            AudioManager.Instance.PlayAudio(enhancedAttackClip, 0.8f);
             GameManager.Instance.UIs.DamageUI(enemies[0], damage * buffScale);
             enemies[0].GetDamage(damage * buffScale);
         }
         else
         {
-            AudioManager.Instance.PlayAudio(Resources.Load<AudioClip>("Audio/Mai_Attack"), 0.5f);
+            AudioManager.Instance.PlayAudio(attackClip, 0.5f);
             GameManager.Instance.UIs.DamageUI(enemies[0], damage);
             enemies[0].GetDamage(damage);
             count++;
