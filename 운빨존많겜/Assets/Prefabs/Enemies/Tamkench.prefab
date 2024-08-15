@@ -329,8 +329,8 @@ GameObject:
   - component: {fileID: 4657852088360955643}
   - component: {fileID: 3957615491558655144}
   - component: {fileID: 4682466585260629692}
-  - component: {fileID: 1557987577341597441}
   - component: {fileID: 859862998545244319}
+  - component: {fileID: -3687853837274541962}
   m_Layer: 0
   m_Name: Tamkench
   m_TagString: Enemy
@@ -427,24 +427,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &1557987577341597441
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5036868773120832061}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb9a6cad059cd5a459d5949168636b2c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_maxHp: 30000
-  model: {fileID: 8701685493984647844}
-  hpScaler: {fileID: 72204082679599907}
-  anim: {fileID: 859862998545244319}
-  moneyReward: 0
-  moveSpeed: 0.5
 --- !u!95 &859862998545244319
 Animator:
   serializedVersion: 5
@@ -466,6 +448,24 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-3687853837274541962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5036868773120832061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2c847fd6c0d16f4f8dac95b8d485cec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_maxHp: 30000
+  model: {fileID: 8701685493984647844}
+  hpScaler: {fileID: 72204082679599907}
+  anim: {fileID: 859862998545244319}
+  moneyReward: 0
+  moveSpeed: 0.5
 --- !u!1 &5735460603822552279
 GameObject:
   m_ObjectHideFlags: 0

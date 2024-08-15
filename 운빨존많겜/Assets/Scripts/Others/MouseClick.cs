@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MouseClick : MonoBehaviour
 {
-    public AudioClip clickSound; // Å¬¸¯ ½Ã Àç»ýÇÒ ¼Ò¸®
+    public AudioClip clickSound; // Å¬ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ò¸ï¿½
     private AudioSource audioSource;
 
     // Start is called before the first frame update
@@ -21,7 +21,7 @@ public class MouseClick : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0)) // ¸¶¿ì½º ¿ÞÂÊ ¹öÆ°À» ´©¸¦ ¶§
+        if (Input.GetMouseButtonDown(0)) // ï¿½ï¿½ï¿½ì½º ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
         {
             PlaySound();
         }

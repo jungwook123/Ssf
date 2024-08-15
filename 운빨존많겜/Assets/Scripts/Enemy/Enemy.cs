@@ -19,7 +19,7 @@ public class Enemy : MonoBehaviour
     Transform targetPoint { get { return GameManager.Instance.enemyWaypoints[pointIndex]; } }
 
     List<Debuff> debuffs = new();
-    private void Awake()
+    protected virtual void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
