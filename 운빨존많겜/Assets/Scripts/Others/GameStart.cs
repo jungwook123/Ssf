@@ -5,6 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class GameStart : MonoBehaviour
 {
+    private void Awake()
+    {
+        SceneSwitcher.Create();
+    }
     public void SceneChange()
     {
         SceneSwitcher.Instance.SwitchScene("InGame");
