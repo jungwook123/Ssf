@@ -54,7 +54,7 @@ public class GameManager_UIs : MonoBehaviour
             cards[i].onClick.AddListener(delegate { GameManager.Instance.SelectCard(tmp); });
             cards[i].interactable = true;
         }
-        shuffleButtonText.text = $"Shuffle\n({GameManager.Instance.shuffleCost}$)";
+        shuffleButtonText.text = $"Shuffle({GameManager.Instance.shuffleCost}$)";
     }
     void CardSelect()
     {
