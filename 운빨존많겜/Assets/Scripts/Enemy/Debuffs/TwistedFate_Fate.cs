@@ -6,43 +6,74 @@ using UnityEngine;
 public class TwistedFate_Fate : Debuff
 {
     public int count { get; private set; }
-    public TwistedFate_Fate()
+    protected readonly float fateDamage;
+    protected readonly AudioVolumePair fateSound;
+    public TwistedFate_Fate(float duration, DebuffEffect effectOrigin, AudioVolumePair fateSound, float fateDamage = 30, int startStack = 1) : base(duration, effectOrigin)
     {
-        count = 1;
+        count = startStack;
+        this.fateDamage = fateDamage;
+        this.fateSound = fateSound;
     }
-    static Pooler<Transform> effectPool = new Pooler<Transform>(Resources.Load<Transform>("Particles/TwistedFate_Fate"));
-    Transform particles;
-    public override void Set(float duration, Enemy debuffed)
+    public override void AddDebuff(Enemy debuffed)
     {
-        base.Set(duration, debuffed);
-        particles = effectPool.GetObject(debuffed.transform.position, Quaternion.identity, debuffed.transform);
-        particles.GetChild(1).gameObject.SetActive(false);
-        particles.GetChild(2).gameObject.SetActive(false);
+        if(!debuffed.FindDebuff(this)) base.AddDebuff(debuffed);
     }
-    public override void ResetDuration(float duration)
+    protected override void OnDebuffReApply(Debuff debuff)
     {
-        if (ended) return;
-        base.ResetDuration(duration);
-        count++;
-        if(count >= 4)
+        base.OnDebuffReApply(debuff);
+        count += (debuff as TwistedFate_Fate).count;
+        if (count >= 4)
         {
-            DebuffEnd();
-            AudioManager.Instance.PlayAudio(Resources.Load<AudioClip>("Audio/TwistedFate_Fate"), 0.8f);
-            GameManager.Instance.UIs.DamageUI(debuffed, TwistedFate.fateDamage);
-            debuffed.GetDamage(TwistedFate.fateDamage);
+            Fate();
+            RemoveDebuff();
         }
         else
         {
-            particles.transform.GetChild(count-1).gameObject.SetActive(true);
+            for (int i = 1; i < count; i++)
+            {
+                effect.EnableLevel(i);
+            }
         }
     }
-    bool ended = false;
-    public override void DebuffEnd()
+    protected virtual void Fate()
     {
-        if (ended) return;
-        base.DebuffEnd();
-        particles.SetParent(null);
-        effectPool.ReleaseObject(particles);
-        ended = true;
+        AudioManager.Instance.PlayAudio(fateSound);
+        GameManager.Instance.UIs.DamageUI(debuffed, fateDamage);
+        debuffed.GetDamage(fateDamage);
+    }
+}
+public class TwistedFate_Mk2_Fate : TwistedFate_Fate
+{
+    public TwistedFate_Mk2_Fate(float duration, DebuffEffect effectOrigin, AudioVolumePair fateSound, float fateDamage = 30, int startStack = 1) : base(duration, effectOrigin, fateSound, fateDamage, startStack)
+    {
+        
+    }
+}
+public class TwistedFate_Mk3_Fate : TwistedFate_Mk2_Fate
+{
+    readonly Bullet fateCard;
+    readonly float bulletDamage, bulletSpeed;
+    readonly AudioVolumePair bulletHitSound;
+    readonly int shotCount;
+    readonly int maxPulseHit;
+    public TwistedFate_Mk3_Fate(float duration, DebuffEffect effectOrigin, AudioVolumePair fateSound, Bullet fateCard, float bulletDamage, float bulletSpeed, AudioVolumePair bulletHitSound, int shotCount, int maxPulseHit, float fateDamage = 30, int startStack = 1) : base(duration, effectOrigin, fateSound, fateDamage, startStack)
+    {
+        this.fateCard = fateCard;
+        this.bulletDamage = bulletDamage;
+        this.bulletSpeed = bulletSpeed;
+        this.bulletHitSound = bulletHitSound;
+        this.shotCount = shotCount;
+        this.maxPulseHit = maxPulseHit;
+    }
+    protected override void Fate()
+    {
+        base.Fate();
+        HitCountException hE = new HitCountException(maxPulseHit);
+        for (int i = 0; i < shotCount; i++)
+        {
+            Bullet tmp = fateCard.SpawnBullet(debuffed.transform.position, Quaternion.Euler(0, 0, 360.0f / shotCount * i));
+            tmp.Set(bulletDamage, bulletSpeed, bulletHitSound, new TwistedFate_Mk3_Fate(baseDuration, effectOrigin, fateSound, fateCard, bulletDamage, bulletSpeed, bulletHitSound, shotCount, maxPulseHit, fateDamage, 1));
+            tmp.SetException(hE, new ExcludeSpecificException(debuffed));
+        }
     }
 }

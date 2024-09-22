@@ -2,7 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ez_Mk2 : RangedTower
+public class Ez_Mk2 : Ez
 {
-    public const float maxBonusDamage = 30.0f, lossHealthAddPercentage = 0.05f;
+    [Header("Ez_Mk2")]
+    [SerializeField] protected float lossHealthAddPercentage;
+    [SerializeField] protected float maxBonusDamage;
+    protected override void Attack()
+    {
+        (SpawnBullet(firePoint.position, firePoint.LookAtRot(enemies[0].transform)) as Ez_Mk2Bullet).Set(lossHealthAddPercentage, maxBonusDamage);
+    }
 }

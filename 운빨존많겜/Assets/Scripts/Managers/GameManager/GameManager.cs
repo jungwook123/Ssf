@@ -62,6 +62,9 @@ public class GameManager : MonoBehaviour
     public float maxBaseHP { get { return m_maxBaseHP; } }
     public float baseHP { get; private set; }
     #endregion
+    #region soundClips
+    [SerializeField] AudioVolumePair shuffleSound, upgradeSound;
+    #endregion
     bool spawnEnded = false;
     private void Awake()
     {
@@ -97,9 +100,16 @@ public class GameManager : MonoBehaviour
         if (gameOver) return;
         topLayer.OnStateUpdate();
     }
+    bool enemySorted = false;
     private void LateUpdate()
     {
-        if (gameOver) return;
+        enemySorted = false;
+    }
+    public void AllSpawnEnd() => spawnEnded = true;
+    public void SortEnemies()
+    {
+        if (enemySorted) return;
+        enemySorted = true;
         enemies.Sort((Enemy a, Enemy b) =>
         {
             int tmp = b.pointIndex.CompareTo(a.pointIndex);
@@ -110,7 +120,6 @@ public class GameManager : MonoBehaviour
             else return tmp;
         });
     }
-    public void AllSpawnEnd() => spawnEnded = true;
     public void AddEnemy(Enemy enemy)
     {
         enemies.Add(enemy);
@@ -142,7 +151,7 @@ public class GameManager : MonoBehaviour
             }
             if (removed >= 3) break;
         }
-        AudioManager.Instance.PlayAudio(Resources.Load<AudioClip>("Audio/Upgrade"), 1.0f);
+        AudioManager.Instance.PlayAudio(upgradeSound);
         SpawnTower(towerToUpgrade.upgrade);
     }
     public bool SpawnTower(TowerData towerToSpawn)
@@ -188,7 +197,7 @@ public class GameManager : MonoBehaviour
             cards[i] = towers.GetRandom();
         }
         cardSelected = false;
-        AudioManager.Instance.PlayAudio(Resources.Load<AudioClip>("Audio/Shuffle"), 1.0f);
+        AudioManager.Instance.PlayAudio(shuffleSound);
         onCardShuffle?.Invoke();
     }
     public void SelectCard(TowerData tower)

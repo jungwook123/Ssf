@@ -29,6 +29,7 @@ public class AudioManager : MonoBehaviour
         tmp.Play();
         sources.Add(tmp);
     }
+    public void PlayAudio(AudioVolumePair pair) => PlayAudio(pair.clip, pair.volume);
     public void PlayAudio(AudioClip clip, float volume, float headStart)
     {
         foreach (var i in sources)
@@ -50,4 +51,5 @@ public class AudioManager : MonoBehaviour
         tmp.Play();
         sources.Add(tmp);
     }
+    public void PlayAudio(AudioVolumePair pair, float headStart) => PlayAudio(pair.clip, pair.volume, headStart);
 }

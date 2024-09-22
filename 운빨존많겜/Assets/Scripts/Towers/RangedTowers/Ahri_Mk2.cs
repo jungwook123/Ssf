@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ahri_Mk2 : RangedTower
+public class Ahri_Mk2 : Ahri
 {
-    public const float slowScale = 0.6f, slowTime = 7.0f;
+    protected override Debuff bulletDebuff => new Ahri_Mk2_Slow(slowTime, slowEffect, slowScale);
     protected override int TargettingCompare(Enemy a, Enemy b)
     {
         if (a.FindDebuff<Ahri_Mk2_Slow>())

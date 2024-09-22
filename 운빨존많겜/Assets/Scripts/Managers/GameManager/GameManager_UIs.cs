@@ -72,6 +72,7 @@ public class GameManager_UIs : MonoBehaviour
     public Pooler<DamageText> dmgEffectPool { get; private set; }
     public void DamageUI(Enemy hit, float damage)
     {
+        damage = Mathf.Ceil(damage * 4.0f) / 4.0f;
         if(damage >= 50.0f)
         {
             ShowDamageUI(hit.transform.position, $"{damage}!!", Color.red);
@@ -87,6 +88,7 @@ public class GameManager_UIs : MonoBehaviour
     }
     public void DamageUI(Enemy hit, float damage, Color color)
     {
+        damage = Mathf.Ceil(damage * 4.0f) / 4.0f;
         if (damage >= 50.0f)
         {
             ShowDamageUI(hit.transform.position, $"{damage}!!", color);
