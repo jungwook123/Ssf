@@ -186,7 +186,7 @@ MonoBehaviour:
   fateEffect: {fileID: 3217550319273047210, guid: 31d253e10903512458cda79e3149a8f0, type: 3}
   pulseBulletDamage: 10
   pulseBulletSpeed: 25
-  pulseBulletCount: 6
+  pulseBulletCount: 3
   maxPulseHit: 1
 --- !u!1 &8426627535407230153
 GameObject:

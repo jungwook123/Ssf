@@ -3334,6 +3334,11 @@ MonoBehaviour:
   - {fileID: 1928762089}
   enemies: []
   towers:
+  - {fileID: 11400000, guid: f54e11c5ba1db214881e9c8fddba7ca8, type: 2}
+  - {fileID: 11400000, guid: d1e95db67f7ef9346aab51c78b9cbee7, type: 2}
+  - {fileID: 11400000, guid: 9f865f4b91f6c044c8de18d11f051988, type: 2}
+  - {fileID: 11400000, guid: 975d2e6d6cb872641ad64a2ebc6a7cb8, type: 2}
+  - {fileID: 11400000, guid: 3c531160da4f564429a53663728131be, type: 2}
   - {fileID: 11400000, guid: 466a69fd104a34346a24b38d08795435, type: 2}
   gridParents:
   - {fileID: 1525825517}
