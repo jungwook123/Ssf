@@ -18,6 +18,10 @@ public class Bullet : MonoBehaviour
     {
         GameManager.Instance.onGameOver += () => { Release(); };
     }
+    private void OnEnable()
+    {
+        exception = null;
+    }
     public Bullet SpawnBullet(Vector2 position, Quaternion rotation)
     {
         if (!bulletPools.ContainsKey(this))
@@ -39,7 +43,6 @@ public class Bullet : MonoBehaviour
         counter = 0.0f;
         released = false;
         triggered = false;
-        exception = null;
         GameManager.Instance.onGameOver += Release;
     }
     BulletException[] exception;
@@ -67,12 +70,12 @@ public class Bullet : MonoBehaviour
             {
                 foreach (var i in exception) if (i.CanHit(tmp) == false) return;
             }
-            triggered = true;
-            OnHit(tmp);
-            if(exception != null)
+            if (exception != null)
             {
                 foreach (var i in exception) i.OnHit(tmp);
             }
+            triggered = true;
+            OnHit(tmp);
             if(!pierce) Release();
         }
     }
@@ -111,7 +114,6 @@ public class HitCountException : BulletException
     Dictionary<Enemy, int> hitCount = new();
     public override bool CanHit(Enemy hitEnemy)
     {
-        Debug.Log("EEEe");
         if (hitCount.ContainsKey(hitEnemy))
         {
             if (hitCount[hitEnemy] >= maxHitCount) return false;

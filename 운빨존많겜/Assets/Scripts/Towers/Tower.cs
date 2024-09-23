@@ -54,6 +54,7 @@ public abstract class Tower : MonoBehaviour
         if (counter < fireRate) counter += Time.deltaTime;
         else
         {
+            enemies.RemoveAll((Enemy i) => i == null);
             if(enemies.Count > 0)
             {
                 counter = 0.0f;

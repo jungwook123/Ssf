@@ -19,9 +19,10 @@ public class GameManager : MonoBehaviour
     #endregion
     #region Towers&Cards
     [SerializeField] List<TowerData> towers = new();
+    [SerializeField] int defaultTowerPrice = 10, towerPriceIncrease = 5;
+    public Dictionary<TowerData, int> towerPrices { get; } = new();
     public const int cardCount = 3;
     public TowerData[] cards { get; private set; } = new TowerData[cardCount];
-    public bool cardSelected { get; private set; } = false;
     #endregion
     #region Grid
     const int gridSizeX = 6, gridSizeY = 3;
@@ -83,6 +84,7 @@ public class GameManager : MonoBehaviour
                 grid[i, k].order = i;
             }
         }
+        foreach (var i in towers) towerPrices.Add(i, defaultTowerPrice);
         baseHP = maxBaseHP;
     }
     private void Start()
@@ -91,7 +93,6 @@ public class GameManager : MonoBehaviour
         {
             cards[i] = towers.GetRandom();
         }
-        cardSelected = false;
         onCardShuffle?.Invoke();
     }
     public int GetIndex(Enemy enemy) => enemies.IndexOf(enemy);
@@ -186,26 +187,27 @@ public class GameManager : MonoBehaviour
         }
         return tot;
     }
-    public Action onCardShuffle, onCardSelect;
+    public Action onCardShuffle;
+    public Action<int> onCardSelect;
     public void ShuffleCards()
     {
         if (money < shuffleCost) return;
         MoneyChange(-shuffleCost);
-        shuffleCost += shuffleCostIncrease;
         for(int i = 0; i < cardCount; i++)
         {
             cards[i] = towers.GetRandom();
         }
-        cardSelected = false;
         AudioManager.Instance.PlayAudio(shuffleSound);
         onCardShuffle?.Invoke();
     }
-    public void SelectCard(TowerData tower)
+    public void SelectCard(int cardIndex)
     {
-        if (SpawnTower(tower))
+        if (money < towerPrices[cards[cardIndex]]) return;
+        MoneyChange(-towerPrices[cards[cardIndex]]);
+        towerPrices[cards[cardIndex]] += towerPriceIncrease;
+        if (SpawnTower(cards[cardIndex]))
         {
-            cardSelected = true;
-            onCardSelect?.Invoke();
+            onCardSelect?.Invoke(cardIndex);
         }
     }
     public Action onBaseDamage;

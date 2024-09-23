@@ -178,7 +178,7 @@ MonoBehaviour:
   hitSound:
     m_clip: {fileID: 8300000, guid: d0c3485106773da4ba4abdc56388765d, type: 3}
     m_volume: 1
-  fateDamage: 150
+  fateDamage: 200
   fateDuration: 8
   fateSound:
     m_clip: {fileID: 8300000, guid: a23ab20aef948f646a53776bd72371d6, type: 3}
@@ -186,8 +186,8 @@ MonoBehaviour:
   fateEffect: {fileID: 3217550319273047210, guid: 31d253e10903512458cda79e3149a8f0, type: 3}
   pulseBulletDamage: 10
   pulseBulletSpeed: 25
-  pulseBulletCount: 3
-  maxPulseHit: 1
+  pulseBulletCount: 10
+  maxPulseHit: 2
 --- !u!1 &8426627535407230153
 GameObject:
   m_ObjectHideFlags: 0
@@ -198,6 +198,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4422396023346485568}
   - component: {fileID: 7209337802154889636}
+  - component: {fileID: 2113431468643898681}
   m_Layer: 0
   m_Name: Square
   m_TagString: Untagged
@@ -262,7 +263,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: a9bfdf97783763f4ca68526829b6fdb9, type: 3}
-  m_Color: {r: 0.39215687, g: 0.39215687, b: 0.39215687, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -272,3 +273,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2113431468643898681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8426627535407230153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a497a63db44efc40bf8d203d7dbc819, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rainbowSpeed: 1
+  s: 0.3
+  v: 1
