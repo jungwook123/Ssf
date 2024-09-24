@@ -4925,7 +4925,7 @@ GameObject:
   - component: {fileID: 232575371222373468}
   - component: {fileID: -8917995475188060898}
   - component: {fileID: 6437168547670871311}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Ahri_Mk2Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}

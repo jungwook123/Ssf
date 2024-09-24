@@ -8,12 +8,18 @@ public class GameManager_Selected : State<GameManager>
 {
     public GameManager_Selected(GameManager origin, Layer<GameManager> parent) : base(origin, parent)
     {
-        origin.UIs.deleteButton.onClick.AddListener(DeleteTower);
-        origin.UIs.fuseButton.onClick.AddListener(FuseTower);
+
     }
+    bool added = false;
     public override void OnStateEnter()
     {
         base.OnStateEnter();
+        if (!added)
+        {
+            origin.UIs.deleteButton.onClick.AddListener(DeleteTower);
+            origin.UIs.fuseButton.onClick.AddListener(FuseTower);
+            added = true;
+        }
         if (origin.selected == null)
         {
             parentLayer.ChangeState("Idle"); return;
@@ -21,8 +27,8 @@ public class GameManager_Selected : State<GameManager>
         if(origin.selected.data.upgrade != null)
         {
             origin.UIs.fuseButton.gameObject.SetActive(true);
-            origin.onTowerSpawn += CheckFuseAvailability;
             CheckFuseAvailability(origin.selected.data);
+            GameManager.Instance.onTowerSpawn += CheckFuseAvailability;
         }
         else
         {
@@ -39,29 +45,11 @@ public class GameManager_Selected : State<GameManager>
         base.OnStateUpdate();
         if(Input.GetKeyDown(KeyCode.Escape))
         {
-            MoveToIdle(); return;
+            parentLayer.ChangeState("Idle"); return;
         }
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && origin.UIs._IsMouseOnUI()==false || Input.GetKeyDown(KeyCode.Escape))
         {
-            if (GameManager.Instance.UIs._IsMouseOnUI()) return;
-            RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.up, 0.0f, LayerMask.GetMask("Tile"));
-            if (hit)
-            {
-                Tile tile = hit.transform.GetComponent<Tile>();
-                if (tile.tower != null)
-                {
-                    UnSelect();
-                    origin.selected = tile.tower;
-                    origin.selectedTile = tile;
-                    parentLayer.ChangeState("MouseHeld");
-                    return;
-                }
-                else
-                {
-                    MoveToIdle(); return;
-                }
-            }
-            else MoveToIdle(); return;
+            parentLayer.ChangeState("Idle"); return;
         }
         /*RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.up, 0.0f, LayerMask.GetMask("Tile"));
         if (hit)
@@ -92,30 +80,15 @@ public class GameManager_Selected : State<GameManager>
     {
         AudioManager.Instance.PlayAudio(Resources.Load<AudioClip>("Audio/Discard"), 1.0f);
         MonoBehaviour.Destroy(origin.selected.gameObject);
-        MoveToIdle();
+        parentLayer.ChangeState("Idle");
     }
     void FuseTower()
     {
         GameManager.Instance.UpgradeTower(origin.selected.data);
-        MoveToIdle();
-    }
-    void UnSelect()
-    {
-        if (origin.selected.data.upgrade != null)
-        {
-            GameManager.Instance.onTowerSpawn -= CheckFuseAvailability;
-        }
-        origin.selected.Unselect();
-        origin.selected = null;
-    }
-    void MoveToIdle()
-    {
-        UnSelect();
         parentLayer.ChangeState("Idle");
     }
     void CheckFuseAvailability(TowerData data)
     {
-        if (origin.selected == null) return;
         if(data == origin.selected.data)
         {
             if(GameManager.Instance.SearchTower(data) >= 3)
@@ -132,6 +105,12 @@ public class GameManager_Selected : State<GameManager>
     {
         base.OnStateExit();
         origin.UIs.CloseSelectUI();
+        if (origin.selected.data.upgrade != null)
+        {
+            GameManager.Instance.onTowerSpawn -= CheckFuseAvailability;
+        }
+        origin.selected.Unselect();
+        origin.selected = null;
         origin.rangeViewer.gameObject.SetActive(false);
     }
 }

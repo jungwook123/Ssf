@@ -460,12 +460,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2c847fd6c0d16f4f8dac95b8d485cec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_maxHp: 50000
+  m_maxHp: 30000
   model: {fileID: 8701685493984647844}
   hpScaler: {fileID: 72204082679599907}
   anim: {fileID: 859862998545244319}
-  moneyReward: 200
-  moveSpeed: 1
+  moneyReward: 0
+  moveSpeed: 0.5
 --- !u!1 &5735460603822552279
 GameObject:
   m_ObjectHideFlags: 0

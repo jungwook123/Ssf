@@ -13,8 +13,4 @@ public class GameStart : MonoBehaviour
     {
         SceneSwitcher.Instance.SwitchScene("InGame");
     }
-    public void ToTitle()
-    {
-        SceneSwitcher.Instance.SwitchScene("Title");
-    }
 }

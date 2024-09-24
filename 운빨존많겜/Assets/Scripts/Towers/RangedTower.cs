@@ -4,19 +4,18 @@ using UnityEngine;
 public class RangedTower : Tower
 {
     [Header("Ranged")]
-    [SerializeField] protected Transform firePoint;
-    [SerializeField] protected Bullet bullet;
+    [SerializeField] Transform firePoint;
+    [SerializeField] Bullet bullet;
     [SerializeField] protected float bulletSpeed;
-    [SerializeField] protected AudioVolumePair hitSound;
-    protected virtual Debuff bulletDebuff => null;
-    protected override void Attack()
+    Pooler<Bullet> bulletPool;
+    protected override void Awake()
     {
-        SpawnBullet(firePoint.position, firePoint.LookAtRot(enemies[0].transform));
+        base.Awake();
+        bulletPool = new Pooler<Bullet>(bullet, 100, 0);
     }
-    protected Bullet SpawnBullet(Vector2 position, Quaternion rotation)
+    public override void Attack()
     {
-        Bullet tmp = bullet.SpawnBullet(position, rotation);
-        tmp.Set(damage, bulletSpeed, hitSound, bulletDebuff);
-        return tmp;
+        base.Attack();
+        bulletPool.GetObject(firePoint.position, Quaternion.Euler(0, 0, Mathf.Atan2(enemies[0].transform.position.y - firePoint.position.y, enemies[0].transform.position.x - firePoint.position.x) * Mathf.Rad2Deg)).Set(damage, bulletSpeed, bulletPool);
     }
 }

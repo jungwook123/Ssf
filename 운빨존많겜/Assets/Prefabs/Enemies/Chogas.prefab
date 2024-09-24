@@ -439,12 +439,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb9a6cad059cd5a459d5949168636b2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_maxHp: 2500
+  m_maxHp: 3000
   model: {fileID: 8701685493984647844}
   hpScaler: {fileID: 72204082679599907}
   anim: {fileID: 859862998545244319}
   moneyReward: 50
-  moveSpeed: 1.5
+  moveSpeed: 1
 --- !u!95 &859862998545244319
 Animator:
   serializedVersion: 5

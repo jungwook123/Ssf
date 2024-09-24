@@ -4,12 +4,7 @@ using UnityEngine;
 
 public class TwistedFate : RangedTower
 {
-    [Header("TwistedFate")]
-    [SerializeField] protected float fateDamage;
-    [SerializeField] protected float fateDuration;
-    [SerializeField] protected AudioVolumePair fateSound;
-    [SerializeField] protected DebuffEffect fateEffect;
-    protected override Debuff bulletDebuff => new TwistedFate_Fate(fateDuration, fateEffect, fateSound, fateDamage);
+    public const float fateDamage = 30.0f, fateDuration = 5.0f;
     protected override int TargettingCompare(Enemy a, Enemy b)
     {
         if (a.FindDebuff<TwistedFate_Fate>())

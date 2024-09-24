@@ -9669,7 +9669,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4147598235739037735}
-  - component: {fileID: 3217550319273047210}
   m_Layer: 0
   m_Name: TwistedFate_Fate
   m_TagString: Untagged
@@ -9695,22 +9694,6 @@ Transform:
   - {fileID: 4860784087276918693}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
---- !u!114 &3217550319273047210
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7368168467748231207}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0683cb5241338bc40844f0f47c183d5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  levels:
-  - {fileID: 6818306547097632827}
-  - {fileID: 7423043842669988371}
-  - {fileID: 3197625041450141598}
 --- !u!1 &7423043842669988371
 GameObject:
   m_ObjectHideFlags: 0
