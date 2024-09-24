@@ -47,33 +47,33 @@ public abstract class Tower : MonoBehaviour
         }
     }
     float counter = 0.0f;
-    bool canAttack = true;
+    protected bool canAttack { get; private set; } = true;
     protected virtual void Update()
     {
         if (!canAttack) return;
         if (counter < fireRate) counter += Time.deltaTime;
         else
         {
+            enemies.RemoveAll((Enemy i) => i == null);
             if(enemies.Count > 0)
             {
                 counter = 0.0f;
+                GameManager.Instance.SortEnemies();
+                enemies.Sort((Enemy a, Enemy b) => TargettingCompare(a, b));
+                if (enemies[0].transform.position.x > transform.position.x)
+                {
+                    model.localScale = new Vector2(-1.0f, 1.0f);
+                }
+                else
+                {
+                    model.localScale = new Vector2(1.0f, 1.0f);
+                }
+                anim.SetTrigger("Attack");
                 Attack();
             }
         }
     }
-    public virtual void Attack()
-    {
-        enemies.Sort((Enemy a, Enemy b) => TargettingCompare(a, b));
-        if (enemies[0].transform.position.x > transform.position.x)
-        {
-            model.localScale = new Vector2(-1.0f, 1.0f);
-        }
-        else
-        {
-            model.localScale = new Vector2(1.0f, 1.0f);
-        }
-        anim.SetTrigger("Attack");
-    }
+    protected abstract void Attack();
     protected virtual int TargettingCompare(Enemy a, Enemy b)
     {
         return GameManager.Instance.GetIndex(a).CompareTo(GameManager.Instance.GetIndex(b));

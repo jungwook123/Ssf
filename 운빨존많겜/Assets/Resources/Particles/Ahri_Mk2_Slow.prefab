@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4147598235739037735}
   - component: {fileID: 4112635897694502058}
   - component: {fileID: 7782827555429642194}
+  - component: {fileID: 8389706969793316780}
   m_Layer: 0
   m_Name: Ahri_Mk2_Slow
   m_TagString: Untagged
@@ -4830,3 +4831,16 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &8389706969793316780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7368168467748231207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0683cb5241338bc40844f0f47c183d5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levels: []

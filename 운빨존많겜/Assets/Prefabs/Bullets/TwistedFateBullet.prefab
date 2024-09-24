@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 232575371222373468}
   - component: {fileID: -8917995475188060898}
   - component: {fileID: -6794912527114311549}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TwistedFateBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}

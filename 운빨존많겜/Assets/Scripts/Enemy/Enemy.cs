@@ -18,7 +18,7 @@ public class Enemy : MonoBehaviour
     public float moveSpeed = 1.0f;
     Transform targetPoint { get { return GameManager.Instance.enemyWaypoints[pointIndex]; } }
 
-    List<Debuff> debuffs = new();
+    internal List<Debuff> debuffs = new();
     protected virtual void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -31,50 +31,49 @@ public class Enemy : MonoBehaviour
         if (targetPoint.position.x > transform.position.x) model.localScale = new Vector2(-1.0f, 1.0f);
         else model.localScale = new Vector2(1.0f, 1.0f);
     }
-    public void AddDebuff<T>(float duration) where T : Debuff, new()
+    public void AddDebuff(Debuff debuff)
     {
-        foreach (var i in debuffs)
+        debuff.AddDebuff(this);
+    }
+    public bool FindDebuff<T>() where T : Debuff
+    {
+        if (GetDebuff<T>() != null) return true;
+        else return false;
+    }
+    public bool FindDebuff<T>(T reapplied) where T : Debuff
+    {
+        T tmp = GetDebuff<T>();
+        if (tmp != null)
         {
-            if (i is T)
-            {
-                i.ResetDuration(duration);
-                return;
-            }
+            tmp.ReApply(reapplied);
+            return true;
         }
-        T tmp = new T();
-        debuffs.Add(tmp);
-        tmp.Set(duration, this);
+        else return false;
+    }
+    public bool FindDebuff<T>(Action<T> onDebuffFound) where T : Debuff
+    {
+        T tmp = GetDebuff<T>();
+        if (tmp != null)
+        {
+            onDebuffFound?.Invoke(tmp);
+            return true;
+        }
+        else return false;
     }
     List<Debuff> removeQueue = new();
     public void RemoveDebuff(Debuff debuff)
     {
         removeQueue.Add(debuff);
     }
-    public bool FindDebuff<T>() where T : Debuff
-    {
-        foreach(var i in debuffs)
-        {
-            if (i is T) return true;
-        }
-        return false;
-    }
     public T GetDebuff<T>() where T : Debuff
     {
         foreach (var i in debuffs)
         {
-            if (i is T) return i as T;
+            if (i is T && !removeQueue.Contains(i)) return i as T;
         }
         return null;
     }
-    bool canMove = true;
-    public void DisableMovement()
-    {
-        canMove = false;
-    }
-    public void EnableMovement()
-    {
-        canMove = true;
-    }
+    public Stackbool canMove;
     protected virtual void Update()
     {
         if (canMove)
@@ -99,13 +98,12 @@ public class Enemy : MonoBehaviour
             }
         }
         foreach (var i in debuffs) i.OnUpdate();
-    }
-    private void LateUpdate()
-    {
-        foreach (var i in removeQueue) debuffs.Remove(i);
+        debuffs.RemoveAll((Debuff i) => removeQueue.Contains(i));
+        removeQueue.Clear();
     }
     public void GetDamage(float damage)
     {
+        if (isDead) return;
         hp -= damage;
         if (anim != null) anim.SetTrigger("Damaged");
         if (hp <= 0) Die();
@@ -119,8 +117,11 @@ public class Enemy : MonoBehaviour
         onDeath?.Invoke();
         Destroy(gameObject);
     }
+    bool isDead = false;
     protected virtual void Die()
     {
+        if (isDead) return;
+        isDead = true;
         GameManager.Instance.MoneyChange(moneyReward);
         GameManager.Instance.RemoveEnemy(this);
         onDeath?.Invoke();

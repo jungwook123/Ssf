@@ -12,6 +12,7 @@ public class GameManager_UIs : MonoBehaviour
     [SerializeField] Button m_deleteButton, m_fuseButton;
     [SerializeField] Text moneyText, shuffleButtonText;
     [SerializeField] Button[] cards = new Button[GameManager.cardCount];
+    [SerializeField] Text[] costTexts = new Text[GameManager.cardCount];
     [SerializeField] DamageText damageEffectPrefab;
     [SerializeField] RectTransform baseHPImage;
     [SerializeField] Text baseHPText;
@@ -22,8 +23,15 @@ public class GameManager_UIs : MonoBehaviour
         selectedUI.gameObject.SetActive(false);
         GameManager.Instance.onMoneyChange += (int money) => { moneyText.text = string.Concat(money, "$"); };
         GameManager.Instance.onCardShuffle += CardShuffle;
+        GameManager.Instance.onCardShuffle += PriceRefresh;
         GameManager.Instance.onCardSelect += CardSelect;
+        GameManager.Instance.onCardSelect += PriceRefresh;
         GameManager.Instance.onBaseDamage += BaseHPUI;
+        for(int i = 0; i < GameManager.cardCount; i++)
+        {
+            int k = i;
+            cards[i].onClick.AddListener(() => { GameManager.Instance.SelectCard(k); });
+        }
         BaseHPUI();
         dmgEffectPool = new Pooler<DamageText>(damageEffectPrefab, 100, 10);
     }
@@ -49,29 +57,33 @@ public class GameManager_UIs : MonoBehaviour
         for(int i = 0; i < GameManager.cardCount; i++)
         {
             cards[i].image.sprite = GameManager.Instance.cards[i].cardImage;
-            TowerData tmp = GameManager.Instance.cards[i];
-            cards[i].onClick.RemoveAllListeners();
-            cards[i].onClick.AddListener(delegate { GameManager.Instance.SelectCard(tmp); });
             cards[i].interactable = true;
         }
-        shuffleButtonText.text = $"Shuffle({GameManager.Instance.shuffleCost}$)";
     }
-    void CardSelect()
+    void CardSelect(int cardIndex)
+    {
+        cards[cardIndex].interactable = false;
+    }
+    void PriceRefresh()
     {
         for (int i = 0; i < GameManager.cardCount; i++)
         {
-            cards[i].onClick.RemoveAllListeners();
-            cards[i].interactable = false;
+            costTexts[i].text = $"{GameManager.Instance.towerPrices[GameManager.Instance.cards[i]]}$";
         }
+    }
+    void PriceRefresh(int cardIndex)
+    {
+        PriceRefresh();
     }
     void BaseHPUI()
     {
         baseHPImage.localPosition = new Vector2(-150.0f + (-300.0f * (1.0f - GameManager.Instance.baseHP / GameManager.Instance.maxBaseHP)), baseHPImage.localPosition.y);
-        baseHPText.text = $"Base HP: {Mathf.CeilToInt(GameManager.Instance.baseHP)}/{GameManager.Instance.maxBaseHP}";
+        baseHPText.text = $"기지 체력: {Mathf.CeilToInt(GameManager.Instance.baseHP)}/{GameManager.Instance.maxBaseHP}";
     }
     public Pooler<DamageText> dmgEffectPool { get; private set; }
     public void DamageUI(Enemy hit, float damage)
     {
+        damage = Mathf.Ceil(damage * 4.0f) / 4.0f;
         if(damage >= 50.0f)
         {
             ShowDamageUI(hit.transform.position, $"{damage}!!", Color.red);
@@ -87,6 +99,7 @@ public class GameManager_UIs : MonoBehaviour
     }
     public void DamageUI(Enemy hit, float damage, Color color)
     {
+        damage = Mathf.Ceil(damage * 4.0f) / 4.0f;
         if (damage >= 50.0f)
         {
             ShowDamageUI(hit.transform.position, $"{damage}!!", color);

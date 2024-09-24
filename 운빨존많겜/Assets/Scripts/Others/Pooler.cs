@@ -1,66 +1,85 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Pool;
+using System;
 
 public class Pooler<T> where T : Component
 {
-    ObjectPool<T> pool;
+    List<T> pool = new();
+    readonly int maxSize, defaultSize;
     T prefab;
     public Pooler(T prefab, int maxSize = 100, int defaultSize = 0)
     {
         this.prefab = prefab;
-        pool = new ObjectPool<T>(
-            PoolCreate,
-            OnPoolTakeout,
-            OnPoolInsert,
-            PoolDestroy,
-            true,
-            defaultSize,
-            maxSize);
+        this.maxSize = maxSize;
+        this.defaultSize = defaultSize;
+        for (int i = 0; i < defaultSize; i++) 
+        {
+            T tmp = MonoBehaviour.Instantiate(prefab);
+            tmp.gameObject.SetActive(false);
+            pool.Add(tmp);
+        }
     }
     public T GetObject()
     {
-        return pool.Get();
+        T obj = Get();
+        obj.gameObject.SetActive(true);
+        return obj;
     }
     public T GetObject(Vector3 position, Quaternion rotation)
     {
-        T obj = GetObject();
+        T obj = Get();
         obj.transform.position = position;
         obj.transform.rotation = rotation;
+        obj.gameObject.SetActive(true);
         return obj;
     }
     public T GetObject(Vector3 position, Quaternion rotation, Transform parent)
     {
-        T obj = GetObject(position, rotation);
+        T obj = Get();
+        obj.transform.position = position;
+        obj.transform.rotation = rotation;
         obj.transform.parent = parent;
+        obj.gameObject.SetActive(true);
         return obj;
     }
     public T GetObject(Transform parent)
     {
-        T obj = GetObject();
+        T obj = Get();
         obj.transform.parent = parent;
+        obj.gameObject.SetActive(true);
         return obj;
     }
     public void ReleaseObject(T obj)
     {
-        pool.Release(obj);
+        Release(obj);
     }
-    void OnPoolTakeout(T pooledObject)
+    T Get()
     {
-        pooledObject.gameObject.SetActive(true);
+        T result;
+        pool.RemoveAll((T obj) => obj == null);
+        if(pool.Count > 0)
+        {
+            result = pool[0];
+            pool.RemoveAt(0);
+        }
+        else
+        {
+            T tmp = MonoBehaviour.Instantiate(prefab);
+            tmp.gameObject.SetActive(false);
+            result = tmp;
+        }
+        return result;
     }
-    void OnPoolInsert(T pooledObject)
+    void Release(T obj)
     {
-        pooledObject.gameObject.SetActive(false);
-    }
-    T PoolCreate()
-    {
-        return MonoBehaviour.Instantiate(prefab);
-    }
-    void PoolDestroy(T pooledObject)
-    {
-        MonoBehaviour.Destroy(pooledObject.gameObject);
+        if(pool.Count >= maxSize)
+        {
+            MonoBehaviour.Destroy(pool[0].gameObject);
+            pool.RemoveAt(0);
+        }
+        obj.gameObject.SetActive(false);
+        pool.Add(obj);
     }
 }

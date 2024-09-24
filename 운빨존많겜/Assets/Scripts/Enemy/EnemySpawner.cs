@@ -18,10 +18,10 @@ public class EnemySpawner : MonoBehaviour
     }
     IEnumerator Intermission()
     {
-        waveText.text = "Intermission";
+        waveText.text = "게임 시작 전";
         for (int i = 0; i < startTime; i++)
         {
-            waveTimeText.text = $"Starting in: {startTime - i}";
+            waveTimeText.text = $"{startTime - i}초 뒤에 시작합니다.";
             yield return new WaitForSeconds(1);
         }
         skipButton.gameObject.SetActive(true);
@@ -34,13 +34,13 @@ public class EnemySpawner : MonoBehaviour
         skipButton.gameObject.SetActive(false);
         if (currentWave < waves.Length - 1)
         {
-            waveText.text = $"Wave {currentWave + 1}";
+            waveText.text = $"웨이브 {currentWave + 1}";
             waveWaiting = WaveWait();
             StartCoroutine(waveWaiting);
         }
         else
         {
-            waveText.text = "Final Wave";
+            waveText.text = "최종 웨이브";
             waveTimeText.text = "";
         }
         StartCoroutine(SpawnWave(currentWave));
@@ -67,7 +67,7 @@ public class EnemySpawner : MonoBehaviour
     {
         for(int i = 0; i < waves[currentWave].endTime; i++)
         {
-            waveTimeText.text = $"Next Wave In: {waves[currentWave].endTime - i}";
+            waveTimeText.text = $"다음 웨이브까지 남은 시간: {waves[currentWave].endTime - i}초";
             yield return new WaitForSeconds(1);
         }
         currentWave++;

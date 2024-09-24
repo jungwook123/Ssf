@@ -374,6 +374,7 @@ MonoBehaviour:
   fireRate: 1
   damage: 20
   model: {fileID: 1376162541108081703}
+  m_sprite: {fileID: 0}
   skillChance: 10
   sword1: {fileID: 701421825437420157}
   sword2: {fileID: 2812873907308515034}
@@ -637,7 +638,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8523cafcd7f9f049b7c4f436c72912d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 30
 --- !u!1 &7979132824412634197
 GameObject:
   m_ObjectHideFlags: 0
@@ -781,7 +781,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8523cafcd7f9f049b7c4f436c72912d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 30
 --- !u!1 &8426627535407230153
 GameObject:
   m_ObjectHideFlags: 0

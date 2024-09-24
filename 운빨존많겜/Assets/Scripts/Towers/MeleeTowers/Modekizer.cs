@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class Modekizer : Tower
 {
-    public const float bleedDamage = 7f, bleedTick = 0.5f, bleedDuration = 2f, bleedSlowScale = 0.9f;
+    [Header("Modekizer")]
+    [SerializeField] protected float bleedDamage = 7f;
+    [SerializeField] protected float bleedTick = 0.5f, bleedDuration = 2f, bleedSlowScale = 0.9f;
+    [SerializeField] protected AudioVolumePair attackSound;
+    [SerializeField] protected DebuffEffect bleedEffect;
     protected override int TargettingCompare(Enemy a, Enemy b)
     {
         if (a.FindDebuff<Modekizer_Bleed>())
@@ -27,14 +31,11 @@ public class Modekizer : Tower
             return base.TargettingCompare(a, b);
         }
     }
-    static AudioClip m_attackClip;
-    static AudioClip attackClip { get { if (m_attackClip == null) m_attackClip = Resources.Load<AudioClip>("Audio/Modekizer_Attack"); return m_attackClip; } }
-    public override void Attack()
+    protected override void Attack()
     {
-        base.Attack();
-        AudioManager.Instance.PlayAudio(attackClip, 0.5f);
+        AudioManager.Instance.PlayAudio(attackSound);
         GameManager.Instance.UIs.DamageUI(enemies[0], damage);
-        enemies[0].AddDebuff<Modekizer_Bleed>(bleedDuration);
+        enemies[0].AddDebuff(new Modekizer_Bleed(bleedDuration, bleedEffect, bleedSlowScale, bleedDamage));
         enemies[0].GetDamage(damage);
     }
 }

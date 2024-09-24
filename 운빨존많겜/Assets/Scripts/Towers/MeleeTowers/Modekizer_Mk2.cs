@@ -2,16 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Modekizer_Mk2 : Tower
+public class Modekizer_Mk2 : Modekizer
 {
-    public const float bleedDamage = 10f, bleedTick = 0.5f, bleedDuration = 3f, bleedSlowScale = 0.8f;
+    [Header("Modekizer_Mk2")]
+    [SerializeField] protected int strikeCount = 4;
+    [SerializeField] protected float strikeDamage = 50.0f;
+    [SerializeField] AudioVolumePair strikeSound;
     protected override int TargettingCompare(Enemy a, Enemy b)
     {
         if(count < strikeCount)
         {
-            if (a.FindDebuff<Modekizer_Mk2_HeavyBleed>())
+            if (a.FindDebuff<Modekizer_Mk2_Bleed>())
             {
-                if (b.FindDebuff<Modekizer_Mk2_HeavyBleed>())
+                if (b.FindDebuff<Modekizer_Mk2_Bleed>())
                 {
                     return base.TargettingCompare(a, b);
                 }
@@ -20,7 +23,7 @@ public class Modekizer_Mk2 : Tower
                     return 1;
                 }
             }
-            else if (b.FindDebuff<Modekizer_Mk2_HeavyBleed>())
+            else if (b.FindDebuff<Modekizer_Mk2_Bleed>())
             {
                 return -1;
             }
@@ -34,29 +37,31 @@ public class Modekizer_Mk2 : Tower
             return base.TargettingCompare(a, b);
         }
     }
-    int count = 0;
-    const int strikeCount = 4;
-    const float strikeDamage = 50.0f;
-    static AudioClip m_attackClip, m_strikeClip;
-    static AudioClip attackClip { get { if (m_attackClip == null) m_attackClip = Resources.Load<AudioClip>("Audio/Mai_Attack"); return m_attackClip; } }
-    static AudioClip strikeClip { get { if (m_strikeClip == null) m_strikeClip = Resources.Load<AudioClip>("Audio/Mai_EnhancedAttack"); return m_strikeClip; } }
-    public override void Attack()
+    protected int count = 0;
+    protected override void Attack()
     {
-        base.Attack();
         if(count < strikeCount)
         {
-            AudioManager.Instance.PlayAudio(attackClip, 0.5f);
-            GameManager.Instance.UIs.DamageUI(enemies[0], damage);
-            enemies[0].AddDebuff<Modekizer_Mk2_HeavyBleed>(bleedDuration);
-            enemies[0].GetDamage(damage);
+            NormalAttack();
             count++;
         }
         else
         {
-            AudioManager.Instance.PlayAudio(strikeClip, 0.8f);
-            GameManager.Instance.UIs.DamageUI(enemies[0], strikeDamage);
-            enemies[0].GetDamage(strikeDamage);
+            Strike();
             count = 0;
         }
+    }
+    protected virtual void Strike()
+    {
+        AudioManager.Instance.PlayAudio(strikeSound);
+        GameManager.Instance.UIs.DamageUI(enemies[0], strikeDamage);
+        enemies[0].GetDamage(strikeDamage);
+    }
+    protected virtual void NormalAttack()
+    {
+        AudioManager.Instance.PlayAudio(attackSound);
+        GameManager.Instance.UIs.DamageUI(enemies[0], damage);
+        enemies[0].AddDebuff(new Modekizer_Mk2_Bleed(bleedDuration, bleedEffect, bleedSlowScale, bleedDamage));
+        enemies[0].GetDamage(damage);
     }
 }
