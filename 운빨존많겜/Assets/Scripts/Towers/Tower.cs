@@ -34,26 +34,6 @@ public abstract class Tower : MonoBehaviour
     }
     float counter = 0.0f;
     protected bool canAttack { get; private set; } = true;
-    void TowerAttack()
-    {
-        if (!canAttack) return;
-        enemies.RemoveAll((Enemy i) => i == null);
-        if (enemies.Count > 0)
-        {
-            GameManager.Instance.SortEnemies();
-            enemies.Sort((Enemy a, Enemy b) => TargettingCompare(a, b));
-            if (enemies[0].transform.position.x > transform.position.x)
-            {
-                model.localScale = new Vector2(-1.0f, 1.0f);
-            }
-            else
-            {
-                model.localScale = new Vector2(1.0f, 1.0f);
-            }
-            anim.SetTrigger("Attack");
-            Attack();
-        }
-    }
     protected abstract void Attack();
     protected virtual int TargettingCompare(Enemy a, Enemy b)
     {
@@ -75,6 +55,34 @@ public abstract class Tower : MonoBehaviour
     {
         canAttack = true;
     }
+    protected void PreAttack()
+    {
+        if (enemies[0].transform.position.x > transform.position.x)
+        {
+            model.localScale = new Vector2(-1.0f, 1.0f);
+        }
+        else
+        {
+            model.localScale = new Vector2(1.0f, 1.0f);
+        }
+        anim.SetTrigger("Attack");
+    }
+    protected virtual void Update()
+    {
+        if (!canAttack) return;
+        if (counter < fireRate) counter += Time.deltaTime;
+        else
+        {
+            enemies.RemoveAll((Enemy i) => i == null);
+            if (enemies.Count > 0)
+            {
+                counter = 0.0f;
+                PreAttack();
+                enemies.Sort((Enemy a, Enemy b) => TargettingCompare(a, b));
+                Attack();
+            }
+        }
+    }
     #endregion
     public List<Enemy> enemies = new();
     //현재 감지한 적들을 보관하는 리스트
@@ -94,21 +102,6 @@ public abstract class Tower : MonoBehaviour
         {
             enemies.Remove(collision.GetComponent<Enemy>());
             //감지한 적들 리스트에서 더 이상 닿지 않는 오브젝트의 'Enemy' 컴퍼넌트 제거하기
-        }
-    }
-    protected virtual void Update()
-    {
-        #region 개발자 전용
-        enemies.RemoveAll((Enemy i) => i == null);
-        #endregion
-        if (counter < fireRate) counter += Time.deltaTime;
-        else
-        {
-            if(enemies.Count > 0)
-            {
-                counter = 0.0f;
-                TowerAttack();
-            }
         }
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Tracing;
 using UnityEngine;
 
 public class Ahri : RangedTower
@@ -34,12 +35,15 @@ public class Ahri : RangedTower
     }
     protected override void Attack()
     {
-        AhriAttack(enemies[0]);
+        if (GetType() != typeof(Ahri)) base.Attack();
     }
     #endregion
     //아리가 공격할 때 호출되는 함수
     public void AhriAttack(Enemy attackedEnemy)
     {
+        #region 개발자 전용
+        PreAttack();
+        #endregion
         Vector2 bulletPosition = firePoint.position;
         //생성할 총알의 위치값을 발사 지점의 위치로 설정
 
@@ -52,5 +56,21 @@ public class Ahri : RangedTower
         spawnedBullet.damage = damage;
         spawnedBullet.speed = bulletSpeed;
         //생성한 총알의 대미지랑 속도 지정
+    }
+    float timer = 0.0f;
+    protected override void Update()
+    {
+        #region 개발자 전용
+        base.Update();
+        if (GetType() != typeof(Ahri)) return;
+        enemies.RemoveAll((Enemy i) => i == null);
+        enemies.Sort((Enemy a, Enemy b) => TargettingCompare(a, b));
+        #endregion
+        timer += Time.deltaTime;
+        if (canAttack && timer >= fireRate && enemies.Count > 0)
+        {
+            timer = 0.0f;
+            AhriAttack(enemies[0]);
+        }
     }
 }

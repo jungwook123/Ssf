@@ -29,7 +29,7 @@ public class TwistedFate : RangedTower
     }
     protected override void Attack()
     {
-        TwistedFateAttack(enemies[0]);
+        if (GetType() != typeof(TwistedFate)) base.Attack();
     }
     #endregion
     //트위스티드 페이트가 공격할 때 호출되는 함수
@@ -47,5 +47,21 @@ public class TwistedFate : RangedTower
         spawnedBullet.damage = damage;
         spawnedBullet.speed = bulletSpeed;
         //생성한 총알의 대미지랑 속도 지정
+    }
+    float timer = 0.0f;
+    protected override void Update()
+    {
+        #region 개발자 전용
+        base.Update();
+        if (GetType() != typeof(TwistedFate)) return;
+        enemies.RemoveAll((Enemy i) => i == null);
+        enemies.Sort((Enemy a, Enemy b) => TargettingCompare(a, b));
+        #endregion
+        timer += Time.deltaTime;
+        if (canAttack && timer >= fireRate && enemies.Count > 0)
+        {
+            timer = 0.0f;
+            TwistedFateAttack(enemies[0]);
+        }
     }
 }

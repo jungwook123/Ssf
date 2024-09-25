@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Unity.Burst.Intrinsics.X86.Avx;
 public class Bullet : MonoBehaviour
 {
     static Dictionary<Bullet, Pooler<Bullet>> bulletPools = new();

@@ -172,8 +172,9 @@ MonoBehaviour:
   damage: 10
   model: {fileID: 1376162541108081703}
   m_sprite: {fileID: 7209337802154889636}
+  enemies: []
   firePoint: {fileID: 4275702736095991957}
-  bullet: {fileID: -6794912527114311549, guid: 6b56a68653facf749a1ec6d4d60235ff, type: 3}
+  bullet: {fileID: 5541069192425987786, guid: 6b56a68653facf749a1ec6d4d60235ff, type: 3}
   bulletSpeed: 10
   hitSound:
     m_clip: {fileID: 8300000, guid: d0c3485106773da4ba4abdc56388765d, type: 3}

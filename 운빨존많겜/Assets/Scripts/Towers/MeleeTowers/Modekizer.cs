@@ -38,18 +38,36 @@ public class Modekizer : Tower
     }
     protected override void Attack()
     {
-        AudioManager.Instance.PlayAudio(attackSound);
-        GameManager.Instance.UIs.DamageUI(enemies[0], damage);
-        ModekizerAttack(enemies[0]);
+
     }
     #endregion
     //모데카이저가 공격할 때 호출되는 함수
     public void ModekizerAttack(Enemy attackedEnemy)
     {
+        #region 개발자 전용
+        AudioManager.Instance.PlayAudio(attackSound);
+        GameManager.Instance.UIs.DamageUI(enemies[0], damage);
+        #endregion
         attackedEnemy.GetDamage(damage);
         //적에게 대미지룰 주고...
 
         InflictBleedingEffect(attackedEnemy);
         //그 적에게 출혈 효과를 준다.
+    }
+    float timer = 0.0f;
+    protected override void Update()
+    {
+        #region 개발자 전용
+        base.Update();
+        if (GetType() != typeof(Modekizer)) return;
+        enemies.RemoveAll((Enemy i) => i == null);
+        enemies.Sort((Enemy a, Enemy b) => TargettingCompare(a, b));
+        #endregion
+        timer += Time.deltaTime;
+        if (canAttack && timer >= fireRate && enemies.Count > 0)
+        {
+            timer = 0.0f;
+            ModekizerAttack(enemies[0]);
+        }
     }
 }

@@ -7,12 +7,15 @@ public class Ez : RangedTower
     #region 개발자 전용
     protected override void Attack()
     {
-        EzAttack(enemies[0]);
+        if (GetType() != typeof(Ez)) base.Attack();
     }
     #endregion
     //에즈리얼이 공격할 때 호출되는 함수
     public void EzAttack(Enemy attackedEnemy)
     {
+        #region 개발자 전용
+        PreAttack();
+        #endregion
         Vector2 bulletPosition = firePoint.position;
         //생성할 총알의 위치값을 발사 지점의 위치로 설정
 
@@ -25,5 +28,21 @@ public class Ez : RangedTower
         spawnedBullet.damage = damage;
         spawnedBullet.speed = bulletSpeed;
         //생성한 총알의 대미지랑 속도 지정
+    }
+    float timer = 0.0f;
+    protected override void Update()
+    {
+        #region 개발자 전용
+        base.Update();
+        if (GetType() != typeof(Ez)) return;
+        enemies.RemoveAll((Enemy i) => i == null);
+        enemies.Sort((Enemy a, Enemy b) => TargettingCompare(a, b));
+        #endregion
+        timer += Time.deltaTime;
+        if (canAttack && timer >= fireRate && enemies.Count > 0)
+        {
+            timer = 0.0f;
+            EzAttack(enemies[0]);
+        }
     }
 }

@@ -106,13 +106,6 @@ public class GameManager : MonoBehaviour
     bool enemySorted = false;
     private void LateUpdate()
     {
-        enemySorted = false;
-    }
-    public void AllSpawnEnd() => spawnEnded = true;
-    public void SortEnemies()
-    {
-        if (enemySorted) return;
-        enemySorted = true;
         enemies.Sort((Enemy a, Enemy b) =>
         {
             int tmp = b.pointIndex.CompareTo(a.pointIndex);
@@ -123,6 +116,7 @@ public class GameManager : MonoBehaviour
             else return tmp;
         });
     }
+    public void AllSpawnEnd() => spawnEnded = true;
     public void AddEnemy(Enemy enemy)
     {
         enemies.Add(enemy);
