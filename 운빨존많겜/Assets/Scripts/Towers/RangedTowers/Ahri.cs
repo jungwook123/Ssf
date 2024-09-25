@@ -40,7 +40,6 @@ public class Ahri : RangedTower
     //아리가 공격할 때 호출되는 함수
     public void AhriAttack(Enemy attackedEnemy)
     {
-        /*
         Vector2 bulletPosition = firePoint.position;
         //생성할 총알의 위치값을 발사 지점의 위치로 설정
 
@@ -52,6 +51,6 @@ public class Ahri : RangedTower
 
         spawnedBullet.damage = damage;
         spawnedBullet.speed = bulletSpeed;
-        //생성한 총알의 대미지랑 속도 지정*/
+        //생성한 총알의 대미지랑 속도 지정
     }
 }

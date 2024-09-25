@@ -6,7 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(CircleCollider2D), typeof(Animator))]
 public abstract class Tower : MonoBehaviour
 {
-    #region devOnly
+    #region 개발자 전용
     TowerData m_data;
     public void Set(TowerData data)
     {
@@ -16,7 +16,6 @@ public abstract class Tower : MonoBehaviour
     
     CircleCollider2D scanCollider;
     protected Animator anim { get; private set; }
-    protected List<Enemy> enemies { get; } = new();
 
     [Header("Tower")]
     [SerializeField] protected float m_range;
@@ -32,20 +31,6 @@ public abstract class Tower : MonoBehaviour
         scanCollider.isTrigger = true;
 
         anim = GetComponent<Animator>();
-    }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Enemy"))
-        {
-            enemies.Add(collision.GetComponent<Enemy>());
-        }
-    }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Enemy"))
-        {
-            enemies.Remove(collision.GetComponent<Enemy>());
-        }
     }
     float counter = 0.0f;
     protected bool canAttack { get; private set; } = true;
@@ -91,13 +76,39 @@ public abstract class Tower : MonoBehaviour
         canAttack = true;
     }
     #endregion
+    public List<Enemy> enemies = new();
+    //현재 감지한 적들을 보관하는 리스트
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        //만약 태그가 'Enemy'인 오브젝트가 범위 안에 닿으면..
+        if (collision.CompareTag("Enemy"))
+        {
+            enemies.Add(collision.GetComponent<Enemy>());
+            //감지한 적들 리스트에 감지된 오브젝트의 'Enemy' 컴퍼넌트 추가하기
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        //만약 범위 닿고 있던 태그가 'Enemy'인 오브젝트가 더 이상 닿지 않으면..
+        if (collision.CompareTag("Enemy"))
+        {
+            enemies.Remove(collision.GetComponent<Enemy>());
+            //감지한 적들 리스트에서 더 이상 닿지 않는 오브젝트의 'Enemy' 컴퍼넌트 제거하기
+        }
+    }
     protected virtual void Update()
     {
+        #region 개발자 전용
+        enemies.RemoveAll((Enemy i) => i == null);
+        #endregion
         if (counter < fireRate) counter += Time.deltaTime;
         else
         {
-            counter = 0.0f;
-            TowerAttack();
+            if(enemies.Count > 0)
+            {
+                counter = 0.0f;
+                TowerAttack();
+            }
         }
     }
 }
