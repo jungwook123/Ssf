@@ -6,6 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(CircleCollider2D), typeof(Animator))]
 public abstract class Tower : MonoBehaviour
 {
+    #region devOnly
     TowerData m_data;
     public void Set(TowerData data)
     {
@@ -48,29 +49,24 @@ public abstract class Tower : MonoBehaviour
     }
     float counter = 0.0f;
     protected bool canAttack { get; private set; } = true;
-    protected virtual void Update()
+    void TowerAttack()
     {
         if (!canAttack) return;
-        if (counter < fireRate) counter += Time.deltaTime;
-        else
+        enemies.RemoveAll((Enemy i) => i == null);
+        if (enemies.Count > 0)
         {
-            enemies.RemoveAll((Enemy i) => i == null);
-            if(enemies.Count > 0)
+            GameManager.Instance.SortEnemies();
+            enemies.Sort((Enemy a, Enemy b) => TargettingCompare(a, b));
+            if (enemies[0].transform.position.x > transform.position.x)
             {
-                counter = 0.0f;
-                GameManager.Instance.SortEnemies();
-                enemies.Sort((Enemy a, Enemy b) => TargettingCompare(a, b));
-                if (enemies[0].transform.position.x > transform.position.x)
-                {
-                    model.localScale = new Vector2(-1.0f, 1.0f);
-                }
-                else
-                {
-                    model.localScale = new Vector2(1.0f, 1.0f);
-                }
-                anim.SetTrigger("Attack");
-                Attack();
+                model.localScale = new Vector2(-1.0f, 1.0f);
             }
+            else
+            {
+                model.localScale = new Vector2(1.0f, 1.0f);
+            }
+            anim.SetTrigger("Attack");
+            Attack();
         }
     }
     protected abstract void Attack();
@@ -93,5 +89,15 @@ public abstract class Tower : MonoBehaviour
     public virtual void Enable()
     {
         canAttack = true;
+    }
+    #endregion
+    protected virtual void Update()
+    {
+        if (counter < fireRate) counter += Time.deltaTime;
+        else
+        {
+            counter = 0.0f;
+            TowerAttack();
+        }
     }
 }

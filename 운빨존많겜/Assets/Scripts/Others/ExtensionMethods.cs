@@ -2,6 +2,7 @@ using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditorInternal;
 using UnityEngine;
 
 public static class ExtensionMethods
@@ -18,6 +19,7 @@ public static class ExtensionMethods
     {
         return obj1.GetType().IsAssignableFrom(obj2.GetType()) && obj2.GetType().IsAssignableFrom(obj1.GetType());
     }
+    public static void Play(this AudioVolumePair sound) => AudioManager.Instance.PlayAudio(sound);
 }
 [System.Serializable]
 public struct AudioVolumePair

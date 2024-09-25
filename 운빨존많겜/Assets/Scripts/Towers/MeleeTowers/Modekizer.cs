@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Modekizer : Tower
 {
+    #region 개발자 전용
     [Header("Modekizer")]
     [SerializeField] protected float bleedDamage = 7f;
     [SerializeField] protected float bleedTick = 0.5f, bleedDuration = 2f, bleedSlowScale = 0.9f;
@@ -31,11 +32,24 @@ public class Modekizer : Tower
             return base.TargettingCompare(a, b);
         }
     }
+    void InflictBleedingEffect(Enemy enemy)
+    {
+        enemy.AddDebuff(new Modekizer_Bleed(bleedDuration, bleedEffect, bleedSlowScale, bleedDamage));
+    }
     protected override void Attack()
     {
         AudioManager.Instance.PlayAudio(attackSound);
         GameManager.Instance.UIs.DamageUI(enemies[0], damage);
-        enemies[0].AddDebuff(new Modekizer_Bleed(bleedDuration, bleedEffect, bleedSlowScale, bleedDamage));
-        enemies[0].GetDamage(damage);
+        ModekizerAttack(enemies[0]);
+    }
+    #endregion
+    //모데카이저가 공격할 때 호출되는 함수
+    public void ModekizerAttack(Enemy attackedEnemy)
+    {
+        attackedEnemy.GetDamage(damage);
+        //적에게 대미지룰 주고...
+
+        InflictBleedingEffect(attackedEnemy);
+        //그 적에게 출혈 효과를 준다.
     }
 }

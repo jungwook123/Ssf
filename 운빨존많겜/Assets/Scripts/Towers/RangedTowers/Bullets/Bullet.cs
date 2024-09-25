@@ -8,7 +8,7 @@ public class Bullet : MonoBehaviour
     protected bool isInstantiated = false;
     protected Pooler<Bullet> origin;
 
-    protected float damage, speed;
+    public float damage, speed;
     const float range = 50.0f;
     protected AudioVolumePair hitSound;
     protected Debuff inflictingDebuff;

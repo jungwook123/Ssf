@@ -6,6 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Enemy : MonoBehaviour
 {
+    #region 개발자 전용
     Rigidbody2D rb;
     [SerializeField] float m_maxHp;
     public float maxHp { get { return m_maxHp; } }
@@ -87,7 +88,7 @@ public class Enemy : MonoBehaviour
             {
                 if (++pointIndex >= GameManager.Instance.enemyWaypoints.Length)
                 {
-                    ReachEnd();
+                    OnEndReach();
                     return;
                 }
                 else
@@ -101,30 +102,38 @@ public class Enemy : MonoBehaviour
         debuffs.RemoveAll((Debuff i) => removeQueue.Contains(i));
         removeQueue.Clear();
     }
+    public Action onDeath;
+    bool isDead = false;
+    #endregion
+
     public void GetDamage(float damage)
     {
+        #region 개발자 전용
         if (isDead) return;
-        hp -= damage;
         if (anim != null) anim.SetTrigger("Damaged");
+        hpScaler.localScale = new Vector2(hp / maxHp, 1.0f);
+        #endregion
+        hp -= damage;
         if (hp <= 0) Die();
-        else hpScaler.localScale = new Vector2(hp / maxHp, 1.0f);
     }
-    public Action onDeath;
-    protected virtual void ReachEnd()
+    private void Die()
     {
-        GameManager.Instance.RemoveEnemy(this);
-        GameManager.Instance.GetBaseDamage(hp);
-        onDeath?.Invoke();
-        Destroy(gameObject);
-    }
-    bool isDead = false;
-    protected virtual void Die()
-    {
+        #region 개발자 전용
         if (isDead) return;
         isDead = true;
         GameManager.Instance.MoneyChange(moneyReward);
         GameManager.Instance.RemoveEnemy(this);
         onDeath?.Invoke();
+        #endregion
+        Destroy(gameObject);
+    }
+    protected virtual void OnEndReach()
+    {
+        #region 개발자 전용
+        GameManager.Instance.RemoveEnemy(this);
+        GameManager.Instance.GetBaseDamage(hp);
+        onDeath?.Invoke();
+        #endregion
         Destroy(gameObject);
     }
 }
