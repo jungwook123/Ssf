@@ -114,8 +114,8 @@ public class Enemy : MonoBehaviour
         if (isDead) return;
         if (anim != null) anim.SetTrigger("Damaged");
         #endregion
-        hp -= damage;
         hpScaler.localScale = new Vector2(hp / maxHp, 1.0f);
+        hp -= damage;
         if (hp <= 0) Die();
     }
     private void Die()
