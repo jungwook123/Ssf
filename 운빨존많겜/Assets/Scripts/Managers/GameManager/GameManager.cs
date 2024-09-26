@@ -42,7 +42,6 @@ public class GameManager : MonoBehaviour
     #region Money
     [SerializeField] int m_money;
     [SerializeField] int m_shuffleCost;
-    [SerializeField] int shuffleCostIncrease;
     public int money { get { return m_money; } private set { m_money = value; } }
     public int shuffleCost { get { return m_shuffleCost; } private set { m_shuffleCost = value; } }
     public Action<int> onMoneyChange;
@@ -55,10 +54,6 @@ public class GameManager : MonoBehaviour
         }
         onMoneyChange.Invoke(money);
     }
-    #region Costs
-    public int spawnCost { get; private set; } = 20;
-    const int spawnCostIncrease = 2;
-    #endregion
     #endregion
     #region baseHP
     [SerializeField] float m_maxBaseHP;

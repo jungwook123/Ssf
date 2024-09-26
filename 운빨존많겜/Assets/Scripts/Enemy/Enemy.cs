@@ -3,7 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+#region 개발자 전용
 [RequireComponent(typeof(Rigidbody2D))]
+#endregion
 public class Enemy : MonoBehaviour
 {
     #region 개발자 전용
@@ -111,9 +113,9 @@ public class Enemy : MonoBehaviour
         #region 개발자 전용
         if (isDead) return;
         if (anim != null) anim.SetTrigger("Damaged");
-        hpScaler.localScale = new Vector2(hp / maxHp, 1.0f);
         #endregion
         hp -= damage;
+        hpScaler.localScale = new Vector2(hp / maxHp, 1.0f);
         if (hp <= 0) Die();
     }
     private void Die()

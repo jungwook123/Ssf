@@ -3592,7 +3592,6 @@ MonoBehaviour:
   m_rangeViewer: {fileID: 1987344491}
   m_money: 100
   m_shuffleCost: 5
-  shuffleCostIncrease: 1
   m_maxBaseHP: 3000
   shuffleSound:
     m_clip: {fileID: 8300000, guid: b79c3b04c331dea4abef2feacff07cc8, type: 3}
