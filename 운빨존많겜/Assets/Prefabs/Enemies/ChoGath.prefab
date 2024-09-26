@@ -332,7 +332,7 @@ GameObject:
   - component: {fileID: 1557987577341597441}
   - component: {fileID: 859862998545244319}
   m_Layer: 0
-  m_Name: Greater Chogas
+  m_Name: ChoGath
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -439,12 +439,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb9a6cad059cd5a459d5949168636b2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_maxHp: 12500
+  m_maxHp: 2500
   model: {fileID: 8701685493984647844}
   hpScaler: {fileID: 72204082679599907}
   anim: {fileID: 859862998545244319}
-  moneyReward: 150
-  moveSpeed: 2
+  moneyReward: 50
+  moveSpeed: 1.5
 --- !u!95 &859862998545244319
 Animator:
   serializedVersion: 5
@@ -572,7 +572,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 2786b3548dd87324cb745ec642d4bfad, type: 3}
-  m_Color: {r: 1, g: 0.5882353, b: 0.5882353, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
