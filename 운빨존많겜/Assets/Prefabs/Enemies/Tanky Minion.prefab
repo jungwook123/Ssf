@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3088319132983861760}
   - component: {fileID: 373364441674578412}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7752061459958824157}
   - component: {fileID: 7929103259354508463}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -178,7 +178,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3980575656451552666}
   - component: {fileID: 3459540955995694508}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Square (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -261,7 +261,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 72204082679599907}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Scaler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -293,7 +293,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1642614877209754749}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: HpBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -331,8 +331,8 @@ GameObject:
   - component: {fileID: 6608225710594222334}
   - component: {fileID: 4682466585260629692}
   - component: {fileID: 6388665644847998048}
-  m_Layer: 7
-  m_Name: Troop
+  m_Layer: 0
+  m_Name: Tanky Minion
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -412,12 +412,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f61eabd0f700ca48b5f454f8a4fabcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_maxHp: 100
+  m_maxHp: 450
   model: {fileID: 8701685493984647844}
   hpScaler: {fileID: 72204082679599907}
   anim: {fileID: 6388665644847998048}
-  moneyReward: 5
-  moveSpeed: 2
+  moneyReward: 10
+  moveSpeed: 1.5
 --- !u!50 &4682466585260629692
 Rigidbody2D:
   serializedVersion: 4
@@ -455,7 +455,7 @@ Animator:
   m_GameObject: {fileID: 5036868773120832061}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 9a6989d489e7e5d45b13c4cc08e2c2e2, type: 2}
+  m_Controller: {fileID: 9100000, guid: 701037ea3feab08468285ffc2a0d7d4c, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -475,7 +475,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8701685493984647844}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -508,7 +508,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2592244028564943892}
   - component: {fileID: 5652309143701931726}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -571,7 +571,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: eb90ec237692b23439a04ae88a675987, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 93aea8ddb1d4d1a498ec0f46432bd4df, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3088319132983861760}
   - component: {fileID: 373364441674578412}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7752061459958824157}
   - component: {fileID: 7929103259354508463}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -178,7 +178,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3980575656451552666}
   - component: {fileID: 3459540955995694508}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Square (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -261,7 +261,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 72204082679599907}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Scaler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -293,7 +293,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1642614877209754749}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: HpBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -328,11 +328,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4657852088360955643}
   - component: {fileID: 3957615491558655144}
-  - component: {fileID: 6608225710594222334}
   - component: {fileID: 4682466585260629692}
-  - component: {fileID: 6388665644847998048}
-  m_Layer: 7
-  m_Name: Fast Troop
+  - component: {fileID: 1557987577341597441}
+  - component: {fileID: 859862998545244319}
+  m_Layer: 0
+  m_Name: ChoGath
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -348,7 +348,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8701685493984647844}
@@ -398,26 +398,8 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.2, y: 1.2}
   m_EdgeRadius: 0
---- !u!114 &6608225710594222334
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5036868773120832061}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f61eabd0f700ca48b5f454f8a4fabcc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_maxHp: 80
-  model: {fileID: 8701685493984647844}
-  hpScaler: {fileID: 72204082679599907}
-  anim: {fileID: 6388665644847998048}
-  moneyReward: 5
-  moveSpeed: 4
 --- !u!50 &4682466585260629692
 Rigidbody2D:
   serializedVersion: 4
@@ -445,7 +427,25 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!95 &6388665644847998048
+--- !u!114 &1557987577341597441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5036868773120832061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb9a6cad059cd5a459d5949168636b2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_maxHp: 2500
+  model: {fileID: 8701685493984647844}
+  hpScaler: {fileID: 72204082679599907}
+  anim: {fileID: 859862998545244319}
+  moneyReward: 50
+  moveSpeed: 1.5
+--- !u!95 &859862998545244319
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
@@ -455,7 +455,7 @@ Animator:
   m_GameObject: {fileID: 5036868773120832061}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: daf10539325d94a40afcfc5d6612aca5, type: 2}
+  m_Controller: {fileID: 9100000, guid: ddd8163ee5256484091eef36c34277c6, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -475,7 +475,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8701685493984647844}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -508,7 +508,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2592244028564943892}
   - component: {fileID: 5652309143701931726}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -525,7 +525,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.3, y: 1.3, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8701685493984647844}
@@ -571,7 +571,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 4502da20ba66a574f92703b22464e30f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2786b3548dd87324cb745ec642d4bfad, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
