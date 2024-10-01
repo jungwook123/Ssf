@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3088319132983861760}
   - component: {fileID: 373364441674578412}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7752061459958824157}
   - component: {fileID: 7929103259354508463}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -178,7 +178,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3980575656451552666}
   - component: {fileID: 3459540955995694508}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Square (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -261,7 +261,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 72204082679599907}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Scaler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -293,7 +293,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1642614877209754749}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: HpBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -331,7 +331,7 @@ GameObject:
   - component: {fileID: 4682466585260629692}
   - component: {fileID: 859862998545244319}
   - component: {fileID: -3687853837274541962}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tamkench
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -478,7 +478,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8701685493984647844}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -511,7 +511,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2592244028564943892}
   - component: {fileID: 5652309143701931726}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}

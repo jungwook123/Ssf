@@ -14,7 +14,7 @@ public class RangedTower : Tower
         SpawnBullet(firePoint.position, firePoint.LookAtRot(enemies[0].transform));
     }
     GameObject Instantiate(GameObject prefab, Vector2 position, Quaternion rotation) => prefab.GetComponent<Bullet>().SpawnBullet(position, rotation).gameObject;
-    protected Bullet SpawnBullet(Vector2 position, Quaternion rotation)
+    protected virtual Bullet SpawnBullet(Vector2 position, Quaternion rotation)
     {
         Bullet tmp = Instantiate(bullet, position, rotation).GetComponent<Bullet>();
         tmp.Set(damage, bulletSpeed, hitSound, bulletDebuff);

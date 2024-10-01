@@ -168,8 +168,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_range: 15
-  fireRate: 0.3
-  damage: 40
+  fireRate: 0.25
+  damage: 30
   model: {fileID: 1376162541108081703}
   m_sprite: {fileID: 7209337802154889636}
   enemies: []

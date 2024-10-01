@@ -3582,7 +3582,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3c531160da4f564429a53663728131be, type: 2}
   - {fileID: 11400000, guid: 466a69fd104a34346a24b38d08795435, type: 2}
   defaultTowerPrice: 10
-  towerPriceIncrease: 10
+  towerPriceIncrease: 5
   gridParents:
   - {fileID: 1525825517}
   - {fileID: 1897474317}

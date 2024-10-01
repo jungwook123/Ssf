@@ -139,9 +139,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_range: 10
   fireRate: 0.5
-  damage: 100
+  damage: 75
   model: {fileID: 1376162541108081703}
   m_sprite: {fileID: 7209337802154889636}
+  enemies: []
   attackSound:
     m_clip: {fileID: 8300000, guid: 30e6f21604c6da846a3704af61052adc, type: 3}
     m_volume: 1
@@ -149,7 +150,7 @@ MonoBehaviour:
   buffScaler: {fileID: 3121619702500026059}
   buffHitCount: 8
   buffDuration: 5
-  buffScale: 2
+  buffScale: 3
   enhancedAttackSound:
     m_clip: {fileID: 8300000, guid: b8d8a097bc9a5244ea6edef6d7b4ecd4, type: 3}
     m_volume: 1
