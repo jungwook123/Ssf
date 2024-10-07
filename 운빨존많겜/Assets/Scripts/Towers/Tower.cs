@@ -6,7 +6,6 @@ using UnityEngine;
 [RequireComponent(typeof(CircleCollider2D), typeof(Animator))]
 public abstract class Tower : MonoBehaviour
 {
-    #region 개발자 전용
     TowerData m_data;
     public void Set(TowerData data)
     {
@@ -83,7 +82,6 @@ public abstract class Tower : MonoBehaviour
             }
         }
     }
-    #endregion
     public List<Enemy> enemies = new();
     //현재 감지한 적들을 보관하는 리스트
     private void OnTriggerEnter2D(Collider2D collision)
