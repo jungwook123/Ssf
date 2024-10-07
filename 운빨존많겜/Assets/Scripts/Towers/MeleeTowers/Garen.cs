@@ -56,6 +56,7 @@ public class Garen : Tower
         {
             GameManager.Instance.UIs.DamageUI(enemies[0], damage);
         }
+        PreAttack();
         #endregion
         //적 체력의 비율 (적의 현재 체력 / 적의 최대 체력) 확인
         if (attackedEnemy.hp / attackedEnemy.maxHp <= threshold)

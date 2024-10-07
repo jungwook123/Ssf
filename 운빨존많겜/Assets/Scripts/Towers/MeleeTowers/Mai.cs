@@ -17,6 +17,7 @@ public class Mai : Tower
     {
         #region 개발자 전용
         AudioManager.Instance.PlayAudio(attackSound);
+        PreAttack();
         GameManager.Instance.UIs.DamageUI(enemies[0], damage);
         #endregion
         //범위 안에 있는 적 중에서 제일 앞에 있는 적에게 대미지 주기

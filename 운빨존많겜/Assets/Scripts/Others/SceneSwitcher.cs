@@ -16,7 +16,6 @@ public class SceneSwitcher : MonoBehaviour
         } 
     }
     [SerializeField] Animator anim;
-    [SerializeField] GameObject prompt;
     string switchingTo;
     bool switching = false;
     public void SwitchScene(string sceneName)
@@ -30,34 +29,6 @@ public class SceneSwitcher : MonoBehaviour
     {
         SceneManager.LoadScene(switchingTo);
         switching = false;
-    }
-    bool prompting = false;
-    const float promptTime = 2.0f;
-    float counter = 0.0f;
-    private void Update()
-    {
-        if (prompting)
-        {
-            if (counter > 0.0f) counter -= Time.deltaTime;
-            else
-            {
-                prompt.SetActive(false);
-                prompting = false;
-            }
-        }
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (prompting)
-            {
-                Application.Quit();
-            }
-            else
-            {
-                prompt.SetActive(true);
-                prompting = true;
-                counter = promptTime;
-            }
-        }
     }
     public static void Create()
     {

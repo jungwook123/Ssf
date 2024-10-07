@@ -46,6 +46,7 @@ public class Modekizer : Tower
     {
         #region 개발자 전용
         AudioManager.Instance.PlayAudio(attackSound);
+        PreAttack();
         GameManager.Instance.UIs.DamageUI(enemies[0], damage);
         #endregion
         attackedEnemy.GetDamage(damage);

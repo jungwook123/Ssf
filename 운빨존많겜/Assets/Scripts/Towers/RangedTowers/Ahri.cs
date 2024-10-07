@@ -43,7 +43,8 @@ public class Ahri : RangedTower
     {
         #region 개발자 전용
         PreAttack();
-        
+        #endregion
+
         Vector2 bulletPosition = firePoint.position;
         //생성할 총알의 위치값을 발사 지점의 위치로 설정
 
@@ -52,7 +53,7 @@ public class Ahri : RangedTower
 
         Bullet spawnedBullet = SpawnBullet(bulletPosition, bulletRotation);
         //아까 정의한 위치값과 회전값으로 총알 생성
-        #endregion
+
         spawnedBullet.damage = damage;
         spawnedBullet.speed = bulletSpeed;
         //생성한 총알의 대미지랑 속도 지정

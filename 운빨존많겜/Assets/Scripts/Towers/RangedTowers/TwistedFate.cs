@@ -35,6 +35,9 @@ public class TwistedFate : RangedTower
     //트위스티드 페이트가 공격할 때 호출되는 함수
     public void TwistedFateAttack(Enemy attackedEnemy)
     {
+        #region 개발자 전용
+        PreAttack();
+        #endregion
         Vector2 bulletPosition = firePoint.position;
         //생성할 총알의 위치값을 발사 지점의 위치로 설정
 
