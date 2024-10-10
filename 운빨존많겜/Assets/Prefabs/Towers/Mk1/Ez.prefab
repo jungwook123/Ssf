@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dbc0ee81ebe4934bbe3577a27f94596, type: 3}
   m_Name: "\uC5D0\uC988\uB9AC\uC5BC"
   m_EditorClassIdentifier: 
-  m_towerName: 
+  m_towerName: "\uC5D0\uC988\uB9AC\uC5BC"
   m_range: 0
   fireRate: 0
   damage: 0

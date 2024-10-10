@@ -135,7 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 504c19063ebe6244a93f7c2f56521e09, type: 3}
   m_Name: "\uAC00\uB80C"
   m_EditorClassIdentifier: 
-  m_towerName: 
+  m_towerName: "\uAC00\uB80C"
   m_range: 0
   fireRate: 0
   damage: 0
