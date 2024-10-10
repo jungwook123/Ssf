@@ -136,17 +136,17 @@ MonoBehaviour:
   m_Name: "\uAC00\uB80C"
   m_EditorClassIdentifier: 
   m_towerName: "\uAC00\uB80C"
-  m_range: 0
-  fireRate: 0
-  damage: 0
-  model: {fileID: 0}
-  m_sprite: {fileID: 0}
+  m_range: 7
+  fireRate: 1
+  damage: 12
+  model: {fileID: 1376162541108081703}
+  m_sprite: {fileID: 7209337802154889636}
   enemies: []
   threshold: 0.33
   multiplier: 3
   attackSound:
-    m_clip: {fileID: 0}
-    m_volume: 0
+    m_clip: {fileID: 8300000, guid: 748ccefc46d6a0646bfcc2758930971d, type: 3}
+    m_volume: 0.5
 --- !u!1 &8426627535407230153
 GameObject:
   m_ObjectHideFlags: 0
