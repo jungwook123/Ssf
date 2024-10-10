@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Modekizer : Tower
 {
+    #region 개발자 전용
     [Header("Modekizer")]
     [SerializeField] protected float bleedDamage = 7f;
     [SerializeField] protected float bleedTick = 0.5f, bleedDuration = 2f, bleedSlowScale = 0.9f;
@@ -31,15 +32,47 @@ public class Modekizer : Tower
             return base.TargettingCompare(a, b);
         }
     }
+    void InflictBleedingEffect(Enemy enemy)
+    {
+        enemy.AddDebuff(new Modekizer_Bleed(bleedDuration, bleedEffect, bleedSlowScale, bleedDamage));
+    }
     protected override void Attack()
     {
+
+    }
+    #endregion
+    //모데카이저가 공격할 때 호출되는 함수
+    public void ModekizerAttack(Enemy attackedEnemy)
+    {
+        #region 개발자 전용
         AudioManager.Instance.PlayAudio(attackSound);
+        PreAttack();
         GameManager.Instance.UIs.DamageUI(enemies[0], damage);
-        enemies[0].AddDebuff(new Modekizer_Bleed(bleedDuration, bleedEffect, bleedSlowScale, bleedDamage));
-        enemies[0].GetDamage(damage);
+        #endregion
+        attackedEnemy.GetDamage(damage);
+        //적에게 대미지룰 주고...
+
+        InflictBleedingEffect(attackedEnemy);
+        //그 적에게 출혈 효과를 준다.
+    }
+    float timer = 0.0f;
+    protected override void Update()
+    {
+        #region 개발자 전용
+        base.Update();
+        if (GetType() != typeof(Modekizer)) return;
+        enemies.RemoveAll((Enemy i) => i == null);
+        enemies.Sort((Enemy a, Enemy b) => TargettingCompare(a, b));
+        #endregion
+        timer += Time.deltaTime;
+        if (canAttack && timer >= fireRate && enemies.Count > 0)
+        {
+            timer = 0.0f;
+            ModekizerAttack(enemies[0]);
+        }
     }
     public override string Describe()
     {
-        return base.Describe() + $"\n- 출혈 대미지 {bleedDamage}\n- 출혈 대미지 주기 {bleedTick}\n- 출혈 지속시간 {bleedDuration}\n- 출혈 감속 {1.0f-bleedSlowScale}";
+        return base.Describe() + $"\n- 출혈 대미지 {bleedDamage}\n- 출혈 대미지 주기 {bleedTick}\n- 출혈 감속 {1.0f - bleedSlowScale}\n- 출혈 지속시간 {bleedDuration}";
     }
 }
