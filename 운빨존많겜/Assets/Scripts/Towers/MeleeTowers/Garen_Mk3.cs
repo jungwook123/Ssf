@@ -60,4 +60,8 @@ public class Garen_Mk3 : Garen_Mk2
             enemy.GetDamage(swordSpinDamage);
         }
     }
+    public override string Describe()
+    {
+        return base.Describe() + $"\n- {swordSpinHitCount}번 공격 후 대검 회전 발동\n- 대검 회전 대미지 {swordSpinDamage}\n- 대검 회전 지속시간 {swordSpinDuration}\n- 대검 회전 속도 {swordRotateSpeed}";
+    }
 }

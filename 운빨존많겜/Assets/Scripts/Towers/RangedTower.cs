@@ -20,4 +20,8 @@ public class RangedTower : Tower
         tmp.Set(damage, bulletSpeed, hitSound, bulletDebuff);
         return tmp;
     }
+    public override string Describe()
+    {
+        return base.Describe() + $"\n- 탄환속도 {bulletSpeed}";
+    }
 }

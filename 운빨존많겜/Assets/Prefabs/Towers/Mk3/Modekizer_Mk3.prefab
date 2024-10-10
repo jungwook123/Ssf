@@ -133,13 +133,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cdac599330bbe7d42b7a9e3bc432a85a, type: 3}
-  m_Name: 
+  m_Name: "\uBAA8\uB370\uCE74\uC774\uC800 Mk3"
   m_EditorClassIdentifier: 
+  m_towerName: "\uBAA8\uB370\uCE74\uC774\uC800 Mk3"
   m_range: 8
   fireRate: 0.5
   damage: 40
   model: {fileID: 1376162541108081703}
   m_sprite: {fileID: 7209337802154889636}
+  enemies: []
   bleedDamage: 25
   bleedTick: 0.25
   bleedDuration: 5

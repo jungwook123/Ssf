@@ -110,32 +110,31 @@ public class Enemy : MonoBehaviour
 
     public void GetDamage(float damage)
     {
-        #region 개발자 전용
         if (isDead) return;
-        if (anim != null) anim.SetTrigger("Damaged");
-        #endregion
-        hpScaler.localScale = new Vector2(hp / maxHp, 1.0f);
         hp -= damage;
         if (hp <= 0) Die();
+        else
+        {
+            hpScaler.localScale = new Vector2(hp / maxHp, 1.0f);
+            if (anim != null) anim.SetTrigger("Damaged");
+        }
     }
     private void Die()
     {
-        #region 개발자 전용
         if (isDead) return;
         isDead = true;
         GameManager.Instance.MoneyChange(moneyReward);
         GameManager.Instance.RemoveEnemy(this);
         onDeath?.Invoke();
-        #endregion
         Destroy(gameObject);
     }
     protected virtual void OnEndReach()
     {
-        #region 개발자 전용
+        if (isDead) return;
+        isDead = true;
         GameManager.Instance.RemoveEnemy(this);
         GameManager.Instance.GetBaseDamage(hp);
         onDeath?.Invoke();
-        #endregion
         Destroy(gameObject);
     }
 }

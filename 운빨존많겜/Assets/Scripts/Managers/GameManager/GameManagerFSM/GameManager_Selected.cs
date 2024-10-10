@@ -96,7 +96,7 @@ public class GameManager_Selected : State<GameManager>
     }
     void FuseTower()
     {
-        GameManager.Instance.UpgradeTower(origin.selected.data);
+        GameManager.Instance.UpgradeTower(origin.selected.data, origin.selectedTile);
         MoveToIdle();
     }
     void UnSelect()

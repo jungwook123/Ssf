@@ -64,4 +64,8 @@ public class Modekizer_Mk2 : Modekizer
         enemies[0].AddDebuff(new Modekizer_Mk2_Bleed(bleedDuration, bleedEffect, bleedSlowScale, bleedDamage));
         enemies[0].GetDamage(damage);
     }
+    public override string Describe()
+    {
+        return base.Describe() + $"\n- {strikeCount+1}번째 공격은 강타 (데미지 {strikeDamage})";
+    }
 }

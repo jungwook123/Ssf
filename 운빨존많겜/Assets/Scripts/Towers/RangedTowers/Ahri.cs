@@ -32,4 +32,8 @@ public class Ahri : RangedTower
             return base.TargettingCompare(a, b);
         }
     }
+    public override string Describe()
+    {
+        return base.Describe() + $"\n- 감속 {1.0f - slowScale}";
+    }
 }

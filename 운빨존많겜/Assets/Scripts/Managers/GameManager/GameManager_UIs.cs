@@ -5,6 +5,7 @@ using Unity.Burst.CompilerServices;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using TMPro;
 
 public class GameManager_UIs : MonoBehaviour
 {
@@ -16,8 +17,11 @@ public class GameManager_UIs : MonoBehaviour
     [SerializeField] DamageText damageEffectPrefab;
     [SerializeField] RectTransform baseHPImage;
     [SerializeField] Text baseHPText;
+    [SerializeField] Transform m_towerDescUI;
+    [SerializeField] TMP_Text towerName, towerDesc;
     public Button deleteButton { get { return m_deleteButton; } }
     public Button fuseButton { get { return m_fuseButton; } }
+    public Transform towerDescUI { get { return m_towerDescUI; } }
     private void Awake()
     {
         selectedUI.gameObject.SetActive(false);
@@ -43,6 +47,11 @@ public class GameManager_UIs : MonoBehaviour
     public void CloseSelectUI()
     {
         selectedUI.gameObject.SetActive(false);
+    }
+    public void SetDesc(Tower tower)
+    {
+        towerName.text = tower.towerName;
+        towerDesc.text = tower.Describe();
     }
     public bool _IsMouseOnUI()
     {

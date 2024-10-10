@@ -38,4 +38,8 @@ public class Modekizer : Tower
         enemies[0].AddDebuff(new Modekizer_Bleed(bleedDuration, bleedEffect, bleedSlowScale, bleedDamage));
         enemies[0].GetDamage(damage);
     }
+    public override string Describe()
+    {
+        return base.Describe() + $"\n- 출혈 대미지 {bleedDamage}\n- 출혈 대미지 주기 {bleedTick}\n- 출혈 지속시간 {bleedDuration}\n- 출혈 감속 {1.0f-bleedSlowScale}";
+    }
 }

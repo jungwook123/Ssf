@@ -15,4 +15,8 @@ public class Mai_Mk3 : Mai_Mk2
         }
         base.BuffAttack();
     }
+    public override string Describe()
+    {
+        return base.Describe() + $"\n- 버프 도중 {maxBuffHitCount}마리의 적 동시 공격 가능";
+    }
 }

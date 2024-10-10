@@ -24,4 +24,8 @@ public class Garen_Mk2 : Garen
         }
         ThresholdCheckAttack();
     }
+    public override string Describe()
+    {
+        return base.Describe() + $"\n- {stunCount+1}번째 공격 {stunDuration}초 스턴";
+    }
 }

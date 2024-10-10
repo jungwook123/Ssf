@@ -11,23 +11,15 @@ public class MainManager : MonoBehaviour
     private void Awake()
     {
         promptingID = Animator.StringToHash("Prompting");
-        SceneSwitcher.Create();
+        GlobalManager.Create();
         if (!introWatched)
         {
             anim.SetTrigger("Intro");
             introWatched = true;
         }
     }
-    private void Update()
-    {
-        if (anim.GetBool(promptingID) && Input.GetKeyDown(KeyCode.Escape)) Application.Quit();
-    }
     public void SceneChange(string sceneName)
     {
-        SceneSwitcher.Instance.SwitchScene(sceneName);
-    }
-    public void ToTitle()
-    {
-        SceneSwitcher.Instance.SwitchScene("Title");
+        GlobalManager.Instance.SwitchScene(sceneName);
     }
 }

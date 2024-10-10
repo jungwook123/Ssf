@@ -26,4 +26,8 @@ public class TwistedFate : RangedTower
         }
         else return base.TargettingCompare(a, b);
     }
+    public override string Describe()
+    {
+        return base.Describe() + $"\n- 적에게 '페이트' 디버프 부여 (4번 중첩 시 페이트 데미지 발생)\n- 페이트 대미지 {fateDamage}\n- 페이트 지속시간 {fateDuration}";
+    }
 }

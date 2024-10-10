@@ -165,8 +165,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 36220c5cfca00184b9a4db0813d91501, type: 3}
-  m_Name: 
+  m_Name: "\uD2B8\uC704\uC2A4\uD2F0\uB4DC \uD398\uC774\uD2B8"
   m_EditorClassIdentifier: 
+  m_towerName: "\uD2B8\uC704\uC2A4\uD2F0\uB4DC \uD398\uC774\uD2B8"
   m_range: 10
   fireRate: 1.5
   damage: 10

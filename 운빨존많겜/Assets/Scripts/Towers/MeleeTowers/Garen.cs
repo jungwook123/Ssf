@@ -42,4 +42,8 @@ public class Garen : Tower
         }
         else return base.TargettingCompare(a, b);
     }
+    public override string Describe()
+    {
+        return base.Describe() + $"\n- 대상의 체력이 {threshold * 100}% 이하일 때 대미지 {multiplier}배";
+    }
 }

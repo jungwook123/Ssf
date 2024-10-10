@@ -17,8 +17,10 @@ public abstract class Tower : MonoBehaviour
     protected Animator anim { get; private set; }
 
     [Header("Tower")]
+    [SerializeField] string m_towerName;
+    public string towerName { get { return m_towerName; } }
     [SerializeField] protected float m_range;
-    public float range { get { return m_range; } set { m_range = value; scanCollider.radius = value; } }
+    public float range { get { return m_range; } }
     [SerializeField] protected float fireRate, damage;
     [SerializeField] Transform model;
     [SerializeField] SpriteRenderer m_sprite;
@@ -81,6 +83,10 @@ public abstract class Tower : MonoBehaviour
                 Attack();
             }
         }
+    }
+    public virtual string Describe()
+    {
+        return $"- 대미지 {damage}\n- 공격주기 {fireRate}초\n- 범위 {range}";
     }
     public List<Enemy> enemies = new();
     //현재 감지한 적들을 보관하는 리스트

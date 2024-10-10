@@ -133,13 +133,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a09a2bb8a1345c4458d4d01df35fe9cc, type: 3}
-  m_Name: 
+  m_Name: "\uB9C8\uC2A4\uD130 \uC774"
   m_EditorClassIdentifier: 
+  m_towerName: "\uB9C8\uC2A4\uD130 \uC774"
   m_range: 7
   fireRate: 1
   damage: 15
   model: {fileID: 1376162541108081703}
   m_sprite: {fileID: 7209337802154889636}
+  enemies: []
   attackSound:
     m_clip: {fileID: 8300000, guid: 30e6f21604c6da846a3704af61052adc, type: 3}
     m_volume: 0.5

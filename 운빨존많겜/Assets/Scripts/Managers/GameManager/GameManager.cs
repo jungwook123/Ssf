@@ -125,10 +125,12 @@ public class GameManager : MonoBehaviour
         }
     }
     public Action<TowerData> onTowerSpawn;
-    public void UpgradeTower(TowerData towerToUpgrade)
+    public void UpgradeTower(TowerData towerToUpgrade, Tile tile)
     {
         if (towerToUpgrade.upgrade == null || SearchTower(towerToUpgrade) < 3) return;
-        int removed = 0;
+        Destroy(tile.tower.gameObject);
+        tile.tower = null;
+        int removed = 1;
         for (int i = 0; i < gridSizeX; i++)
         {
             for (int k = 0; k < gridSizeY; k++)
@@ -143,8 +145,10 @@ public class GameManager : MonoBehaviour
             }
             if (removed >= 3) break;
         }
+        tile.tower = Instantiate(towerToUpgrade.upgrade.tower, tile.transform.position, Quaternion.identity);
+        tile.tower.Set(towerToUpgrade.upgrade);
+        onTowerSpawn?.Invoke(towerToUpgrade.upgrade);
         AudioManager.Instance.PlayAudio(upgradeSound);
-        SpawnTower(towerToUpgrade.upgrade);
     }
     public bool SpawnTower(TowerData towerToSpawn)
     {
@@ -229,10 +233,9 @@ public class GameManager : MonoBehaviour
         else 
         {
             GameLose();
-            SceneSwitcher.Instance.SwitchScene("Defeat");
         }
     }
-    void SwitchScene(string sceneName) => SceneSwitcher.Instance.SwitchScene(sceneName);
+    void SwitchScene(string sceneName) => GlobalManager.Instance.SwitchScene(sceneName);
 #endregion
     //게임에서 패배할 때 호출되는 함수
     public void GameLose()

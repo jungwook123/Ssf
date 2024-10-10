@@ -35,4 +35,8 @@ public class Ahri_Mk3 : Ahri_Mk2
         SpawnBullet(firePoint.position, firePoint.LookAtRot(enemies[0].transform));
         SpawnBullet(firePoint.position, firePoint.LookAtRot(enemies[0].transform) * Quaternion.Euler(0, 0, spread));
     }
+    public override string Describe()
+    {
+        return base.Describe() + $"\n- 한번에 탄환 3개 발사";
+    }
 }

@@ -53,4 +53,8 @@ public class Mai_Mk2 : Mai
             }
         }
     }
+    public override string Describe()
+    {
+        return base.Describe() + $"\n- {buffHitCount}번 공격 후 버프 발동\n- 버프 중 대미지 배율 {buffScale}\n- 버프 지속시간 {buffDuration}";
+    }
 }

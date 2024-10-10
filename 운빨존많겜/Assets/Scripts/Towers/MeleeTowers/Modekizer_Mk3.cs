@@ -67,4 +67,8 @@ public class Modekizer_Mk3 : Modekizer_Mk2
             }
         }
     }
+    public override string Describe()
+    {
+        return base.Describe() + $"\n- 강타 시 부상 디버프 (감속 {1.0f - strikeInjurySlowScale}, 지속시간 무한)";
+    }
 }

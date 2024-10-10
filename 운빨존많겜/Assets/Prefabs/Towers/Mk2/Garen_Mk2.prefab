@@ -133,13 +133,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d9682a9e2dd6e87499b0639b422cc733, type: 3}
-  m_Name: 
+  m_Name: "\uAC00\uB80C Mk2"
   m_EditorClassIdentifier: 
+  m_towerName: "\uAC00\uB80C Mk2"
   m_range: 8
   fireRate: 0.8
   damage: 25
   model: {fileID: 1376162541108081703}
   m_sprite: {fileID: 7209337802154889636}
+  enemies: []
   threshold: 0.5
   multiplier: 3
   attackSound:
