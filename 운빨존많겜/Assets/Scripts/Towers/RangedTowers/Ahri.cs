@@ -37,6 +37,10 @@ public class Ahri : RangedTower
     {
         if (GetType() != typeof(Ahri)) base.Attack();
     }
+    public override string Describe()
+    {
+        return base.Describe() + $"\n- 감속 {1.0f - slowScale}";
+    }
     #endregion
     //아리가 공격할 때 호출되는 함수
     public void AhriAttack(Enemy attackedEnemy)

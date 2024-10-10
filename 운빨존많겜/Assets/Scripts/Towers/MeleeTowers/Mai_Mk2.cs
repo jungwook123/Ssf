@@ -21,7 +21,9 @@ public class Mai_Mk2 : Mai
         }
         else
         {
-            base.Attack();
+            AudioManager.Instance.PlayAudio(attackSound);
+            GameManager.Instance.UIs.DamageUI(enemies[0], damage);
+            enemies[0].GetDamage(damage);
             count++;
             buffScaler.localScale = new Vector2((float)count / buffHitCount, 1.0f);
             if (count >= buffHitCount)
