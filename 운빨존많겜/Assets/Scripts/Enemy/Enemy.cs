@@ -112,9 +112,9 @@ public class Enemy : MonoBehaviour
     {
         #region 개발자 전용
         if (isDead) return;
-        hpScaler.localScale = new Vector2(hp / maxHp, 1.0f);
         if (anim != null) anim.SetTrigger("Damaged");
         #endregion
+        hpScaler.localScale = new Vector2(hp / maxHp, 1.0f);
         hp -= damage;
         if (hp <= 0) Die();
     }
