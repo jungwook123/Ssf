@@ -56,18 +56,6 @@ public abstract class Tower : MonoBehaviour
     {
         canAttack = true;
     }
-    protected void PreAttack()
-    {
-        if (enemies[0].transform.position.x > transform.position.x)
-        {
-            model.localScale = new Vector2(-1.0f, 1.0f);
-        }
-        else
-        {
-            model.localScale = new Vector2(1.0f, 1.0f);
-        }
-        anim.SetTrigger("Attack");
-    }
     protected virtual void Update()
     {
         if (!canAttack) return;
@@ -78,7 +66,15 @@ public abstract class Tower : MonoBehaviour
             if (enemies.Count > 0)
             {
                 counter = 0.0f;
-                PreAttack();
+                if (enemies[0].transform.position.x > transform.position.x)
+                {
+                    model.localScale = new Vector2(-1.0f, 1.0f);
+                }
+                else
+                {
+                    model.localScale = new Vector2(1.0f, 1.0f);
+                }
+                anim.SetTrigger("Attack");
                 enemies.Sort((Enemy a, Enemy b) => TargettingCompare(a, b));
                 Attack();
             }

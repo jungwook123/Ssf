@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,7 +13,7 @@ public class Mai_Mk2 : Mai
     [SerializeField] protected AudioVolumePair enhancedAttackSound;
     int count = 0;
     bool buffed = false;
-    float counter = 0.0f;
+    [NonSerialized] float counter = 0.0f;
     protected override void Attack()
     {
         if (buffed)
