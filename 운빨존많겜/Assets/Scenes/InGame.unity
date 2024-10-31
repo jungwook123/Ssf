@@ -3808,7 +3808,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 740663461}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc886facd8e21b44fbfa28362dc102de, type: 3}
+  m_Script: {fileID: 11500000, guid: 6c99dfcc1c725694ca53ea86c0ff9d37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_enemyWaypoints:
@@ -5642,70 +5642,127 @@ MonoBehaviour:
   startTime: 15
   waves:
   - elements:
-    - {m_enemy: {fileID: 5036868773120832061, guid: 1b6f692a1f532fc4a99c16fb51061e1a, type: 3}, m_count: 10, m_spawnCooldown: 1}
+    - m_enemy: {fileID: 5036868773120832061, guid: 1b6f692a1f532fc4a99c16fb51061e1a, type: 3}
+      m_count: 10
+      m_spawnCooldown: 1
     m_endTime: 20
   - elements:
-    - {m_enemy: {fileID: 5036868773120832061, guid: 1b6f692a1f532fc4a99c16fb51061e1a, type: 3}, m_count: 15, m_spawnCooldown: 0.5}
+    - m_enemy: {fileID: 5036868773120832061, guid: 1b6f692a1f532fc4a99c16fb51061e1a, type: 3}
+      m_count: 15
+      m_spawnCooldown: 0.5
     m_endTime: 20
   - elements:
-    - {m_enemy: {fileID: 5036868773120832061, guid: 1b6f692a1f532fc4a99c16fb51061e1a, type: 3}, m_count: 20, m_spawnCooldown: 0.35}
+    - m_enemy: {fileID: 5036868773120832061, guid: 1b6f692a1f532fc4a99c16fb51061e1a, type: 3}
+      m_count: 20
+      m_spawnCooldown: 0.35
     m_endTime: 20
   - elements:
-    - {m_enemy: {fileID: 5036868773120832061, guid: 7b08e109d10de44479b43b3c258e890d, type: 3}, m_count: 10, m_spawnCooldown: 1}
+    - m_enemy: {fileID: 5036868773120832061, guid: 7b08e109d10de44479b43b3c258e890d, type: 3}
+      m_count: 10
+      m_spawnCooldown: 1
     m_endTime: 20
   - elements:
-    - {m_enemy: {fileID: 5036868773120832061, guid: 1b6f692a1f532fc4a99c16fb51061e1a, type: 3}, m_count: 10, m_spawnCooldown: 0.5}
-    - {m_enemy: {fileID: 5036868773120832061, guid: 7b08e109d10de44479b43b3c258e890d, type: 3}, m_count: 10, m_spawnCooldown: 0.25}
+    - m_enemy: {fileID: 5036868773120832061, guid: 1b6f692a1f532fc4a99c16fb51061e1a, type: 3}
+      m_count: 10
+      m_spawnCooldown: 0.5
+    - m_enemy: {fileID: 5036868773120832061, guid: 7b08e109d10de44479b43b3c258e890d, type: 3}
+      m_count: 10
+      m_spawnCooldown: 0.25
     m_endTime: 25
   - elements:
-    - {m_enemy: {fileID: 5036868773120832061, guid: 0273ed23ed6d8f24db153dcff68c3af3, type: 3}, m_count: 8, m_spawnCooldown: 1}
+    - m_enemy: {fileID: 5036868773120832061, guid: 0273ed23ed6d8f24db153dcff68c3af3, type: 3}
+      m_count: 8
+      m_spawnCooldown: 1
     m_endTime: 25
   - elements:
-    - {m_enemy: {fileID: 5036868773120832061, guid: 0273ed23ed6d8f24db153dcff68c3af3, type: 3}, m_count: 8, m_spawnCooldown: 0.5}
-    - {m_enemy: {fileID: 5036868773120832061, guid: 1b6f692a1f532fc4a99c16fb51061e1a, type: 3}, m_count: 10, m_spawnCooldown: 0.35}
-    - {m_enemy: {fileID: 5036868773120832061, guid: 7b08e109d10de44479b43b3c258e890d, type: 3}, m_count: 10, m_spawnCooldown: 0.25}
+    - m_enemy: {fileID: 5036868773120832061, guid: 0273ed23ed6d8f24db153dcff68c3af3, type: 3}
+      m_count: 8
+      m_spawnCooldown: 0.5
+    - m_enemy: {fileID: 5036868773120832061, guid: 1b6f692a1f532fc4a99c16fb51061e1a, type: 3}
+      m_count: 10
+      m_spawnCooldown: 0.35
+    - m_enemy: {fileID: 5036868773120832061, guid: 7b08e109d10de44479b43b3c258e890d, type: 3}
+      m_count: 10
+      m_spawnCooldown: 0.25
     m_endTime: 30
   - elements:
-    - {m_enemy: {fileID: 5036868773120832061, guid: 0273ed23ed6d8f24db153dcff68c3af3, type: 3}, m_count: 5, m_spawnCooldown: 0.25}
-    - {m_enemy: {fileID: 5036868773120832061, guid: de9cf0322f107084582e856f866b3674, type: 3}, m_count: 1, m_spawnCooldown: 0}
+    - m_enemy: {fileID: 5036868773120832061, guid: 0273ed23ed6d8f24db153dcff68c3af3, type: 3}
+      m_count: 5
+      m_spawnCooldown: 0.25
+    - m_enemy: {fileID: 5036868773120832061, guid: de9cf0322f107084582e856f866b3674, type: 3}
+      m_count: 1
+      m_spawnCooldown: 0
     m_endTime: 25
   - elements:
-    - {m_enemy: {fileID: 5036868773120832061, guid: de9cf0322f107084582e856f866b3674, type: 3}, m_count: 2, m_spawnCooldown: 5}
+    - m_enemy: {fileID: 5036868773120832061, guid: de9cf0322f107084582e856f866b3674, type: 3}
+      m_count: 2
+      m_spawnCooldown: 5
     m_endTime: 20
   - elements:
-    - {m_enemy: {fileID: 5036868773120832061, guid: de9cf0322f107084582e856f866b3674, type: 3}, m_count: 1, m_spawnCooldown: 3}
-    - {m_enemy: {fileID: 5036868773120832061, guid: 0273ed23ed6d8f24db153dcff68c3af3, type: 3}, m_count: 5, m_spawnCooldown: 0.25}
-    - {m_enemy: {fileID: 5036868773120832061, guid: 7b08e109d10de44479b43b3c258e890d, type: 3}, m_count: 20, m_spawnCooldown: 0.1}
+    - m_enemy: {fileID: 5036868773120832061, guid: de9cf0322f107084582e856f866b3674, type: 3}
+      m_count: 1
+      m_spawnCooldown: 3
+    - m_enemy: {fileID: 5036868773120832061, guid: 0273ed23ed6d8f24db153dcff68c3af3, type: 3}
+      m_count: 5
+      m_spawnCooldown: 0.25
+    - m_enemy: {fileID: 5036868773120832061, guid: 7b08e109d10de44479b43b3c258e890d, type: 3}
+      m_count: 20
+      m_spawnCooldown: 0.1
     m_endTime: 25
   - elements:
-    - {m_enemy: {fileID: 5036868773120832061, guid: c536e18798dcd244cb03c3d2a4d61710, type: 3}, m_count: 8, m_spawnCooldown: 0.35}
+    - m_enemy: {fileID: 5036868773120832061, guid: c536e18798dcd244cb03c3d2a4d61710, type: 3}
+      m_count: 8
+      m_spawnCooldown: 0.35
     m_endTime: 25
   - elements:
-    - {m_enemy: {fileID: 5036868773120832061, guid: c536e18798dcd244cb03c3d2a4d61710, type: 3}, m_count: 10, m_spawnCooldown: 0.25}
-    - {m_enemy: {fileID: 5036868773120832061, guid: 7b08e109d10de44479b43b3c258e890d, type: 3}, m_count: 30, m_spawnCooldown: 0.1}
-    - {m_enemy: {fileID: 5036868773120832061, guid: de9cf0322f107084582e856f866b3674, type: 3}, m_count: 2, m_spawnCooldown: 2}
+    - m_enemy: {fileID: 5036868773120832061, guid: c536e18798dcd244cb03c3d2a4d61710, type: 3}
+      m_count: 10
+      m_spawnCooldown: 0.25
+    - m_enemy: {fileID: 5036868773120832061, guid: 7b08e109d10de44479b43b3c258e890d, type: 3}
+      m_count: 30
+      m_spawnCooldown: 0.1
+    - m_enemy: {fileID: 5036868773120832061, guid: de9cf0322f107084582e856f866b3674, type: 3}
+      m_count: 2
+      m_spawnCooldown: 2
     m_endTime: 35
   - elements:
-    - {m_enemy: {fileID: 5036868773120832061, guid: c661709312a923046b197bbf7f335a2d, type: 3}, m_count: 1, m_spawnCooldown: 0.5}
-    - {m_enemy: {fileID: 5036868773120832061, guid: c536e18798dcd244cb03c3d2a4d61710, type: 3}, m_count: 3, m_spawnCooldown: 0.5}
+    - m_enemy: {fileID: 5036868773120832061, guid: c661709312a923046b197bbf7f335a2d, type: 3}
+      m_count: 1
+      m_spawnCooldown: 0.5
+    - m_enemy: {fileID: 5036868773120832061, guid: c536e18798dcd244cb03c3d2a4d61710, type: 3}
+      m_count: 3
+      m_spawnCooldown: 0.5
     m_endTime: 25
   - elements:
-    - {m_enemy: {fileID: 5036868773120832061, guid: c661709312a923046b197bbf7f335a2d, type: 3}, m_count: 2, m_spawnCooldown: 5}
+    - m_enemy: {fileID: 5036868773120832061, guid: c661709312a923046b197bbf7f335a2d, type: 3}
+      m_count: 2
+      m_spawnCooldown: 5
     m_endTime: 30
   - elements:
-    - {m_enemy: {fileID: 5036868773120832061, guid: c661709312a923046b197bbf7f335a2d, type: 3}, m_count: 1, m_spawnCooldown: 3}
-    - {m_enemy: {fileID: 5036868773120832061, guid: c536e18798dcd244cb03c3d2a4d61710, type: 3}, m_count: 5, m_spawnCooldown: 0.25}
-    - {m_enemy: {fileID: 5036868773120832061, guid: c661709312a923046b197bbf7f335a2d, type: 3}, m_count: 1, m_spawnCooldown: 3}
-    - {m_enemy: {fileID: 5036868773120832061, guid: 7b08e109d10de44479b43b3c258e890d, type: 3}, m_count: 10, m_spawnCooldown: 0.1}
-    - {m_enemy: {fileID: 5036868773120832061, guid: c661709312a923046b197bbf7f335a2d, type: 3}, m_count: 1, m_spawnCooldown: 0}
+    - m_enemy: {fileID: 5036868773120832061, guid: c661709312a923046b197bbf7f335a2d, type: 3}
+      m_count: 1
+      m_spawnCooldown: 3
+    - m_enemy: {fileID: 5036868773120832061, guid: c536e18798dcd244cb03c3d2a4d61710, type: 3}
+      m_count: 5
+      m_spawnCooldown: 0.25
+    - m_enemy: {fileID: 5036868773120832061, guid: c661709312a923046b197bbf7f335a2d, type: 3}
+      m_count: 1
+      m_spawnCooldown: 3
+    - m_enemy: {fileID: 5036868773120832061, guid: 7b08e109d10de44479b43b3c258e890d, type: 3}
+      m_count: 10
+      m_spawnCooldown: 0.1
+    - m_enemy: {fileID: 5036868773120832061, guid: c661709312a923046b197bbf7f335a2d, type: 3}
+      m_count: 1
+      m_spawnCooldown: 0
     m_endTime: 35
   - elements:
-    - {m_enemy: {fileID: 5036868773120832061, guid: ff2fdb14180ab7d4f834cb71939cd4aa, type: 3}, m_count: 1, m_spawnCooldown: 0}
+    - m_enemy: {fileID: 5036868773120832061, guid: ff2fdb14180ab7d4f834cb71939cd4aa, type: 3}
+      m_count: 1
+      m_spawnCooldown: 0
     m_endTime: 35
   waveText: {fileID: 348803925}
   waveTimeText: {fileID: 2035598544}
   skipButton: {fileID: 846019743}
-  currentWave: 0
 --- !u!4 &1227103355
 Transform:
   m_ObjectHideFlags: 0
