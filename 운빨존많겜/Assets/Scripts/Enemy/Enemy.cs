@@ -123,9 +123,7 @@ public class Enemy : MonoBehaviour
         if (isDead) return;
         if (anim != null) anim.SetTrigger("Damaged");
         #endregion
-        hp -= damage;
-        hpScaler.localScale = new Vector2(hp / maxHp, 1.0f);
-        if (hp <= 0) Die();
+        //작성...
     }
     private void Die()
     {
@@ -136,6 +134,6 @@ public class Enemy : MonoBehaviour
         GameManager.Instance.RemoveEnemy(this);
         onDeath?.Invoke();
         #endregion
-        Destroy(gameObject);
+        //작성...
     }
 }

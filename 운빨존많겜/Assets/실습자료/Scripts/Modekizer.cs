@@ -40,6 +40,10 @@ public class Modekizer : Tower
     {
 
     }
+    public override string Describe()
+    {
+        return base.Describe() + $"\n- 출혈 대미지 {bleedDamage}\n- 출혈 대미지 주기 {bleedTick}\n- 출혈 감속 {1.0f - bleedSlowScale}\n- 출혈 지속시간 {bleedDuration}";
+    }
     #endregion
     //모데카이저가 공격할 때 호출되는 함수
     public void ModekizerAttack(Enemy attackedEnemy)
@@ -49,11 +53,7 @@ public class Modekizer : Tower
         PreAttack();
         GameManager.Instance.UIs.DamageUI(enemies[0], damage);
         #endregion
-        attackedEnemy.GetDamage(damage);
-        //적에게 대미지룰 주고...
-
-        InflictBleedingEffect(attackedEnemy);
-        //그 적에게 출혈 효과를 준다.
+        //작성...
     }
     float timer = 0.0f;
     protected override void Update()
@@ -70,9 +70,5 @@ public class Modekizer : Tower
             timer = 0.0f;
             ModekizerAttack(enemies[0]);
         }
-    }
-    public override string Describe()
-    {
-        return base.Describe() + $"\n- 출혈 대미지 {bleedDamage}\n- 출혈 대미지 주기 {bleedTick}\n- 출혈 감속 {1.0f - bleedSlowScale}\n- 출혈 지속시간 {bleedDuration}";
     }
 }

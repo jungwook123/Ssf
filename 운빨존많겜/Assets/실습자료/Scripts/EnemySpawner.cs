@@ -82,11 +82,7 @@ public class EnemySpawner : MonoBehaviour
     #endregion
     public void SpawnEnemy(GameObject enemyPrefab)
     {
-        Enemy tmp = Instantiate(enemyPrefab, enemySpawnPosition, Quaternion.identity).GetComponent<Enemy>();
-        //적 생성 위치에 enemyPrefab(생성할 적)을 소환하고, 해당 적의 'Enemy' 컴퍼넌트를 저장
-
-        AddEnemy(tmp);
-        //방금 저장한 'Enemy' 컴퍼넌트를 적 목록에 추가*/
+        //작성...
     }
 }
 #region 개발자 전용
