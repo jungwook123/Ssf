@@ -59,8 +59,11 @@ public class TwistedFate : RangedTower
     protected override void Update()
     {
         #region 개발자 전용
-        base.Update();
-        if (GetType() != typeof(TwistedFate)) return;
+        if (GetType() != typeof(TwistedFate))
+        {
+            base.Update();
+            return;
+        }
         enemies.RemoveAll((Enemy i) => i == null);
         enemies.Sort((Enemy a, Enemy b) => TargettingCompare(a, b));
         #endregion

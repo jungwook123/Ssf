@@ -27,8 +27,11 @@ public class Mai : Tower
     protected override void Update()
     {
         #region 개발자 전용
-        base.Update();
-        if (GetType() != typeof(Mai)) return;
+        if (GetType() != typeof(Mai))
+        {
+            base.Update();
+            return;
+        }
         enemies.RemoveAll((Enemy i) => i == null);
         enemies.Sort((Enemy a, Enemy b) => TargettingCompare(a, b));
         #endregion
