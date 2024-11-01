@@ -59,11 +59,6 @@ public class Ahri : RangedTower
         enemies.RemoveAll((Enemy i) => i == null);
         enemies.Sort((Enemy a, Enemy b) => TargettingCompare(a, b));
         #endregion
-        timer += Time.deltaTime;
-        if (canAttack && timer >= fireRate && enemies.Count > 0)
-        {
-            timer = 0.0f;
-            AhriAttack(enemies[0]);
-        }
+        //작성...
     }
 }
