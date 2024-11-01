@@ -240,13 +240,13 @@ public class GameManager : MonoBehaviour
     //게임에서 패배할 때 호출되는 함수
     public void GameLose()
     {
-        //작성...
+        SwitchScene("Victory");
     }
 
 
     //게임에서 승리할 때 호출되는 함수
     public void GameWin()
     {
-        //작성...
+        SwitchScene("Defeat");
     }
 }

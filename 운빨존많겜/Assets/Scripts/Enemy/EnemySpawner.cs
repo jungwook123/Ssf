@@ -82,7 +82,8 @@ public class EnemySpawner : MonoBehaviour
     #endregion
     public void SpawnEnemy(GameObject enemyPrefab)
     {
-        //작성...
+        Enemy tmp = Instantiate(enemyPrefab, enemySpawnPosition, Quaternion.identity).GetComponent<Enemy>();
+        AddEnemy(tmp);
     }
 }
 #region 개발자 전용
