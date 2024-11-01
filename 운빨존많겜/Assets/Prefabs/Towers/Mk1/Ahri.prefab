@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Name: "\uC544\uB9AC"
   m_EditorClassIdentifier: 
   m_towerName: "\uC544\uB9AC"
-  m_range: 10
+  m_range: 9
   fireRate: 1.5
   damage: 7
   model: {fileID: 1376162541108081703}
