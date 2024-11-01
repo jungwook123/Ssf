@@ -4,10 +4,10 @@ using Unity.VisualScripting;
 using UnityEngine;
 public class Garen : Tower
 {
-    #region 개발자 전용
     [Header("Garen")]
-    [SerializeField] protected float threshold = 0.33f;
-    [SerializeField] protected float multiplier = 3f;
+    public float threshold = 0.33f;
+    public float multiplier = 3f;
+    #region 개발자 전용
     [SerializeField] protected AudioVolumePair attackSound;
     protected override void Attack()
     {
