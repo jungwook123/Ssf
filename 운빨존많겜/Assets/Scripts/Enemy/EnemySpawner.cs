@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 public class EnemySpawner : MonoBehaviour
 {
-    #region 개발자 전용
     [SerializeField] int startTime;
     [SerializeField] Wave[] waves;
     [SerializeField] Text waveText, waveTimeText;
@@ -50,7 +49,7 @@ public class EnemySpawner : MonoBehaviour
         {
             for (int k = 0; k < waves[waveIndex].elements[i].count; k++)
             {
-                SpawnEnemy(waves[waveIndex].elements[i].enemy);
+                AddEnemy(Instantiate(waves[waveIndex].elements[i].enemy, enemySpawnPosition, Quaternion.identity).GetComponent<Enemy>());
                 if (i == waves[waveIndex].elements.Count - 1 && k == waves[waveIndex].elements[i].count - 1) break;
                 yield return new WaitForSeconds(waves[waveIndex].elements[i].spawnCooldown);
             }
@@ -79,17 +78,7 @@ public class EnemySpawner : MonoBehaviour
     }
     void AddEnemy(Enemy enemy) => GameManager.Instance.AddEnemy(enemy);
     Vector2 enemySpawnPosition => GameManager.Instance.enemyWaypoints[0].position;
-    #endregion
-    public void SpawnEnemy(GameObject enemyPrefab)
-    {
-        Enemy tmp = Instantiate(enemyPrefab, enemySpawnPosition, Quaternion.identity).GetComponent<Enemy>();
-        //적 생성 위치에 enemyPrefab(생성할 적)을 소환하고, 해당 적의 'Enemy' 컴퍼넌트를 저장
-
-        AddEnemy(tmp);
-        //방금 저장한 'Enemy' 컴퍼넌트를 적 목록에 추가*/
-    }
 }
-#region 개발자 전용
 [System.Serializable]
 public class Wave
 {
@@ -107,4 +96,3 @@ public class WaveElement
     [SerializeField] float m_spawnCooldown;
     public float spawnCooldown { get { return m_spawnCooldown; } }
 }
-#endregion

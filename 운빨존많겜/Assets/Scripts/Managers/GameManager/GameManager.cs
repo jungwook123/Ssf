@@ -7,7 +7,6 @@ using UnityEngine;
 #endregion
 public class GameManager : MonoBehaviour
 {
-    #region 개발자 전용
     public static GameManager Instance { get; private set; }
     public GameManager_UIs UIs { get; private set; }
     public GameManager()
@@ -228,27 +227,11 @@ public class GameManager : MonoBehaviour
         }
         if (victory)
         {
-            GameWin();
+            GlobalManager.Instance.SwitchScene("Victory");
         }
         else 
         {
-            GameLose();
+            GlobalManager.Instance.SwitchScene("Defeat");
         }
-    }
-    void SwitchScene(string sceneName) => GlobalManager.Instance.SwitchScene(sceneName);
-#endregion
-    //게임에서 패배할 때 호출되는 함수
-    public void GameLose()
-    {
-        SwitchScene("Defeat");
-        //패배 장면으로 전환하기
-    }
-
-
-    //게임에서 승리할 때 호출되는 함수
-    public void GameWin()
-    {
-        SwitchScene("Victory");
-        //승리 장면으로 전환하기
     }
 }
